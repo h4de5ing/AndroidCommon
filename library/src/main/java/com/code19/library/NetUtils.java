@@ -30,7 +30,7 @@ import android.util.Log;
  *
  * @description Codes there always can be better.
  */
-public class NetWorkUtils {
+public class NetUtils {
 
     public static final String NETWORK_TYPE_WIFI = "wifi";
     public static final String NETWORK_TYPE_3G = "3g";

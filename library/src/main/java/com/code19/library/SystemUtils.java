@@ -142,7 +142,7 @@ public final class SystemUtils {
     }
 
     /**
-     * 获取当前应用程序的版本号
+     * 获取当前应用程序的版本名称
      */
     public static String getAppVersionName(Context context) {
         String version = "0";
