@@ -84,8 +84,73 @@
     * getNavigationBarHeight 获取导航栏高度
     * getScreenSize 获取屏幕尺寸
     
+- DeviceInfo.java 设备信息工具
+    * getLibraryVersion
+    * getAndroidID 获取设备ID
+    * getModel
+    * getBuildBrand
+    * getBuildHost
+    * getBuildTags
+    * getBuildTime 获取系统编译时间
+    * getBuildUser 获取系统编译作者
+    * getBuildVersionRelease
+    * getBuildVersionRelease 获取编译版本
+    * getScreenDisplayID 
+    * getBuildVersionCodename
+    * getBuildVersionIncremental
+    * getBuildVersionSDK
+    * getBuildID
+    * getSupportedABIS
+    * getStringSupportedABIS
+    * getStringSupported32bitABIS
+    * getStringSupported64bitABIS
+    * getSupported32bitABIS
+    * getSupported64bitABIS
+    * getManufacturer
+    * getResolution
+    * getCarrier 获取网络运营商：中国电信，中国移动，中国联通
+    * getDevice 
+    * getBootloader
+    * getBoard
+    * getDisplayVersion
+    * getLanguage 获取语言
+    * getNetworkType 获取网络类型
+    * getOSCodename 获取系统代码:Lollipop
+    * getOSVersion 获取系统版本:5.1.1
+    * getWifiMAC 获取Mac地址
+    * getIMEI 获取IMEI号
+    * getIMSI 获取IMSI号
+    * getSerial 获取设备序列号
+    * getSIMSerial 获取SIM序列号
+    * getGSFID 获取GSF序列号
+    * getBluetoothMAC 获取蓝牙地址
+    * getPsuedoUniqueID
+    * getPhoneNo 获取电话号码
+    * getProduct
+    * getFingerprint 获取手指点击的坐标
+    * getHardware 
+    * getRadioVer
+    * getIPAddress 获取IPv4的IP地址
+    * getUA 获取的浏览器信息(User-Agent)
+    * getLatLong 获取地址位置
+    * getDisplayXYCoordinates
+    * getTime 获取手机当前时间
+    * getFormatedTime 获取手机当前时间(格式化后)
+    * getAppName 获取应用名称
+    * getAppVersion 获取应用版本
+    * getAppVersionCode 获取版本代码
+    * getActivityName 获取Activity名称
+    * getPackageName 获取包名
+    * getStore
+    * getDensity 获取得屏幕密度
+    * getAccounts 获取google账号
+    * isNetworkAvailable 网络是否可用
+    * isRunningOnEmulator 当前设备是否是模拟器
+
+    
 License
 ----
+
   Copyright (C)  2016 android@19code.com
   
   Licensed under the Apache License, Version 2.0 (the "License");  
