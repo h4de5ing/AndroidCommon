@@ -16,7 +16,10 @@
 
 package com.code19.library;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
@@ -71,8 +74,7 @@ public class NetUtils {
                 type = NETWORK_TYPE_WIFI;
             } else if ("MOBILE".equalsIgnoreCase(typeName)) {
                 String proxyHost = android.net.Proxy.getDefaultHost();
-                type = TextUtils.isEmpty(proxyHost) ? (isFastMobileNetwork(context) ? NETWORK_TYPE_3G : NETWORK_TYPE_2G)
-                        : NETWORK_TYPE_WAP;
+                type = TextUtils.isEmpty(proxyHost) ? (isFastMobileNetwork(context) ? NETWORK_TYPE_3G : NETWORK_TYPE_2G) : NETWORK_TYPE_WAP;
             } else {
                 type = NETWORK_TYPE_UNKNOWN;
             }
@@ -83,10 +85,15 @@ public class NetUtils {
     /**
      * 判断网络是否连接
      */
-    public static boolean checkNet(Context context) {
+    public static boolean isConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
-        return info != null;
+        if (info != null && info.isConnected()) {
+            if (info.getState() == NetworkInfo.State.CONNECTED) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -96,8 +103,20 @@ public class NetUtils {
         ConnectivityManager cm = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
         // wifi的状态：ConnectivityManager.TYPE_WIFI
         // 3G的状态：ConnectivityManager.TYPE_MOBILE
-        NetworkInfo.State state = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-        return NetworkInfo.State.CONNECTED == state;
+        return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    /**
+     * 打开网络设置界面
+     *
+     * @param act 启动设置的activity
+     */
+    public static void openNetSetting(Activity act) {
+        Intent intent = new Intent();
+        ComponentName cm = new ComponentName("com.android.settings", "com.android.settings.WirelessSettings");
+        intent.setComponent(cm);
+        intent.setAction("android.intent.action.VIEW");
+        act.startActivityForResult(intent, 0);
     }
 
     /**

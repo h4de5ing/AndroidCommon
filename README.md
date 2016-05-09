@@ -44,8 +44,9 @@
 - NetUtils.java 网络工具
     * getNetworkType 获取网络类型
     * getNetworkTypeName 获取网络名称
-    * checkNet 检查网络状态
+    * isConnected 检查网络状态
     * isWiFi 是否wifi
+    * openNetSetting 打开网络设置界面
     * isNetworkAvailable 网络可用性
     
 - SPUtils.java SharedPreferences工具
@@ -73,11 +74,18 @@
     * getDeviceUsableMemory 获取设备可用空间
     * gc 清理后台进程和服务
     * createDeskShortCut 创建桌面快捷方式
-    * captureView 控件截图
     
 - ViewUtils.java View工具
+    * captureView 截图
+    * createViewBitmap 截图
+    * convertViewToBitmap 截图
+    * getStatusBarHeight 获取状态栏高度
+    * getToolbarHeight 获取工具栏高度
+    * getNavigationBarHeight 获取导航栏高度
+    * getScreenSize 获取屏幕尺寸
     
-## License
+License
+----
   Copyright (C)  2016 android@19code.com
   
   Licensed under the Apache License, Version 2.0 (the "License");  

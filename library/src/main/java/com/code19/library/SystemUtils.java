@@ -27,11 +27,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.telephony.TelephonyManager;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
@@ -40,7 +38,7 @@ import java.util.List;
 
 /**
  * 系统信息工具包<br>
- * <p/>
+ * <p>
  * <b>创建时间</b> 2014-8-14
  *
  * @author kymjs (https://github.com/kymjs)
@@ -88,7 +86,7 @@ public final class SystemUtils {
 
     /**
      * 隐藏系统键盘
-     * <p/>
+     * <p>
      * <br>
      * <b>警告</b> 必须是确定键盘显示时才能调用
      */
@@ -306,15 +304,5 @@ public final class SystemUtils {
         cxt.sendBroadcast(shortcutIntent);
     }
 
-    /**
-     * 截图
-     *
-     * @param v 需要进行截图的控件
-     * @return 该控件截图的Bitmap对象。
-     */
-    public static Bitmap captureView(View v) {
-        v.setDrawingCacheEnabled(true);
-        v.buildDrawingCache();
-        return v.getDrawingCache();
-    }
+
 }
