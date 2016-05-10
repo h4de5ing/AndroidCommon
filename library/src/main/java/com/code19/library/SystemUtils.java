@@ -193,7 +193,7 @@ public final class SystemUtils {
     /**
      * 将签名字符串转换成需要的32位签名
      */
-    private static String hexdigest(byte[] paramArrayOfByte) {
+    public static String hexdigest(byte[] paramArrayOfByte) {
         final char[] hexDigits = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102};
         try {
             MessageDigest localMessageDigest = MessageDigest.getInstance("MD5");
@@ -209,6 +209,7 @@ public final class SystemUtils {
                 arrayOfChar[++j] = hexDigits[(k & 0xF)];
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return "";
     }
@@ -284,7 +285,7 @@ public final class SystemUtils {
      * @param title 快捷方式标题
      * @param cls   要启动的类
      */
-    public void createDeskShortCut(Context cxt, int icon, String title, Class<?> cls) {
+    public static void createDeskShortCut(Context cxt, int icon, String title, Class<?> cls) {
         // 创建快捷方式的Intent
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         // 不允许重复创建

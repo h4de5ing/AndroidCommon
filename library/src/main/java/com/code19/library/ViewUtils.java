@@ -197,6 +197,15 @@ public class ViewUtils {
     }
 
     /**
+     * 获取activity的截图
+     */
+    public static Bitmap getActivityBitmap(Activity activity) {
+        View view = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+        view.setDrawingCacheEnabled(true);
+        return view.getDrawingCache();
+    }
+
+    /**
      * 获取状态栏的高度
      *
      * @param context 上下文
@@ -245,4 +254,5 @@ public class ViewUtils {
         wm.getDefaultDisplay().getSize(screenSize);
         return screenSize;
     }
+
 }
