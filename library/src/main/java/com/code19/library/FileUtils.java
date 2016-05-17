@@ -17,6 +17,7 @@
 package com.code19.library;
 
 import android.content.Context;
+import android.text.format.Formatter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -35,7 +36,6 @@ import java.util.zip.GZIPOutputStream;
 
 /**
  * Create by h4de5ing 2016/5/7 007
- * 文件工具类，实现对文件的创建，删除，读，写，压缩，解压，流的转换
  */
 public class FileUtils {
 
@@ -53,23 +53,21 @@ public class FileUtils {
     /**
      * 判断文件是否存在
      *
-     * @param context  上下文
      * @param filename 文件名称，传入文件的完整路径
      * @return 存在返回 true
      */
-    public static boolean existsFile(Context context, String filename) {
+    public static boolean existsFile(String filename) {
         return new File(filename).exists();
     }
 
     /**
-     * 将字符串写入到文件中去
+     * 将字符串写入到文件中
      *
-     * @param context  上下文
      * @param filename 文件名称，传入文件的完整路径
      * @param content  写入的内容
      * @return 写入成功返回 true
      */
-    public static boolean writeFile(Context context, String filename, String content) {
+    public static boolean writeFile(String filename, String content) {
         boolean isSuccess = false;
         BufferedWriter bufferedWriter = null;
         try {
@@ -92,7 +90,7 @@ public class FileUtils {
     }
 
     /**
-     * 读取文件
+     * 从文件中读取字符串
      *
      * @param filename 文件名称，传入文件的完整路径
      * @return 返回文件中的字符串
@@ -199,6 +197,17 @@ public class FileUtils {
             closeIO(gzip);
             closeIO(os);
         }
+    }
+
+    /**
+     * 格式化文件大小
+     *
+     * @param context
+     * @param size
+     * @return
+     */
+    public static String formatFileSize(Context context, long size) {
+        return Formatter.formatFileSize(context, size);
     }
 
 }

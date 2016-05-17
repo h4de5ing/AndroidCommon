@@ -1,9 +1,12 @@
 # 常用工具类
-- 每一个Android开发者在日常开发中都会积累一些自己的代码片段.
-- 本项目就是收集一些日常开发中的常用工具类,减少功能性代码的重复编写,方便快速开发.
-- 通过封装一层工具类的好处是以后只需要修改工具类的实现，就可以替换整体的框架.
-- 部分方法没有经过测试,请使用者自行测试并反馈问题.
-- 参考了众多项目并加以改进和总结,如有疑问,请来信说明.
+- 每一个Android开发者在日常开发中都会积累一些自己的代码片段
+- 目的：
+       * 1.将常用功能模块做成工具类
+       * 2.将常用第三方框架封装成工具类
+       * 3.收集一些高效的正确的代码片段避免下次踩坑
+- 还在努力维护中,暂时不加入依赖仓库中,待代码经过检验,功能完善再加入到依赖中
+- 大部分参考一些技术文章或者开源项目源码,未经测试,有Bug请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
+- 如果你有更好的封装,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
 ## app Module中的类:
     MainActivity.java 测试项目中的主类
@@ -37,12 +40,13 @@
 - FileUtils.java  文件工具
     * deleteFile 删除文件
     * existsFile 判断文件是否存在
-    * writeFile 写文件
-    * readFile 读文件
+    * writeFile 将字符串写入到文件中
+    * readFile 从文件中读取字符串
     * copyFileFast 快速复制
     * closeIO 关闭IO流
     * zip zip压缩
     * unzip zip解压
+    * formatFileSize 格式化文件大小
     
 - JsonUtils.java Json相关工具
     * toJson 对象转json

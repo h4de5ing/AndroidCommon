@@ -934,7 +934,10 @@ public class DeviceInfo {
         String[] params = {ID_KEY};
         Cursor c = context.getContentResolver().query(URI, null, null, params, null);
 
-        if (!c.moveToFirst() || c.getColumnCount() < 2) {
+        if (c == null || !c.moveToFirst() || c.getColumnCount() < 2) {
+			if(c != null) {
+				c.close();
+			}
             c.close();
             return null;
         }
