@@ -4,15 +4,21 @@
        * 1.将常用功能模块做成工具类
        * 2.将常用第三方框架封装成工具类
        * 3.收集一些高效的正确的代码片段避免下次踩坑
-- 还在努力维护中,暂时不加入依赖仓库中,待代码经过检验,功能完善再加入到依赖中
-- 大部分参考一些技术文章或者开源项目源码,未经测试,有Bug请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
-- 如果你有更好的封装,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
+- 能力一般,水平有限,难免有Bug,如果有任何问题,请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
+- 如果写的更好,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
 ## app Module中的类:
     MainActivity.java 测试项目中的主类
     HandlerActivity.java Handler的正确使用方式事例
     
 ## library Module中的类：
+
+- AppUtils.java 应用相关工具
+    * getAppName 获取应用名称
+    * getAppIcon 获取应用图标
+    * getAppDate 获取应用更新日期
+    * getAppSize 获取应用大小
+    * getAppApk 获取应用apk文件
 
 - CipherUtils.java 加密工具
     * md5Encode:md5加密

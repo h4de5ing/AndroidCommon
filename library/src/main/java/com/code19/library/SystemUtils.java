@@ -35,6 +35,7 @@ import android.view.inputmethod.InputMethodManager;
 import java.io.File;
 import java.security.MessageDigest;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 系统信息工具包<br>
@@ -304,6 +305,11 @@ public final class SystemUtils {
         // 发送广播。OK
         cxt.sendBroadcast(shortcutIntent);
     }
-
+    /**
+     * @return 返回当前语言
+     */
+    public static String getCurrentLauguage() {
+        return Locale.getDefault().getLanguage();
+    }
 
 }
