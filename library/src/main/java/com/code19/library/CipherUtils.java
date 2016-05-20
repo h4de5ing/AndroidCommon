@@ -18,7 +18,9 @@ package com.code19.library;
 
 import android.util.Base64;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -26,49 +28,60 @@ import java.security.NoSuchAlgorithmException;
  * Create by h4de5ing 2016/5/7 007
  */
 public class CipherUtils {
-
-    public static String md5Encode(InputStream in) {
+    /**
+     * checked
+     */
+    public static String encode(String input) {
         try {
-            MessageDigest digester = MessageDigest.getInstance("MD5");
-            byte[] bytes = new byte[8192];
-            int byteCount;
-            while ((byteCount = in.read(bytes)) > 0) {
-                digester.update(bytes, 0, byteCount);
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            byte[] inputByteArray = input.getBytes();
+            messageDigest.update(inputByteArray);
+            byte[] resultByteArray = messageDigest.digest();
+            char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+            char[] resultCharArray = new char[resultByteArray.length * 2];
+            int index = 0;
+            for (byte b : resultByteArray) {
+                resultCharArray[index++] = hexDigits[b >>> 4 & 0xf];
+                resultCharArray[index++] = hexDigits[b & 0xf];
             }
-            byte[] digest = digester.digest();
-            StringBuilder sb = new StringBuilder();
-            for (byte b : digest) {
-                int r = b & 0xff;
-                String hex = Integer.toHexString(r);
-                if (hex.length() == 1) {
-                    hex = 0 + hex;
-                }
-                sb.append(hex);
-            }
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
+            return new String(resultCharArray);
+        } catch (NoSuchAlgorithmException e) {
+            return null;
         }
-        return null;
     }
 
-
-    public static String md5Encode(String pwd) {
+    /**
+     * checked
+     */
+    public static String md5Encode(InputStream in) {
+        int bufferSize = 256 * 1024;
+        DigestInputStream digestInputStream = null;
         try {
-            MessageDigest instance = MessageDigest.getInstance("md5");
-            byte[] digest = instance.digest(pwd.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : digest) {
-                int r = b & 0xff;
-                String hex = Integer.toHexString(r);
-                if (hex.length() == 1) {
-                    hex = 0 + hex;
-                }
-                sb.append(r);
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            digestInputStream = new DigestInputStream(in, messageDigest);
+            byte[] buffer = new byte[bufferSize];
+            while (digestInputStream.read(buffer) > 0) ;
+            messageDigest = digestInputStream.getMessageDigest();
+            byte[] resultByteArray = messageDigest.digest();
+            char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+            char[] resultCharArray = new char[resultByteArray.length * 2];
+            int index = 0;
+            for (byte b : resultByteArray) {
+                resultCharArray[index++] = hexDigits[b >>> 4 & 0xf];
+                resultCharArray[index++] = hexDigits[b & 0xf];
             }
-            return sb.toString();
+            return new String(resultCharArray);
         } catch (NoSuchAlgorithmException e) {
+            return null;
+        } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (digestInputStream != null)
+                    digestInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
