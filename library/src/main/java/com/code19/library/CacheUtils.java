@@ -14,18 +14,9 @@
  *   limitations under the License.
  */
 
-package com.code19.androidcommon;
+package com.code19.library;
 
-import org.junit.Test;
+public class CacheUtils {
 
-import static org.junit.Assert.*;
 
-/**
- * To work on unit tests, switch the Test Artifact in the Build Variants view.
- */
-public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
-    }
 }

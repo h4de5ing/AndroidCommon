@@ -5,7 +5,7 @@
        * 2.将常用第三方框架封装成工具类
        * 3.收集一些高效的正确的代码片段避免下次踩坑
 - 能力一般,水平有限,难免有Bug,如果有任何问题,请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
-- 如果写的更好,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
+- 如果你有更好的代码,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
 ## app Module中的类:
     MainActivity.java 测试项目中的主类
