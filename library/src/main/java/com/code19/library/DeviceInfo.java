@@ -88,7 +88,6 @@ public class DeviceInfo {
 
     /**
      * Gets android id.
-     * 获取设备ID
      *
      * @return the android id
      */
@@ -179,7 +178,6 @@ public class DeviceInfo {
 
     /**
      * Gets build time.
-     * 获取系统编译时间
      *
      * @return the build time
      */
@@ -195,7 +193,6 @@ public class DeviceInfo {
 
     /**
      * Gets build user.
-     * 获取系统编译作者
      *
      * @return the build user
      */
@@ -214,7 +211,6 @@ public class DeviceInfo {
 
     /**
      * Gets build version release.
-     * 获取编译版本
      *
      * @return the build version release
      */
@@ -373,7 +369,6 @@ public class DeviceInfo {
 
     /**
      * Gets string supported 32 bit abis.
-     * 32位平台
      *
      * @return the string supported 32 bit abis
      */
@@ -407,7 +402,6 @@ public class DeviceInfo {
 
     /**
      * Gets string supported 64 bit abis.
-     * 64位平台
      *
      * @return the string supported 64 bit abis
      */
@@ -521,7 +515,7 @@ public class DeviceInfo {
 
     /**
      * Gets carrier.
-     * 获取网络运营商。中国电信，中国移动，中国联通
+     *
      * @return the carrier
      */
     public String getCarrier() {
@@ -613,7 +607,6 @@ public class DeviceInfo {
 
     /**
      * Gets language.
-     * 获取语言
      *
      * @return the language
      */
@@ -632,7 +625,6 @@ public class DeviceInfo {
 
     /**
      * Gets country.
-     * 获取国家
      *
      * @return the country
      */
@@ -656,7 +648,7 @@ public class DeviceInfo {
 
     /**
      * Gets network type.
-     * 网络类型，需要权限：<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+     * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
      * <uses-permission android:name="android.permission.INTERNET"/>
      *
      * @return the network type
@@ -684,11 +676,9 @@ public class DeviceInfo {
                     if (manager.getSimState() == TelephonyManager.SIM_STATE_READY) {
                         switch (manager.getNetworkType()) {
 
-                            // Unknown
                             case TelephonyManager.NETWORK_TYPE_UNKNOWN:
                                 result = "Cellular - Unknown";
                                 break;
-                            // Cellular Data–2G
                             case TelephonyManager.NETWORK_TYPE_EDGE:
                             case TelephonyManager.NETWORK_TYPE_GPRS:
                             case TelephonyManager.NETWORK_TYPE_CDMA:
@@ -696,7 +686,6 @@ public class DeviceInfo {
                             case TelephonyManager.NETWORK_TYPE_1xRTT:
                                 result = "Cellular - 2G";
                                 break;
-                            // Cellular Data–3G
                             case TelephonyManager.NETWORK_TYPE_UMTS:
                             case TelephonyManager.NETWORK_TYPE_HSDPA:
                             case TelephonyManager.NETWORK_TYPE_HSPA:
@@ -707,11 +696,9 @@ public class DeviceInfo {
                             case TelephonyManager.NETWORK_TYPE_EVDO_B:
                                 result = "Cellular - 3G";
                                 break;
-                            // Cellular Data–4G
                             case TelephonyManager.NETWORK_TYPE_LTE:
                                 result = "Cellular - 4G";
                                 break;
-                            // Cellular Data–Unknown Generation
                             default:
                                 result = "Cellular - Unknown Generation";
                                 break;
@@ -730,7 +717,7 @@ public class DeviceInfo {
 
     /**
      * Gets os codename.
-     * 获取系统代码:Lollipop
+     * Lollipop
      *
      * @return the os codename
      */
@@ -795,7 +782,7 @@ public class DeviceInfo {
 
     /**
      * Gets os version.
-     * 获取系统版本:5.1.1
+     * 5.1.1
      *
      * @return the os version
      */
@@ -814,7 +801,7 @@ public class DeviceInfo {
 
     /**
      * Gets wifi mac.
-     * 获取Mac地址。需要权限:<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+     * <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
      *
      * @return the wifi mac
      */
@@ -840,7 +827,7 @@ public class DeviceInfo {
 
     /**
      * Gets imei.
-     * 获取IMEI号。需要权限：<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+     * <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
      *
      * @return the imei
      */
@@ -863,7 +850,6 @@ public class DeviceInfo {
 
     /**
      * Gets imsi.
-     * 获取IMSI号
      *
      * @return the imsi
      */
@@ -885,7 +871,7 @@ public class DeviceInfo {
 
     /**
      * Gets serial.
-     * 获取设备序列号
+     *
      * @return the serial
      */
     public String getSerial() {
@@ -903,7 +889,6 @@ public class DeviceInfo {
 
     /**
      * Gets sim serial.
-     * 获取SIM序列号
      *
      * @return the sim serial
      */
@@ -922,7 +907,6 @@ public class DeviceInfo {
 
     /**
      * Gets gsfid.
-     * 获取GSF序列号
      * <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
      *
      * @return the gsfid
@@ -935,9 +919,9 @@ public class DeviceInfo {
         Cursor c = context.getContentResolver().query(URI, null, null, params, null);
 
         if (c == null || !c.moveToFirst() || c.getColumnCount() < 2) {
-			if(c != null) {
-				c.close();
-			}
+            if (c != null) {
+                c.close();
+            }
             c.close();
             return null;
         }
@@ -953,7 +937,7 @@ public class DeviceInfo {
 
     /**
      * Gets bluetooth mac.
-     * 获取蓝牙地址，需要权限:<uses-permission android:name="android.permission.BLUETOOTH"/>
+     * <uses-permission android:name="android.permission.BLUETOOTH"/>
      *
      * @return the bluetooth mac
      */
@@ -1021,7 +1005,7 @@ public class DeviceInfo {
 
     /**
      * Gets phone no.
-     * 获取电话号码
+     *
      * @return the phone no
      */
     public String getPhoneNo() {
@@ -1062,7 +1046,6 @@ public class DeviceInfo {
 
     /**
      * Gets fingerprint.
-     * 获取手指点击的坐标
      *
      * @return the fingerprint
      */
@@ -1120,7 +1103,6 @@ public class DeviceInfo {
 
     /**
      * Gets ip address.
-     * 获取IPv4的IP地址
      *
      * @param useIPv4 the use i pv 4
      * @return the ip address
@@ -1157,7 +1139,6 @@ public class DeviceInfo {
 
     /**
      * Gets ua.
-     * 获取的浏览器信息(User-Agent)
      *
      * @return the ua
      */
@@ -1183,7 +1164,7 @@ public class DeviceInfo {
 
     /**
      * Get lat long double [ ].
-     * 获取地址位置,需要权限:<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+     * <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
      *
      * @return the double [ ]
      */
@@ -1267,7 +1248,6 @@ public class DeviceInfo {
 
     /**
      * Gets time.
-     * 获取手机当前时间
      *
      * @return the time
      */
@@ -1277,7 +1257,6 @@ public class DeviceInfo {
 
     /**
      * Gets formated time.
-     * 获取手机当前时间(格式化后)
      *
      * @return the formated time
      */
@@ -1290,7 +1269,6 @@ public class DeviceInfo {
 
     /**
      * Gets app name.
-     * 获取应用名称
      *
      * @return the app name
      */
@@ -1310,7 +1288,6 @@ public class DeviceInfo {
 
     /**
      * Gets app version.
-     * 获取应用版本
      *
      * @return the app version
      */
@@ -1329,7 +1306,6 @@ public class DeviceInfo {
 
     /**
      * Gets app version code.
-     * 获取版本代码
      *
      * @return the app version code
      */
@@ -1349,7 +1325,6 @@ public class DeviceInfo {
 
     /**
      * Gets activity name.
-     * 获取Activity名称
      *
      * @return the activity name
      */
@@ -1368,7 +1343,6 @@ public class DeviceInfo {
 
     /**
      * Gets package name.
-     * 获取包名
      *
      * @return the package name
      */
@@ -1407,7 +1381,6 @@ public class DeviceInfo {
 
     /**
      * Gets density.
-     * 获取得屏幕密度
      *
      * @return the density
      */
@@ -1445,7 +1418,7 @@ public class DeviceInfo {
 
     /**
      * Get accounts string [ ].
-     * 获取google账号，需要权限:<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+     * <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
      *
      * @return the string [ ]
      */
@@ -1470,7 +1443,6 @@ public class DeviceInfo {
 
     /**
      * Is network available boolean.
-     * 网络是否可用
      *
      * @return the boolean
      */
@@ -1489,7 +1461,6 @@ public class DeviceInfo {
 
     /**
      * Is running on emulator boolean.
-     * 当前设备是否是模拟器
      *
      * @return the boolean
      */

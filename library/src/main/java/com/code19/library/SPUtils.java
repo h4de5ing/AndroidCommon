@@ -24,82 +24,32 @@ import android.content.SharedPreferences;
  */
 public class SPUtils {
 
-    /**
-     * 存储布尔型属性
-     *
-     * @param context  上下文
-     * @param filename 配置文件的名称
-     * @param key      键
-     * @param value    值
-     */
     public static void setBoolean(Context context, String filename, String key, boolean value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
         sp.edit().putBoolean(key, value);
     }
 
-    /**
-     * 获取布尔型属性
-     *
-     * @param context      上下文
-     * @param filename     配置文件名称
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 返回获取到的属性值
-     */
+
     public static boolean getBoolean(Context context, String filename, String key, boolean defaultValue) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
         return sp.getBoolean(key, defaultValue);
     }
 
-    /**
-     * 设置数字型属性
-     *
-     * @param context  上下文
-     * @param filename 配置文件名称
-     * @param key      键
-     * @param value    值
-     */
     public static void setInt(Context context, String filename, String key, int value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
         sp.edit().putInt(key, value);
     }
 
-    /**
-     * 获取数字型属性
-     *
-     * @param context      上下文
-     * @param filename     配置文件名称
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 返回获取的数字型属性值
-     */
     public static int getInt(Context context, String filename, String key, int defaultValue) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
         return sp.getInt(key, defaultValue);
     }
 
-    /**
-     * 设置字符串属性
-     *
-     * @param context  上下文
-     * @param filename 配置文件名称
-     * @param key      键
-     * @param value    值
-     */
     public static void setString(Context context, String filename, String key, String value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
         sp.edit().putString(key, value);
     }
 
-    /**
-     * 获取字符型属性
-     *
-     * @param context      上下文
-     * @param filename     配置文件名称
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 返回获取的字符串型属性值
-     */
     public static String getString(Context context, String filename, String key, String defaultValue) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
         return sp.getString(key, defaultValue);

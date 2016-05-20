@@ -51,12 +51,7 @@ public class GsonUtil {
     private GsonUtil() {
     }
 
-    /**
-     * 将对象转换成json格式
-     *
-     * @param ts
-     * @return
-     */
+
     public static String objectToJson(Object ts) {
         String jsonStr = null;
         if (gson != null) {
@@ -65,12 +60,7 @@ public class GsonUtil {
         return jsonStr;
     }
 
-    /**
-     * 将对象转换成json格式
-     *
-     * @param ts
-     * @return
-     */
+
     public static String objectToJson(Object ts, Type type) {
         String jsonStr = null;
         if (gson != null) {
@@ -79,12 +69,7 @@ public class GsonUtil {
         return jsonStr;
     }
 
-    /**
-     * 将对象转换成json格式(并自定义日期格式)
-     *
-     * @param ts
-     * @return
-     */
+
     public static String objectToJsonDateSerializer(Object ts,
                                                     final String dateformat) {
         String jsonStr = null;
@@ -105,12 +90,7 @@ public class GsonUtil {
         return jsonStr;
     }
 
-    /**
-     * 将json格式转换成list对象
-     *
-     * @param jsonStr
-     * @return
-     */
+
     public static List<?> jsonToList(String jsonStr) {
         List<?> objList = null;
         if (gson != null) {
@@ -121,13 +101,7 @@ public class GsonUtil {
         return objList;
     }
 
-    /**
-     * 将json格式转换成list对象，并准确指定类型
-     *
-     * @param jsonStr
-     * @param type
-     * @return
-     */
+
     public static List<?> jsonToList(String jsonStr, Type type) {
         List<?> objList = null;
         if (gson != null) {
@@ -136,12 +110,7 @@ public class GsonUtil {
         return objList;
     }
 
-    /**
-     * 将json格式转换成map对象
-     *
-     * @param jsonStr
-     * @return
-     */
+
     public static Map<?, ?> jsonToMap(String jsonStr) {
         Map<?, ?> objMap = null;
         if (gson != null) {
@@ -152,12 +121,6 @@ public class GsonUtil {
         return objMap;
     }
 
-    /**
-     * 将json转换成bean对象
-     *
-     * @param jsonStr
-     * @return
-     */
     public static Object jsonToBean(String jsonStr, Class<?> cl) {
         Object obj = null;
         if (gson != null) {
@@ -166,13 +129,7 @@ public class GsonUtil {
         return obj;
     }
 
-    /**
-     * 将json转换成bean对象,可指定日期格式
-     *
-     * @param jsonStr
-     * @param cl
-     * @return
-     */
+
     @SuppressWarnings("unchecked")
     public static <T> T jsonToBeanDateSerializer(String jsonStr, Class<T> cl,
                                                  final String pattern) {
@@ -198,13 +155,7 @@ public class GsonUtil {
         return (T) obj;
     }
 
-    /**
-     * 获取jsonStr中的某值
-     *
-     * @param jsonStr
-     * @param key
-     * @return
-     */
+
     public static Object getJsonValue(String jsonStr, String key) {
         Object rulsObj = null;
         Map<?, ?> rulsMap = jsonToMap(jsonStr);

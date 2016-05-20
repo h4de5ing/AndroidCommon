@@ -37,16 +37,13 @@ import android.widget.TextView;
 
 
 /**
- * View相关工具类
  * Created by zhangshixin on 2015/11/26.
  * Blog : http://blog.csdn.net/u011240877
  *
  * @description Codes there always can be better.
  */
 public class ViewUtils {
-    /**
-     * 把自身从父View中移除
-     */
+
     public static void removeSelfFromParent(View view) {
         if (view != null) {
             ViewParent parent = view.getParent();
@@ -57,9 +54,7 @@ public class ViewUtils {
         }
     }
 
-    /**
-     * 请求View树重新布局，用于解决中层View有布局状态而导致上层View状态断裂
-     */
+
     public static void requestLayoutParent(View view, boolean isAll) {
         ViewParent parent = view.getParent();
         while (parent != null && parent instanceof View) {
@@ -73,9 +68,7 @@ public class ViewUtils {
         }
     }
 
-    /**
-     * 判断触点是否落在该View上
-     */
+
     public static boolean isTouchInView(MotionEvent ev, View v) {
         int[] vLoc = new int[2];
         v.getLocationOnScreen(vLoc);
@@ -84,9 +77,7 @@ public class ViewUtils {
         return motionX >= vLoc[0] && motionX <= (vLoc[0] + v.getWidth()) && motionY >= vLoc[1] && motionY <= (vLoc[1] + v.getHeight());
     }
 
-    /**
-     * FindViewById的泛型封装，减少强转代码
-     */
+
     public static <T extends View> T findViewById(View layout, int id) {
         return (T) layout.findViewById(id);
     }
@@ -94,7 +85,6 @@ public class ViewUtils {
     public static Bitmap bigImage(Bitmap bmp, float big) {
         int bmpWidth = bmp.getWidth();
         int bmpHeight = bmp.getHeight();
-        /* 产生reSize后的Bitmap对象 */
         Matrix matrix = new Matrix();
         matrix.postScale(big, big);
         Bitmap resizeBmp = Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeight, matrix, true);
@@ -104,41 +94,31 @@ public class ViewUtils {
 
 
     public static void tvUnderLine(TextView textView) {
-        textView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
-        textView.getPaint().setAntiAlias(true);//抗锯齿
+        textView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        textView.getPaint().setAntiAlias(true);
     }
 
 
     static PopupWindow popupWindow;
 
-    /**
-     * 弹出popupwindow
-     *
-     * @param context
-     * @param resId      布局layoutID
-     * @param root       显示到哪个View下
-     * @param paramsType 布局参数类型：1-都是match；2- ； 3-
-     * @return 布局解析得到的View，便于后续findViewById
-     */
     public static View showPopupWindow(Context context, int resId, View root, int paramsType) {
-        // 一个自定义的布局，作为显示的内容
         View popupView;
         popupView = LayoutInflater.from(context).inflate(resId, null);
 
         switch (paramsType) {
-            case 1:    //宽高全都是match_parent
+            case 1:
                 popupWindow = new PopupWindow(popupView,
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                 break;
-            case 2:    //宽是match，高是wrap
+            case 2:
                 popupWindow = new PopupWindow(popupView,
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                 break;
-            case 3:   //宽是wrap，高是match
+            case 3:
                 popupWindow = new PopupWindow(popupView,
                         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                 break;
-            case 4:   //宽、高都是wrap
+            case 4:
                 popupWindow = new PopupWindow(popupView,
                         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                 break;
@@ -157,9 +137,7 @@ public class ViewUtils {
         return popupView;
     }
 
-    /**
-     * 关闭popup
-     */
+
     public static void dismissPopup() {
         if (popupWindow != null && popupWindow.isShowing()) {
             popupWindow.dismiss();
@@ -167,18 +145,13 @@ public class ViewUtils {
         }
     }
 
-    /**
-     * 截图
-     */
     public static Bitmap captureView(View v) {
         v.setDrawingCacheEnabled(true);
         v.buildDrawingCache();
         return v.getDrawingCache();
     }
 
-    /**
-     * 截图
-     */
+
     public static Bitmap createViewBitmap(View v) {
         Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -186,9 +159,7 @@ public class ViewUtils {
         return bitmap;
     }
 
-    /**
-     * 截图
-     */
+
     public static Bitmap convertViewToBitmap(View view) {
         view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
@@ -196,21 +167,14 @@ public class ViewUtils {
         return view.getDrawingCache();
     }
 
-    /**
-     * 获取activity的截图
-     */
+
     public static Bitmap getActivityBitmap(Activity activity) {
         View view = activity.getWindow().getDecorView().findViewById(android.R.id.content);
         view.setDrawingCacheEnabled(true);
         return view.getDrawingCache();
     }
 
-    /**
-     * 获取状态栏的高度
-     *
-     * @param context 上下文
-     * @return 状态栏高度
-     */
+
     public static int getStatusBarHeight(Context context) {
         int result = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -220,12 +184,7 @@ public class ViewUtils {
         return result;
     }
 
-    /**
-     * 获取ToolBar的高度
-     *
-     * @param context
-     * @return
-     */
+
     public static int getToolbarHeight(Context context) {
         final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.actionBarSize});
         int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
@@ -242,12 +201,6 @@ public class ViewUtils {
         return 0;
     }
 
-    /**
-     * 获取屏幕尺寸
-     *
-     * @param context 上下文
-     * @return 屏幕尺寸像素值，下标为0的值为宽，下标为1的值为高
-     */
     public static Point getScreenSize(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Point screenSize = new Point();

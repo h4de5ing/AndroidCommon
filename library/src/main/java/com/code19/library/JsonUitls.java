@@ -22,25 +22,11 @@ import com.google.gson.Gson;
  * Create by h4de5ing 2016/5/7 007
  */
 public class JsonUitls {
-    /**
-     * 对象转换成json字符串
-     *
-     * @param obj 对象
-     * @return 返回Json字符串
-     */
     public static String toJson(Object obj) {
         Gson gson = new Gson();
         return gson.toJson(obj);
     }
 
-
-    /**
-     * json字符串转成对象
-     *
-     * @param str  Json字符串
-     * @param type 对象类
-     * @return 返回对象实体
-     */
     public static <T> T fromJson(String str, Class<T> type) {
         Gson gson = new Gson();
         return gson.fromJson(str, type);

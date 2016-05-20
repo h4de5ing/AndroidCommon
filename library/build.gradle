@@ -1,10 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'   //插件
+apply plugin: 'com.jfrog.bintray'    //插件
 
-version = "0.0.1"
+version = "0.0.1"  //版本号,更新代码后修改这个值
 android {
-    resourcePrefix "h4de5ing_"
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
@@ -33,7 +32,6 @@ def gitUrl = 'https://github.com/h4de5ing/AndroidCommon.git'   // Git仓库的ur
 group = "com.code19.library"
 install{
     repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
         pom {
             project {
                 packaging 'aar'
@@ -49,9 +47,9 @@ install{
                 }
                 developers {
                     developer {
-                        id 'h4de5ing'
-                        name 'h4de5ing'
-                        email 'android@19code.com'
+                        id 'h4de5ing'   //开发者id
+                        name 'h4de5ing' //开发者名称
+                        email 'android@19code.com'  //开发者邮箱
                     }
                 }
                 scm {
@@ -87,7 +85,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "h4de5ing-commonr"    //发布到JCenter上的项目名字
+        name = "h4de5ing-common"    //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

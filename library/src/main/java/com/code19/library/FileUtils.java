@@ -39,34 +39,14 @@ import java.util.zip.GZIPOutputStream;
  */
 public class FileUtils {
 
-    /**
-     * 删除文件
-     *
-     * @param context  上下文
-     * @param filename 文件名称，传入文件的完整路径
-     * @return 删除成功返回 true
-     */
     public static boolean deleteFile(Context context, String filename) {
         return context.deleteFile(filename);
     }
 
-    /**
-     * 判断文件是否存在
-     *
-     * @param filename 文件名称，传入文件的完整路径
-     * @return 存在返回 true
-     */
     public static boolean existsFile(String filename) {
         return new File(filename).exists();
     }
 
-    /**
-     * 将字符串写入到文件中
-     *
-     * @param filename 文件名称，传入文件的完整路径
-     * @param content  写入的内容
-     * @return 写入成功返回 true
-     */
     public static boolean writeFile(String filename, String content) {
         boolean isSuccess = false;
         BufferedWriter bufferedWriter = null;
@@ -89,12 +69,6 @@ public class FileUtils {
         return isSuccess;
     }
 
-    /**
-     * 从文件中读取字符串
-     *
-     * @param filename 文件名称，传入文件的完整路径
-     * @return 返回文件中的字符串
-     */
     public static String readFile(String filename) {
         File file = new File(filename);
         BufferedReader bufferedReader = null;
@@ -118,24 +92,12 @@ public class FileUtils {
         return str;
     }
 
-    /**
-     * 快速复制文件（采用nio操作）
-     *
-     * @param is 数据来源
-     * @param os 数据目标
-     * @throws IOException
-     */
     public static void copyFileFast(FileInputStream is, FileOutputStream os) throws IOException {
         FileChannel in = is.getChannel();
         FileChannel out = os.getChannel();
         in.transferTo(0, in.size(), out);
     }
 
-    /**
-     * 关闭流
-     *
-     * @param closeables io
-     */
     public static void closeIO(Closeable... closeables) {
         if (null == closeables || closeables.length <= 0) {
             return;
@@ -152,12 +114,6 @@ public class FileUtils {
         }
     }
 
-    /**
-     * 压缩
-     *
-     * @param is 输入流
-     * @param os 数据流
-     */
     public static void zip(InputStream is, OutputStream os) {
         GZIPOutputStream gzip = null;
         try {
@@ -176,12 +132,6 @@ public class FileUtils {
         }
     }
 
-    /**
-     * 解压
-     *
-     * @param is 输入流
-     * @param os 输出流
-     */
     public static void unzip(InputStream is, OutputStream os) {
         GZIPInputStream gzip = null;
         try {
@@ -199,13 +149,6 @@ public class FileUtils {
         }
     }
 
-    /**
-     * 格式化文件大小
-     *
-     * @param context
-     * @param size
-     * @return
-     */
     public static String formatFileSize(Context context, long size) {
         return Formatter.formatFileSize(context, size);
     }

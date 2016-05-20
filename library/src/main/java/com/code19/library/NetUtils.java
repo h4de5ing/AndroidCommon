@@ -27,7 +27,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * 网络相关工具类
  * Created by zhangshixin on 2015/11/26.
  * Blog : http://blog.csdn.net/u011240877
  *
@@ -42,24 +41,12 @@ public class NetUtils {
     public static final String NETWORK_TYPE_UNKNOWN = "unknown";
     public static final String NETWORK_TYPE_DISCONNECT = "disconnect";
 
-    /**
-     * 获取网络类型
-     *
-     * @param context 上下文
-     * @return boolean
-     */
     public static int getNetworkType(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager == null ? null : connectivityManager.getActiveNetworkInfo();
         return networkInfo == null ? -1 : networkInfo.getType();
     }
 
-    /**
-     * 获取网络类型的名称
-     *
-     * @param context 上下文
-     * @return 网络名称
-     */
     public static String getNetworkTypeName(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo;
@@ -82,10 +69,7 @@ public class NetUtils {
         return type;
     }
 
-    /**
-     * 判断网络是否连接
-     */
-    public static boolean isConnected(Context context) {
+     public static boolean isConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
@@ -96,9 +80,6 @@ public class NetUtils {
         return false;
     }
 
-    /**
-     * 判断是否为wifi联网
-     */
     public static boolean isWiFi(Context cxt) {
         ConnectivityManager cm = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
         // wifi的状态：ConnectivityManager.TYPE_WIFI
@@ -106,11 +87,7 @@ public class NetUtils {
         return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
     }
 
-    /**
-     * 打开网络设置界面
-     *
-     * @param act 启动设置的activity
-     */
+
     public static void openNetSetting(Activity act) {
         Intent intent = new Intent();
         ComponentName cm = new ComponentName("com.android.settings", "com.android.settings.WirelessSettings");
@@ -119,12 +96,6 @@ public class NetUtils {
         act.startActivityForResult(intent, 0);
     }
 
-    /**
-     * 判断网络是否有效.
-     *
-     * @param context 上下文
-     * @return true, if is network available
-     */
     public static boolean isNetworkAvailable(Context context) {
         if (context == null) {
             Log.e("isNetworkAvailable", " Context is null");

@@ -28,13 +28,7 @@ import java.io.File;
  * Create by h4de5ing 2016/5/18 018
  */
 public class AppUtils {
-    /**
-     * 获取应用名称
-     *
-     * @param packageName 应用程序包名
-     * @param context     包管理器
-     * @return 返回获取到的应用程序名称
-     */
+
     public static String getAppName(String packageName, Context context) {
         PackageManager pm = context.getPackageManager();
         String appName = null;
@@ -47,13 +41,6 @@ public class AppUtils {
         return appName;
     }
 
-    /**
-     * 获取应用图标
-     *
-     * @param packageName 应用程序包名
-     * @param context     包管理器
-     * @return 返回获取到的应用程序图标
-     */
 
     public static Drawable getAppIcon(String packageName, Context context) {
         PackageManager pm = context.getPackageManager();
@@ -67,13 +54,7 @@ public class AppUtils {
         return appIcon;
     }
 
-    /**
-     * 获取应用程序最后更新的时间
-     *
-     * @param packageName 应用程序包名
-     * @param pm          包管理器
-     * @return 返回获取到的应用程序更新时间
-     */
+
     public static long getAppDate(String packageName, PackageManager pm) {
         long lastUpdateTime = 0;
         try {
@@ -85,13 +66,7 @@ public class AppUtils {
         return lastUpdateTime;
     }
 
-    /**
-     * 获取应用的大小
-     *
-     * @param packageName 应用程序包名
-     * @param pm          包管理器
-     * @return 返回获取到的应用程序大小
-     */
+
     public static long getAppSize(String packageName, PackageManager pm) {
         long appSize = 0;
         try {
@@ -103,13 +78,6 @@ public class AppUtils {
         return appSize;
     }
 
-    /**
-     * 获取应用成apk
-     *
-     * @param packageName 应用程序包名
-     * @param pm          包管理器
-     * @return 返回获取到的应用程序apk
-     */
     public static String getAppApk(String packageName, PackageManager pm) {
         String sourceDir = null;
         try {
