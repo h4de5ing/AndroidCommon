@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2016 android@19code.com
+ *   Copyright (C)  2016 android@19code.com
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public class SPUtils {
 
     public static void setBoolean(Context context, String filename, String key, boolean value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
-        sp.edit().putBoolean(key, value).commit();
+        sp.edit().putBoolean(key, value).apply();
     }
 
 
@@ -38,7 +38,7 @@ public class SPUtils {
 
     public static void setInt(Context context, String filename, String key, int value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
-        sp.edit().putInt(key, value).commit();
+        sp.edit().putInt(key, value).apply();
     }
 
     public static int getInt(Context context, String filename, String key, int defaultValue) {
@@ -48,7 +48,7 @@ public class SPUtils {
 
     public static void setString(Context context, String filename, String key, String value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
-        sp.edit().putString(key, value).commit();
+        sp.edit().putString(key, value).apply();
     }
 
     public static String getString(Context context, String filename, String key, String defaultValue) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2016 android@19code.com
+ *   Copyright (C)  2016 android@19code.com
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -148,7 +148,7 @@ public class DeviceUtils {
                 for (Enumeration<InetAddress> enumIpAddr = en.nextElement().getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
-                        return inetAddress.getHostAddress().toString();
+                        return new String(inetAddress.getHostAddress());
                     }
                 }
             }
@@ -986,7 +986,7 @@ public class DeviceUtils {
             if (c != null) {
                 c.close();
             }
-            c.close();
+            //c.close();
             return null;
         }
         try {

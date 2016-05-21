@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2016 android@19code.com
+ *   Copyright (C)  2016 android@19code.com
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ import android.widget.TextView;
 
 /**
  * Blog : http://blog.csdn.net/u011240877
- *
  */
 public class ViewUtils {
 

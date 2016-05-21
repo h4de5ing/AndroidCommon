@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2016 android@19code.com
+ *   Copyright (C)  2016 android@19code.com
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -81,11 +81,7 @@ public final class SystemUtils {
                 .getRunningAppProcesses();
         for (RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
-                if (appProcess.importance == RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return appProcess.importance == RunningAppProcessInfo.IMPORTANCE_BACKGROUND;
             }
         }
         return false;
