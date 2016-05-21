@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.telephony.TelephonyManager;
@@ -217,10 +218,10 @@ public final class SystemUtils {
     }
 
 
-    public static void createDeskShortCut(Context cxt, int icon, String title, Class<?> cls) {
+    public static void createDeskShortCut(Context cxt, String shortCutName, int icon, Class<?> cls) {
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         shortcutIntent.putExtra("duplicate", false);
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortCutName);
         Parcelable ico = Intent.ShortcutIconResource.fromContext(cxt.getApplicationContext(), icon);
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ico);
         Intent intent = new Intent(cxt, cls);
@@ -230,8 +231,56 @@ public final class SystemUtils {
         cxt.sendBroadcast(shortcutIntent);
     }
 
-    public static String getCurrentLauguage() {
+    /**
+     * 创建桌面快捷方式
+     *
+     * @param ctx           上下文
+     * @param shortCutName  快捷方式名
+     * @param iconId        快捷方式图标资源ID
+     * @param presentIntent 快捷方式激活的activity，需要执行的intent，自己定义
+     */
+    public static void createShortcut(Context ctx, String shortCutName, int iconId, Intent presentIntent) {
+        Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        shortcutIntent.putExtra("duplicate", false);
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortCutName);
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(ctx, iconId));
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, presentIntent);
+        ctx.sendBroadcast(shortcutIntent);
+    }
+
+    public static void shareText(Context ctx, String title, String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        //intent.putExtra(Intent.EXTRA_SUBJECT, title);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        ctx.startActivity(Intent.createChooser(intent, title));
+       /* List<ResolveInfo> ris = getShareTargets(ctx);
+        if (ris != null && ris.size() > 0) {
+            ctx.startActivity(Intent.createChooser(intent, title));
+        }*/
+    }
+
+    public static void shareFile(Context ctx, String title, String filePath) {
+        FileUtils.shareFile(ctx, title, filePath);
+    }
+
+
+    public static List<ResolveInfo> getShareTargets(Context ctx) {
+        Intent intent = new Intent(Intent.ACTION_SEND, null);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setType("text/plain");
+        PackageManager pm = ctx.getPackageManager();
+        return pm.queryIntentActivities(intent, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
+    }
+
+    public static String getCurrentLanguage() {
         return Locale.getDefault().getLanguage();
     }
 
+    public static String getLanguage(Context ctx) {
+        if (ctx != null) {
+            return ctx.getResources().getConfiguration().locale.getLanguage();
+        }
+        return null;
+    }
 }

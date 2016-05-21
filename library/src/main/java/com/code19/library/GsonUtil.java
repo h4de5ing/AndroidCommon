@@ -34,10 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author robertli
- * @Package com.ymc.supplierspirit.common
- * @date 2016/1/7 16:30
- * @Description:
+ *
  */
 public class GsonUtil {
     private static Gson gson = null;
@@ -79,8 +76,7 @@ public class GsonUtil {
                             public JsonElement serialize(Date src,
                                                          Type typeOfSrc,
                                                          JsonSerializationContext context) {
-                                SimpleDateFormat format = new SimpleDateFormat(
-                                        dateformat);
+                                SimpleDateFormat format = new SimpleDateFormat(dateformat);
                                 return new JsonPrimitive(format.format(src));
                             }
                         }).setDateFormat(dateformat).create();

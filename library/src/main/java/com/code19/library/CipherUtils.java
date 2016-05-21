@@ -26,11 +26,10 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Create by h4de5ing 2016/5/7 007
+ * checked
  */
 public class CipherUtils {
-    /**
-     * checked
-     */
+
     public static String encode(String input) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -50,10 +49,8 @@ public class CipherUtils {
         }
     }
 
-    /**
-     * checked
-     */
-    public static String md5Encode(InputStream in) {
+
+    public static String encode(InputStream in) {
         int bufferSize = 256 * 1024;
         DigestInputStream digestInputStream = null;
         try {
@@ -93,17 +90,45 @@ public class CipherUtils {
 
 
     public static String base64Decode(String str) {
-        byte[] decode = Base64.decode(str, Base64.DEFAULT);
-        return String.valueOf(decode);
+        return Base64.decode(str.getBytes(), Base64.DEFAULT).toString();
     }
 
 
-    public static String XorEncode(String pwd, int key) {
-        key = key % 128;
-        byte[] bytes = pwd.getBytes();
-        for (int i = 0; i < bytes.length; i++) {
-            bytes[i] ^= key;
+    public static String XorEncode(String str,String privatekey) {
+        int[] snNum = new int[str.length()];
+        String result = "";
+        String temp = "";
+        for (int i = 0, j = 0; i < str.length(); i++, j++) {
+            if (j == privatekey.length())
+                j = 0;
+            snNum[i] = str.charAt(i) ^ privatekey.charAt(j);
         }
-        return new String(bytes);
+        for (int k = 0; k < str.length(); k++) {
+            if (snNum[k] < 10) {
+                temp = "00" + snNum[k];
+            } else {
+                if (snNum[k] < 100) {
+                    temp = "0" + snNum[k];
+                }
+            }
+            result += temp;
+        }
+        return result;
+    }
+
+    public static String XorDecode(String str,String privateKey) {
+        char[] snNum = new char[str.length() / 3];
+        String result = "";
+
+        for (int i = 0, j = 0; i < str.length() / 3; i++, j++) {
+            if (j == privateKey.length())
+                j = 0;
+            int n = Integer.parseInt(str.substring(i * 3, i * 3 + 3));
+            snNum[i] = (char) ((char) n ^ privateKey.charAt(j));
+        }
+        for (int k = 0; k < str.length() / 3; k++) {
+            result += snNum[k];
+        }
+        return result;
     }
 }

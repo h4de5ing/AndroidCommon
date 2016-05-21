@@ -21,47 +21,48 @@ import android.util.DisplayMetrics;
 
 /**
  * Create by h4de5ing 2016/5/7 007
+ * checked
  */
 public class DensityUtil {
 
-    public static int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    public static int dip2px(Context c, float dpValue) {
+        final float scale = c.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    public static int px2dip(Context c, float pxValue) {
+        final float scale = c.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
 
-    public static int px2sp(Context context, float pxValue) {
-        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int px2sp(Context c, float pxValue) {
+        float fontScale = c.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 
 
-    public static int sp2px(Context context, float spValue) {
-        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int sp2px(Context c, float spValue) {
+        float fontScale = c.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
-    public static int getDialogW(Context aty) {
+    public static int getDialogW(Context c) {
         DisplayMetrics dm = new DisplayMetrics();
-        dm = aty.getResources().getDisplayMetrics();
+        dm = c.getResources().getDisplayMetrics();
         int w = dm.widthPixels - 100;
         // int w = aty.getWindowManager().getDefaultDisplay().getWidth() - 100;
         return w;
     }
 
 
-    public static int getScreenW(Context aty) {
-        DisplayMetrics dm = aty.getResources().getDisplayMetrics();
+    public static int getScreenW(Context c) {
+        DisplayMetrics dm = c.getResources().getDisplayMetrics();
         return dm.widthPixels;
     }
 
-    public static int getScreenH(Context aty) {
-        DisplayMetrics dm = aty.getResources().getDisplayMetrics();
+    public static int getScreenH(Context c) {
+        DisplayMetrics dm = c.getResources().getDisplayMetrics();
         return dm.heightPixels;
     }
 }

@@ -20,9 +20,10 @@ import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
@@ -30,31 +31,35 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
+import android.widget.EditText;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.util.Calendar;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 /**
- * Easy device info class
  * https://github.com/nisrulz/easydeviceinfo
+ * unchecked
  */
-public class DeviceInfo {
+public class DeviceUtils {
 
     private final Context context;
     private final TelephonyManager tm;
@@ -62,35 +67,19 @@ public class DeviceInfo {
     /**
      * The constant LOGTAG.
      */
-    private static final String LOGTAG = "DeviceInfo";
+    private static final String LOGTAG = "DeviceUtils";
 
     /**
      * Instantiates a new Easy device info.
      *
      * @param context the context
      */
-    public DeviceInfo(Context context) {
+    public DeviceUtils(Context context) {
         this.context = context;
         tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         initialVal = "na";
     }
 
-    /**
-     * Gets library version.
-     *
-     * @return the library version
-     */
-    public String getLibraryVersion() {
-        String version = "1.1.7";
-        int versionCode = 9;
-        return version + "-" + versionCode;
-    }
-
-    /**
-     * Gets android id.
-     *
-     * @return the android id
-     */
     public String getAndroidID() {
         String result = initialVal;
         try {
@@ -102,6 +91,150 @@ public class DeviceInfo {
             result = initialVal;
         }
         return result;
+    }
+
+    public static String getDeviceID(Context ctx) {
+        return ((TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+    }
+
+    public static String getIMEI(Context ctx) {
+        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getDeviceId() != null ? tm.getDeviceId() : null;
+    }
+
+    public static String getIMSI(Context ctx) {
+        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getSubscriberId() != null ? tm.getSubscriberId() : null;
+    }
+
+    /**
+     * 获取MAC地址
+     *
+     * @param ctx 上下文
+     * @return MAC地址
+     */
+    @SuppressWarnings("MissingPermission")
+    public static String getWifiMacAddr(Context ctx) {
+        String macAddr = "";
+        try {
+            WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
+            macAddr = wifi.getConnectionInfo().getMacAddress();
+            if (macAddr == null) {
+                macAddr = "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return macAddr;
+    }
+
+    /**
+     * 获取ip地址
+     */
+    public static String getIP(Context ctx) {
+        WifiManager wifiManager = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
+        return wifiManager.isWifiEnabled() ? getWifiIP(wifiManager) : getGPRSIP();
+    }
+
+    private static String getWifiIP(WifiManager wifiManager) {
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        String ip = intToIp(wifiInfo.getIpAddress());
+        return ip != null ? ip : "";
+    }
+
+    private static String getGPRSIP() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                for (Enumeration<InetAddress> enumIpAddr = en.nextElement().getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        return inetAddress.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "";
+        }
+        return "";
+    }
+
+    private static String intToIp(int i) {
+        return (i & 0xFF) + "." + ((i >> 8) & 0xFF) + "." + ((i >> 16) & 0xFF) + "." + (i >> 24 & 0xFF);
+    }
+
+    /**
+     * Gets ip address.
+     */
+    public static String getIPAddress(boolean useIPv4) {
+        String result = null;
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
+                for (InetAddress addr : addrs) {
+                    if (!addr.isLoopbackAddress()) {
+                        String sAddr = addr.getHostAddress().toUpperCase();
+                        boolean isIPv4 = addr instanceof Inet4Address;
+                        if (useIPv4) {
+                            if (isIPv4) result = sAddr;
+                        } else {
+                            if (!isIPv4) {
+                                int delim = sAddr.indexOf('%');
+                                result = delim < 0 ? sAddr : sAddr.substring(0, delim);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+        return result;
+    }
+
+
+    /**
+     * 获取手机号码
+     */
+    public static String getPhoneNumber(Context ctx) {
+        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getLine1Number();
+    }
+
+    /**
+     * 获取运营商
+     * 其中46000、46002和46007标识中国移动，46001标识中国联通，46003标识中国电信
+     *
+     * @param ctx 上下文
+     * @return 运营商
+     */
+    public static String getMNC(Context ctx) {
+        String providersName = "";
+        TelephonyManager telephonyManager = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+        if (telephonyManager.getSimState() == TelephonyManager.SIM_STATE_READY) {
+            providersName = telephonyManager.getSimOperator();
+            providersName = providersName == null ? "" : providersName;
+        }
+        return providersName;
+    }
+
+    /**
+     * 跳转到拨号界面，让用户选择是否拨号
+     *
+     * @param activity    上下文
+     * @param phoneNumber 拨打的电话号码
+     */
+    public static void forwardToDial(Activity activity, String phoneNumber) {
+        if (activity != null && !TextUtils.isEmpty(phoneNumber)) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+                activity.startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -799,75 +932,6 @@ public class DeviceInfo {
         return result;
     }
 
-    /**
-     * Gets wifi mac.
-     * <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-     *
-     * @return the wifi mac
-     */
-    @SuppressWarnings("MissingPermission")
-    public String getWifiMAC() {
-        String result = initialVal;
-        try {
-
-            if (context.checkCallingOrSelfPermission(Manifest.permission.ACCESS_WIFI_STATE)
-                    == PackageManager.PERMISSION_GRANTED) {
-
-                WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                result = wm.getConnectionInfo().getMacAddress();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (result == null || result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
-
-    /**
-     * Gets imei.
-     * <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-     *
-     * @return the imei
-     */
-    public String getIMEI() {
-        String result = initialVal;
-        boolean hasReadPhoneStatePermission =
-                context.checkCallingOrSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                        == PackageManager.PERMISSION_GRANTED;
-        try {
-            if (hasReadPhoneStatePermission) result = tm.getDeviceId();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (result == null || result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
-
-    /**
-     * Gets imsi.
-     *
-     * @return the imsi
-     */
-    public String getIMSI() {
-        String result = initialVal;
-        boolean hasReadPhoneStatePermission =
-                context.checkCallingOrSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                        == PackageManager.PERMISSION_GRANTED;
-        try {
-            if (hasReadPhoneStatePermission) result = tm.getSubscriberId();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (result == null || result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
 
     /**
      * Gets serial.
@@ -1101,41 +1165,6 @@ public class DeviceInfo {
         return result;
     }
 
-    /**
-     * Gets ip address.
-     *
-     * @param useIPv4 the use i pv 4
-     * @return the ip address
-     */
-    public String getIPAddress(boolean useIPv4) {
-        String result = initialVal;
-        try {
-            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
-                for (InetAddress addr : addrs) {
-                    if (!addr.isLoopbackAddress()) {
-                        String sAddr = addr.getHostAddress().toUpperCase();
-                        boolean isIPv4 = addr instanceof Inet4Address;
-                        if (useIPv4) {
-                            if (isIPv4) result = sAddr;
-                        } else {
-                            if (!isIPv4) {
-                                int delim = sAddr.indexOf('%'); // drop ip6 port suffix
-                                result = delim < 0 ? sAddr : sAddr.substring(0, delim);
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (result == null || result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
 
     /**
      * Gets ua.
@@ -1246,82 +1275,6 @@ public class DeviceInfo {
         return coordinates;
     }
 
-    /**
-     * Gets time.
-     *
-     * @return the time
-     */
-    public long getTime() {
-        return System.currentTimeMillis();
-    }
-
-    /**
-     * Gets formated time.
-     *
-     * @return the formated time
-     */
-    public String getFormatedTime() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-        return cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(
-                Calendar.SECOND);
-    }
-
-    /**
-     * Gets app name.
-     *
-     * @return the app name
-     */
-    public String getAppName() {
-        String result;
-        final PackageManager pm = context.getPackageManager();
-        ApplicationInfo ai;
-        try {
-            ai = pm.getApplicationInfo(context.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            ai = null;
-            e.printStackTrace();
-        }
-        result = (String) (ai != null ? pm.getApplicationLabel(ai) : initialVal);
-        return result;
-    }
-
-    /**
-     * Gets app version.
-     *
-     * @return the app version
-     */
-    public String getAppVersion() {
-        String result = initialVal;
-        try {
-            result = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (result == null || result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
-
-    /**
-     * Gets app version code.
-     *
-     * @return the app version code
-     */
-    public String getAppVersionCode() {
-        String result = initialVal;
-        try {
-            result = String.valueOf(
-                    context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
 
     /**
      * Gets activity name.
@@ -1341,23 +1294,6 @@ public class DeviceInfo {
         return result;
     }
 
-    /**
-     * Gets package name.
-     *
-     * @return the package name
-     */
-    public String getPackageName() {
-        String result = initialVal;
-        try {
-            result = context.getPackageName();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (result == null || result.length() == 0) {
-            result = initialVal;
-        }
-        return result;
-    }
 
     /**
      * Gets store.
@@ -1525,5 +1461,24 @@ public class DeviceInfo {
             result = result.replaceAll(" ", "_");
         }
         return result;
+    }
+
+
+    public static void showSoftInputMethod(Context context, EditText editText) {
+        if (context != null && editText != null) {
+            editText.requestFocus();
+            InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.showSoftInput(editText, 0);
+        }
+    }
+
+
+    public static void hideSoftInputMethod(Context context, EditText editText) {
+        if (context != null && editText != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            }
+        }
     }
 }

@@ -21,12 +21,13 @@ import android.content.SharedPreferences;
 
 /**
  * Create by h4de5ing 2016/5/7 007
+ * checked
  */
 public class SPUtils {
 
     public static void setBoolean(Context context, String filename, String key, boolean value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
-        sp.edit().putBoolean(key, value);
+        sp.edit().putBoolean(key, value).commit();
     }
 
 
@@ -37,7 +38,7 @@ public class SPUtils {
 
     public static void setInt(Context context, String filename, String key, int value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
-        sp.edit().putInt(key, value);
+        sp.edit().putInt(key, value).commit();
     }
 
     public static int getInt(Context context, String filename, String key, int defaultValue) {
@@ -47,7 +48,7 @@ public class SPUtils {
 
     public static void setString(Context context, String filename, String key, String value) {
         SharedPreferences sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
-        sp.edit().putString(key, value);
+        sp.edit().putString(key, value).commit();
     }
 
     public static String getString(Context context, String filename, String key, String defaultValue) {

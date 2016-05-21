@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2016 android@19code.com
+ *   Copyright (C)  2016 android@19code.com
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -16,19 +16,9 @@
 
 package com.code19.library;
 
-import com.google.gson.Gson;
-
 /**
- * Create by h4de5ing 2016/5/7 007
+ * Create by h4de5ing 2016/5/21 021
  */
-public class JsonUitls {
-    public static String toJson(Object obj) {
-        Gson gson = new Gson();
-        return gson.toJson(obj);
-    }
-
-    public static <T> T fromJson(String str, Class<T> type) {
-        Gson gson = new Gson();
-        return gson.fromJson(str, type);
-    }
+public class Config {
+    public static String TAG="H4de5ing";
 }

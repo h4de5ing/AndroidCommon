@@ -24,13 +24,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 /**
- * Created by zhangshixin on 2015/11/26.
  * Blog : http://blog.csdn.net/u011240877
- *
- * @description Codes there always can be better.
+ * checked
  */
 public class NetUtils {
 
@@ -69,7 +66,7 @@ public class NetUtils {
         return type;
     }
 
-     public static boolean isConnected(Context context) {
+    public static boolean isConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
@@ -80,25 +77,8 @@ public class NetUtils {
         return false;
     }
 
-    public static boolean isWiFi(Context cxt) {
-        ConnectivityManager cm = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
-        // wifi的状态：ConnectivityManager.TYPE_WIFI
-        // 3G的状态：ConnectivityManager.TYPE_MOBILE
-        return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
-    }
-
-
-    public static void openNetSetting(Activity act) {
-        Intent intent = new Intent();
-        ComponentName cm = new ComponentName("com.android.settings", "com.android.settings.WirelessSettings");
-        intent.setComponent(cm);
-        intent.setAction("android.intent.action.VIEW");
-        act.startActivityForResult(intent, 0);
-    }
-
     public static boolean isNetworkAvailable(Context context) {
         if (context == null) {
-            Log.e("isNetworkAvailable", " Context is null");
             return false;
         }
         try {
@@ -113,11 +93,25 @@ public class NetUtils {
         return false;
     }
 
+    public static boolean isWiFi(Context cxt) {
+        ConnectivityManager cm = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // wifi的状态：ConnectivityManager.TYPE_WIFI
+        // 3G的状态：ConnectivityManager.TYPE_MOBILE
+        return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    //unchecked
+    public static void openNetSetting(Activity act) {
+        Intent intent = new Intent();
+        ComponentName cm = new ComponentName("com.android.settings", "com.android.settings.WirelessSettings");
+        intent.setComponent(cm);
+        intent.setAction("android.intent.action.VIEW");
+        act.startActivityForResult(intent, 0);
+    }
+
+
     /**
      * Whether is fast mobile network
-     *
-     * @param context
-     * @return boolean
      */
 
     private static boolean isFastMobileNetwork(Context context) {

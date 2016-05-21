@@ -17,6 +17,8 @@
 package com.code19.library;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.format.Formatter;
 
 import java.io.BufferedReader;
@@ -38,13 +40,28 @@ import java.util.zip.GZIPOutputStream;
  * Create by h4de5ing 2016/5/7 007
  */
 public class FileUtils {
+    public static void closeIO(Closeable... closeables) {
+        if (null == closeables || closeables.length <= 0) {
+            return;
+        }
+        for (Closeable cb : closeables) {
+            try {
+                if (null == cb) {
+                    continue;
+                }
+                cb.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static boolean deleteFile(Context context, String filename) {
         return context.deleteFile(filename);
     }
 
-    public static boolean existsFile(String filename) {
-        return new File(filename).exists();
+    public static boolean isFileExist(String filePath) {
+        return new File(filePath).exists();
     }
 
     public static boolean writeFile(String filename, String content) {
@@ -57,14 +74,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            closeIO(bufferedWriter);
         }
         return isSuccess;
     }
@@ -81,13 +91,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            closeIO(bufferedReader);
         }
         return str;
     }
@@ -98,20 +102,12 @@ public class FileUtils {
         in.transferTo(0, in.size(), out);
     }
 
-    public static void closeIO(Closeable... closeables) {
-        if (null == closeables || closeables.length <= 0) {
-            return;
-        }
-        for (Closeable cb : closeables) {
-            try {
-                if (null == cb) {
-                    continue;
-                }
-                cb.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public static void shareFile(Context context, String title, String filePath) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        Uri uri = Uri.parse("file://" + filePath);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        context.startActivity(Intent.createChooser(intent, title));
     }
 
     public static void zip(InputStream is, OutputStream os) {
@@ -151,6 +147,104 @@ public class FileUtils {
 
     public static String formatFileSize(Context context, long size) {
         return Formatter.formatFileSize(context, size);
+    }
+
+    public static void Stream2File(InputStream is, String fileName) {
+        byte[] b = new byte[1024];
+        int len = -1;
+        FileOutputStream os = null;
+        try {
+            os = new FileOutputStream(new File(fileName));
+            while ((len = is.read(b)) != -1) {
+                os.write(b, 0, len);
+                os.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            closeIO(is);
+            closeIO(os);
+        }
+    }
+
+    /**
+     * 创建一个文件夹
+     *
+     * @param filePath 文件夹路径
+     * @return true 成功，false 失败
+     */
+    public static boolean createFolder(String filePath) {
+        return createFolder(filePath, false);
+    }
+
+    /**
+     * 创建一个文件夹
+     *
+     * @param filePath 文件夹路径
+     * @param recreate 是否重建
+     * @return true 成功，false 失败
+     */
+    public static boolean createFolder(String filePath, boolean recreate) {
+        String folderName = getFolderName(filePath);
+        if (folderName == null || folderName.length() == 0 || folderName.trim().length() == 0) {
+            return false;
+        }
+
+        File folder = new File(folderName);
+        if (folder.exists()) {
+            if (recreate) {
+                deleteFile(folderName);
+                return folder.mkdirs();
+            } else {
+                return true;
+            }
+        } else {
+            return folder.mkdirs();
+        }
+    }
+
+    /**
+     * 从文件夹路径中获取文件夹名
+     *
+     * @param filePath 文件夹路径
+     * @return 文件夹名
+     */
+    public static String getFolderName(String filePath) {
+        if (filePath == null || filePath.length() == 0 || filePath.trim().length() == 0) {
+            return filePath;
+        }
+        int filePos = filePath.lastIndexOf(File.separator);
+        return (filePos == -1) ? "" : filePath.substring(0, filePos);
+    }
+
+    /**
+     * 删除文件夹下的文件
+     *
+     * @param path 文件路径
+     * @return true 成功，false 失败
+     */
+    public static boolean deleteFile(String path) {
+        if (path == null || path.length() == 0 || path.trim().length() == 0) {
+            return true;
+        }
+        File file = new File(path);
+        if (!file.exists()) {
+            return true;
+        }
+        if (file.isFile()) {
+            return file.delete();
+        }
+        if (!file.isDirectory()) {
+            return false;
+        }
+        for (File f : file.listFiles()) {
+            if (f.isFile()) {
+                f.delete();
+            } else if (f.isDirectory()) {
+                deleteFile(f.getAbsolutePath());
+            }
+        }
+        return file.delete();
     }
 
 }
