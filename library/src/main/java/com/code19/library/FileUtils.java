@@ -56,8 +56,8 @@ public class FileUtils {
         }
     }
 
-    public static boolean deleteFile(Context context, String filename) {
-        return context.deleteFile(filename);
+    public static boolean deleteFile(String filename) {
+        return new File(filename).delete();
     }
 
     public static boolean isFileExist(String filePath) {
@@ -167,29 +167,15 @@ public class FileUtils {
         }
     }
 
-    /**
-     * 创建一个文件夹
-     *
-     * @param filePath 文件夹路径
-     * @return true 成功，false 失败
-     */
     public static boolean createFolder(String filePath) {
         return createFolder(filePath, false);
     }
 
-    /**
-     * 创建一个文件夹
-     *
-     * @param filePath 文件夹路径
-     * @param recreate 是否重建
-     * @return true 成功，false 失败
-     */
     public static boolean createFolder(String filePath, boolean recreate) {
         String folderName = getFolderName(filePath);
         if (folderName == null || folderName.length() == 0 || folderName.trim().length() == 0) {
             return false;
         }
-
         File folder = new File(folderName);
         if (folder.exists()) {
             if (recreate) {
@@ -203,12 +189,6 @@ public class FileUtils {
         }
     }
 
-    /**
-     * 从文件夹路径中获取文件夹名
-     *
-     * @param filePath 文件夹路径
-     * @return 文件夹名
-     */
     public static String getFolderName(String filePath) {
         if (filePath == null || filePath.length() == 0 || filePath.trim().length() == 0) {
             return filePath;
@@ -217,17 +197,11 @@ public class FileUtils {
         return (filePos == -1) ? "" : filePath.substring(0, filePos);
     }
 
-    /**
-     * 删除文件夹下的文件
-     *
-     * @param path 文件路径
-     * @return true 成功，false 失败
-     */
-    public static boolean deleteFile(String path) {
-        if (path == null || path.length() == 0 || path.trim().length() == 0) {
+    public static boolean deleteFiles(String folder) {
+        if (folder == null || folder.length() == 0 || folder.trim().length() == 0) {
             return true;
         }
-        File file = new File(path);
+        File file = new File(folder);
         if (!file.exists()) {
             return true;
         }

@@ -16,19 +16,49 @@
 
 package com.code19.androidcommon;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+
+import com.code19.library.DeviceUtils;
+import com.code19.library.FileUtils;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "ghost";
+    private Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button fire = (Button) findViewById(R.id.fire);
+        Button dial = (Button) findViewById(R.id.dial);
+
+        if (fire != null) {
+            fire.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean b = FileUtils.deleteFile(c.getCacheDir().getAbsolutePath() + "/" + "a");
+                    boolean b1 = c.deleteFile(c.getCacheDir().getAbsolutePath() + "/" + "a");
+                    Log.i(TAG, "利用上下文删除: " + b);
+                }
+            });
+        }
+        if (dial != null) {
+            dial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean b = FileUtils.deleteFile(c.getCacheDir().getAbsolutePath());
+                    Log.i("ghost", "删除目录下的文件:" + b);
+                }
+            });
+        }
     }
 
-    public void share(View view) {
+    public void share() {
+        Log.i(TAG, "getStore: " + DeviceUtils.getStore(c));
     }
 }

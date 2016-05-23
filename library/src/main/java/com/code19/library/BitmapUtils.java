@@ -27,24 +27,10 @@ import android.os.Environment;
  * unchecked
  */
 public class BitmapUtils {
-    /**
-     * 缩略图宽
-     */
     private static final int THUMB_WIDTH = 200;
-    /**
-     * 缩略图高
-     */
     private static final int THUMB_HEIGHT = 200;
     private static final String IMAGE_FOLDER = Environment.getExternalStorageDirectory().getAbsolutePath() + "/BitmapTemp/";
 
-    /**
-     * 解压
-     *
-     * @param pathName 地址
-     * @param width    长
-     * @param height   宽
-     * @return bitmap
-     */
     public static Bitmap decodeFile(String pathName, int width, int height) {
         Bitmap bitmap = null;
         if (FileUtils.isFileExist(pathName)) {
@@ -81,14 +67,6 @@ public class BitmapUtils {
         return bitmap;
     }
 
-    /**
-     * @param options   参数
-     * @param reqWidth  目标的宽度
-     * @param reqHeight 目标的高度
-     * @return
-     * @description 计算图片的压缩比率
-     */
-
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -103,12 +81,6 @@ public class BitmapUtils {
         return inSampleSize;
     }
 
-    /**
-     * 缩略图
-     *
-     * @param imagePath path
-     * @return bitmap
-     */
     public static Bitmap getImageThumbnail(String imagePath) {
         Bitmap bitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -146,9 +118,5 @@ public class BitmapUtils {
         }
         return bitmap;
     }
-
-
-
-
 
 }

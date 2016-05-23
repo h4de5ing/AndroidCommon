@@ -81,39 +81,4 @@ public class DateUtils {
         now.set(Calendar.DATE, now.get(Calendar.DATE) + day);
         return now.getTime();
     }
-
-    public static String getInterval(Date createAt) {
-        String interval = null;
-        long millisecond = new Date().getTime() - createAt.getTime();
-        long second = millisecond / 1000;
-        if (second <= 0) {
-            second = 0;
-        }
-        if (second == 0) {
-            interval = "刚刚";
-        } else if (second < 30) {
-            interval = second + "秒以前";
-        } else if (second >= 30 && second < 60) {
-            interval = "半分钟前";
-        } else if (second >= 60 && second < 60 * 60) {
-            long minute = second / 60;
-            interval = minute + "分钟前";
-        } else if (second >= 60 * 60 && second < 60 * 60 * 24) {
-            long hour = (second / 60) / 60;
-            interval = hour + "小时前";
-        } else if (second >= 60 * 60 * 24 && second <= 60 * 60 * 24 * 2) {
-            interval = "昨天" + formatDateCustom(createAt, "HH:mm");
-        } else if (second >= 60 * 60 * 24 * 2 && second <= 60 * 60 * 24 * 7) {
-            long day = ((second / 60) / 60) / 24;
-            interval = day + "天前";
-        } else if (second >= 60 * 60 * 24 * 7) {
-            interval = formatDateCustom(createAt, "MM-dd HH:mm");
-        } else if (second >= 60 * 60 * 24 * 365) {
-            interval = formatDateCustom(createAt, "yyyy-MM-dd HH:mm");
-        } else {
-            interval = "";
-        }
-        return interval;
-    }
-
 }

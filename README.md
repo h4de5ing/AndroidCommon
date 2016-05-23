@@ -69,74 +69,55 @@ compile 'com.code19.library:library:0.0.4'
     
 - DeviceUtils.java 设备信息工具
     * getAndroidID 获取AndroidID
-    * getDeviceID 获取设备ID
-    * getIMEI 获取手机IMEI码
-    * getIMSI 获取手机IMSI码
+    * getIMEI 获取设备IMEI码
+    * getIMSI 获取设备IMSI码
     * getWifiMacAddr 获取MAC地址
-    * getIP 获取网络IP地址
-    * getIPAddress 获取网络IP地址
-    * getPhoneNumber 获取手机号码(未获取成功)
-    * getMNC 获取网络运营商
-    * forwardToDial 跳转到拨号页面
-    * getModel
-    * getBuildBrand
-    * getBuildHost
-    * getBuildTags
-    * getBuildTime 获取系统编译时间
-    * getBuildUser 获取系统编译作者
-    * getBuildVersionRelease
-    * getBuildVersionRelease 获取编译版本
-    * getScreenDisplayID 
-    * getBuildVersionCodename
-    * getBuildVersionIncremental
-    * getBuildVersionSDK
-    * getBuildID
-    * getSupportedABIS
-    * getStringSupportedABIS
-    * getStringSupported32bitABIS
-    * getStringSupported64bitABIS
-    * getSupported32bitABIS
-    * getSupported64bitABIS
-    * getManufacturer
-    * getResolution
-    * getCarrier 获取网络运营商：中国电信，中国移动，中国联通
-    * getDevice 
-    * getBootloader
-    * getBoard
-    * getDisplayVersion
-    * getLanguage 获取语言
-    * getNetworkType 获取网络类型
-    * getOSCodename 获取系统代码:Lollipop
-    * getOSVersion 获取系统版本:5.1.1
-    * getWifiMAC 获取Mac地址
-    * getIMEI 获取IMEI号
-    * getIMSI 获取IMSI号
+    * getIP 获取网络IP地址(优先获取wifi地址)
+    * getWifiIP 获取WIFI连接下的ip地址
+    * getGPRSIP 获取GPRS连接下的ip地址
     * getSerial 获取设备序列号
     * getSIMSerial 获取SIM序列号
+    * getPhoneNumber 获取手机号码(未获取成功)
+    * getMNC 获取网络运营商 46000,46002,46007 中国移动，46001 中国联通，46003 中国电信
+    * getCarrier 获取网络运营商：中国电信,中国移动,中国联通
+    * getModel 获取硬件型号
+    * getBuildBrand 获取编译厂商
+    * getBuildHost 获取编译服务器主机
+    * getBuildTags 获取描述Build的标签
+    * getBuildTime 获取系统编译时间
+    * getBuildUser 获取系统编译作者
+    * getBuildVersionRelease 获取编译系统版本(5.1)
+    * getBuildVersionCodename 获取开发代号
+    * getBuildVersionIncremental 获取源码控制版本号  
+    * getBuildVersionSDK 获取编译的SDK
+    * getBuildID 获取修订版本列表(LMY47D)
+    * getSupportedABIS CPU指令集
+    * getManufacturer 获取硬件制造厂商
+    * getBootloader 获取系统启动程序版本号
+    * getScreenDisplayID 
+    * getDisplayVersion 获取系统版本号
+    * getLanguage 获取语言
+    * getCountry 获取国家
+    * getOSVersion 获取系统版本:5.1.1
     * getGSFID 获取GSF序列号
     * getBluetoothMAC 获取蓝牙地址
-    * getPsuedoUniqueID
-    * getPhoneNo 获取电话号码
-    * getProduct
-    * getFingerprint 获取手指点击的坐标
-    * getHardware 
-    * getRadioVer
-    * getIPAddress 获取IPv4的IP地址
-    * getUA 获取的浏览器信息(User-Agent)
-    * getLatLong 获取地址位置
-    * getDisplayXYCoordinates
-    * getActivityName 获取Activity名称
-    * getStore
+    * getPsuedoUniqueID Android设备物理唯一标识符
+    * getFingerprint 构建标识,包括brand,name,device,version.release,id,version.incremental,type,tags这些信息
+    * getHardware 获取硬件信息
+    * getProduct 获取产品信息
+    * getDevice 获取设备信息
+    * getBoard 获取主板信息
+    * getRadioVersion 获取基带版本(无线电固件版本 Api14以上)
+    * getUA 获取的浏览器指纹(User-Agent)
+    * getStore 获取应用市场
     * getDensity 获取得屏幕密度
     * getAccounts 获取google账号
-    * isNetworkAvailable 网络是否可用
     * isRunningOnEmulator 当前设备是否是模拟器  
     * showSoftInputMethod 显示软键盘
     * hideSoftInputMethod 隐藏软键盘
     
 - FileUtils.java  文件工具类
     * closeIO 关闭IO流
-    * deleteFile 删除文件
     * isFileExist 文件是否存在
     * writeFile 将字符串写入到文件
     * readFile 从文件中读取字符串
@@ -146,6 +127,10 @@ compile 'com.code19.library:library:0.0.4'
     * unzip zip解压
     * formatFileSize 格式化文件大小
     * Stream2File 将输入流写入到文件
+    * createFolder 创建文件夹
+    * createFolder 创建文件夹(支持覆盖已存在的同名文件夹)
+    * getFolderName 获取文件夹名称
+    * deleteFile 删除目录下的文件
     
 - ImageUtils.java 图片工具类 * 未验证 
     
@@ -170,10 +155,8 @@ compile 'com.code19.library:library:0.0.4'
     * getString 获取字符串属性
  
 - SystemUtils.java 系统工具
-    * getPhoneIMEI 获取手机IMEI码
-    * getSDKVersion 获取手机系统SDK版本
-    * getSystemVersion 获取系统版本
     * sendSMS 调用系统发送短信
+    * forwardToDial 跳转到拨号页面
     * hideKeyBoard 隐藏系统键盘
     * isBackground 判断当前应用程序是否后台运行
     * isSleeping 判断手机是否处理睡眠

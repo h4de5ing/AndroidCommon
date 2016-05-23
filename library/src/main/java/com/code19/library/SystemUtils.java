@@ -30,7 +30,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Parcelable;
-import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
@@ -44,23 +44,6 @@ import java.util.Locale;
 @SuppressLint("SimpleDateFormat")
 public final class SystemUtils {
 
-
-    public static String getPhoneIMEI(Context cxt) {
-        TelephonyManager tm = (TelephonyManager) cxt.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getDeviceId();
-    }
-
-
-    public static int getSDKVersion() {
-        return android.os.Build.VERSION.SDK_INT;
-    }
-
-
-    public static String getSystemVersion() {
-        return android.os.Build.VERSION.RELEASE;
-    }
-
-
     public static void sendSMS(Context cxt, String smsBody) {
         Uri smsToUri = Uri.parse("smsto:");
         Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);
@@ -68,6 +51,12 @@ public final class SystemUtils {
         cxt.startActivity(intent);
     }
 
+    public static void forwardToDial(Activity activity, String phoneNumber) {
+        if (activity != null && !TextUtils.isEmpty(phoneNumber)) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+            activity.startActivity(intent);
+        }
+    }
 
     public static void hideKeyBoard(Activity aty) {
         ((InputMethodManager) aty.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(aty.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
