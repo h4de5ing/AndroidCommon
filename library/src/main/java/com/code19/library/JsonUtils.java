@@ -42,13 +42,7 @@ public class JsonUtils {
         return gson.fromJson(str, type);
     }
 
-    /**
-     * Map转为JSON对象
-     *
-     * @param data Map数据
-     * @return
-     */
-    public static JSONObject mapToJson(Map<?, ?> data) {
+    public static JSONObject map2Json(Map<?, ?> data) {
         JSONObject object = new JSONObject();
 
         for (Map.Entry<?, ?> entry : data.entrySet()) {
@@ -66,13 +60,7 @@ public class JsonUtils {
         return object;
     }
 
-    /**
-     * 集合转换为JSONArray
-     *
-     * @param data 集合对象
-     * @return
-     */
-    public static JSONArray collectionToJson(Collection<?> data) {
+    public static JSONArray collection2Json(Collection<?> data) {
         JSONArray jsonArray = new JSONArray();
         if (data != null) {
             for (Object aData : data) {
@@ -82,14 +70,7 @@ public class JsonUtils {
         return jsonArray;
     }
 
-    /**
-     * Object对象转换为JSONArray
-     *
-     * @param data Object对象
-     * @return
-     * @throws JSONException Object非数组时，抛出异常
-     */
-    public static JSONArray arrayToJson(Object data) throws JSONException {
+    public static JSONArray object2Json(Object data) throws JSONException {
         if (!data.getClass().isArray()) {
             throw new JSONException("Not a primitive data: " + data.getClass());
         }
@@ -111,12 +92,12 @@ public class JsonUtils {
         }
         try {
             if (o instanceof Collection) {
-                return collectionToJson((Collection<?>) o);
+                return collection2Json((Collection<?>) o);
             } else if (o.getClass().isArray()) {
-                return arrayToJson(o);
+                return object2Json(o);
             }
             if (o instanceof Map) {
-                return mapToJson((Map<?, ?>) o);
+                return map2Json((Map<?, ?>) o);
             }
 
             if (o instanceof Boolean || o instanceof Byte || o instanceof Character || o instanceof Double || o instanceof Float || o instanceof Integer || o instanceof Long
@@ -131,105 +112,13 @@ public class JsonUtils {
         return null;
     }
 
-    /**
-     * 根据json字符串生成JSONObject对象
-     *
-     * @param json json字符串
-     * @return 返回JSONObject对象或者空（null）
-     */
-    public static JSONObject initJSONObject(String json) {
-
+    public static JSONObject string2JSONObject(String json) {
         JSONObject jsonObject = null;
         try {
             JSONTokener jsonParser = new JSONTokener(json);
             jsonObject = (JSONObject) jsonParser.nextValue();
         } catch (Exception e) {
-        } finally {
-            return jsonObject;
-        }
-
-    }
-
-    /**
-     * 根据Key值相对应的Value值
-     *
-     * @param jsonObject Json对象
-     * @param key        健值
-     * @return 返回value值或空串（""）
-     */
-    public static String getString(JSONObject jsonObject, String key) {
-        String value = "";
-        try {
-            value = jsonObject.getString(key);
-        } catch (Exception e) {
-        }
-
-        return value;
-    }
-
-    /**
-     * 根据Key值相对应的Value值
-     *
-     * @param jsonObject Json对象
-     * @param key        健值
-     * @return 返回value值或-1
-     */
-    public static int getInt(JSONObject jsonObject, String key) {
-        int value = -1;
-        try {
-            value = jsonObject.getInt(key);
-        } catch (Exception e) {
-        }
-
-        return value;
-    }
-
-    /**
-     * 根据Key值相对应的Value值
-     *
-     * @param jsonObject Json对象
-     * @param key        健值
-     * @return 返回value值或-1
-     */
-    public static long getLong(JSONObject jsonObject, String key) {
-        long value = -1;
-        try {
-            value = jsonObject.getLong(key);
-        } catch (Exception e) {
-        }
-
-        return value;
-    }
-
-    /**
-     * 根据Key值相对应的Value值
-     *
-     * @param jsonObject Json对象
-     * @param key        健值
-     * @return 返回value值或null
-     */
-    public static JSONArray getJSONArray(JSONObject jsonObject, String key) {
-        JSONArray arrays = null;
-        try {
-            arrays = jsonObject.getJSONArray(key);
-        } catch (Exception e) {
-        }
-
-        return arrays;
-    }
-
-    /**
-     * 根据Key值相对应的Value值
-     *
-     * @param jsonArray JsonArray对象
-     * @param index     索引
-     * @return 返回value值或null
-     */
-    public static JSONObject getJSONObject(JSONArray jsonArray, int index) {
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = jsonArray.getJSONObject(index);
-        } catch (Exception e) {
+            e.printStackTrace();
         }
         return jsonObject;
     }

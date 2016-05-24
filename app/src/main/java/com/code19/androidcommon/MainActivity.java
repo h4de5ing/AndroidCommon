@@ -19,12 +19,8 @@ package com.code19.androidcommon;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.code19.library.DeviceUtils;
-import com.code19.library.FileUtils;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "ghost";
@@ -41,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
             fire.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean b = FileUtils.deleteFile(c.getCacheDir().getAbsolutePath() + "/" + "a");
-                    boolean b1 = c.deleteFile(c.getCacheDir().getAbsolutePath() + "/" + "a");
-                    Log.i(TAG, "利用上下文删除: " + b);
+                    share();
                 }
             });
         }
@@ -51,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
             dial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean b = FileUtils.deleteFile(c.getCacheDir().getAbsolutePath());
-                    Log.i("ghost", "删除目录下的文件:" + b);
                 }
             });
         }
     }
 
     public void share() {
-        Log.i(TAG, "getStore: " + DeviceUtils.getStore(c));
+
+
     }
 }

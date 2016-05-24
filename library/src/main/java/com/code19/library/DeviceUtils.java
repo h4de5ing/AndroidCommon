@@ -317,16 +317,6 @@ public class DeviceUtils {
         }
     }
 
-
-    /**
-     * Gets store.
-     *
-     * @return the store
-     */
-    public static String getStore(Context ctx) {
-        return Build.VERSION.SDK_INT >= 3 ? ctx.getPackageManager().getInstallerPackageName(ctx.getPackageName()) : "";
-    }
-
     public static String getDensity(Context ctx) {
         String densityStr = null;
         final int density = ctx.getResources().getDisplayMetrics().densityDpi;

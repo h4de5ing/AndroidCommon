@@ -216,14 +216,6 @@ public final class SystemUtils {
         cxt.sendBroadcast(shortcutIntent);
     }
 
-    /**
-     * 创建桌面快捷方式
-     *
-     * @param ctx           上下文
-     * @param shortCutName  快捷方式名
-     * @param iconId        快捷方式图标资源ID
-     * @param presentIntent 快捷方式激活的activity，需要执行的intent，自己定义
-     */
     public static void createShortcut(Context ctx, String shortCutName, int iconId, Intent presentIntent) {
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         shortcutIntent.putExtra("duplicate", false);

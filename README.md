@@ -26,6 +26,7 @@ compile 'com.code19.library:library:0.0.4'
     * getAppApk 获取应用apk文件
     * getAppVersionName 获取应用版本名称
     * getAppVersionCode 获取应用版本号
+    * getAppInstaller 获取应用的安装市场
     * getAppPackageName 获取应用包名
     * hasPermission 是否有权限
     * isInstalled 应用是否安装
@@ -33,7 +34,9 @@ compile 'com.code19.library:library:0.0.4'
     * uninstallApk 卸载应用
     * isSystemApp 是否是系统应用
     
-- BitmapUtils.java Bitmap工具类 * 未验证  
+- BitmapUtils.java Bitmap工具类
+   * decodeFile 解析文件为bitmap
+   * getImageThumbnail 获取图片缩略图
         
 - CacheUtils.java 缓存工具类
     * setCache 设置缓存
@@ -109,7 +112,6 @@ compile 'com.code19.library:library:0.0.4'
     * getBoard 获取主板信息
     * getRadioVersion 获取基带版本(无线电固件版本 Api14以上)
     * getUA 获取的浏览器指纹(User-Agent)
-    * getStore 获取应用市场
     * getDensity 获取得屏幕密度
     * getAccounts 获取google账号
     * isRunningOnEmulator 当前设备是否是模拟器  
@@ -132,11 +134,24 @@ compile 'com.code19.library:library:0.0.4'
     * getFolderName 获取文件夹名称
     * deleteFile 删除目录下的文件
     
-- ImageUtils.java 图片工具类 * 未验证 
+- ImageUtils.java 图片工具类
+    * calculateInSampleSize 计算图片的压缩比率
+    * getPictureDegree 获取图片的角度
+    * rotaingImageView 旋转图片
+    * decodeScaleImage 加载图片并压缩
+    * getRoundedCornerBitmap 获取圆角图片
+    //* decodeUriAsBitmap 解析URL流为图片
+    * bitmap2File bitmap存为文件
+    * compressImage 质量压缩
+    * compressFixBitmap 固定大小压缩 
     
 - JsonUtils.java Json工具类(需要依赖Gson 2.0以上)
     * toJson 对象转json
     * fromJson json转对象
+    * mapToJson Map转为JSONObject
+    * collection2Json 集合转换为JSONArray
+    * object2Json Object对象转换为JSONArray
+    * string2JSONObject json字符串生成JSONObject对象
     
 - NetUtils.java 网络工具
     * getNetworkType 获取网络类型
@@ -177,7 +192,24 @@ compile 'com.code19.library:library:0.0.4'
     * getLanguage 获取当前系统的语言 
 
 - VerificationUtils.java 验证工具类
-
+    * matcherRealName 判断姓名格式  
+    ```
+    真实姓名可以是汉字，也可以是字母，但是不能两者都有，也不能包含任何符号和数字
+    1.如果是英文名,可以允许英文名字中出现空格
+    2.英文名的空格可以是多个，但是不能连续出现多个
+    3.汉字不能出现空格
+    ```
+    * matcherPhoneNum 判断手机号格式  (匹配11数字，并且13-19开头)
+    * matcherAccount 判断账号格式 (4-20位字符)
+    * matcherPassword 判断密码格式 (6-12位字母或数字)
+    * matcherPassword2 判断密码格式 (6-12位字母或数字,必须同时包含字母和数字)
+    * matcherEmail 判断邮箱格式
+    * matcherIP 判断IP地址
+    * matcherUrl 判断URL (http,https,ftp)
+    * matcherVehicleNumber 判断中国民用车辆号牌
+    * matcherIdentityCard 判断身份证号码格式
+    * isNumeric 是否数值型
+    * testRegex 是否匹配正则
     
 - ViewUtils.java View工具
     * captureView 截图
@@ -188,8 +220,42 @@ compile 'com.code19.library:library:0.0.4'
     * getToolbarHeight 获取工具栏高度
     * getNavigationBarHeight 获取导航栏高度
     * getScreenSize 获取屏幕尺寸
-   
-       
+    
+    
+    
+```shell 
+
+    /**
+     * 身份证校验
+     * <p>
+     * 根据〖中华人民共和国国家标准 GB 11643-1999〗中有关公民身份号码的规定，公民身份号码是特征组合码，由十七位数字本体码和一位数字校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。
+     * 地址码表示编码对象常住户口所在县(市、旗、区)的行政区划代码。
+     * 出生日期码表示编码对象出生的年、月、日，其中年份用四位数字表示，年、月、日之间不用分隔符。
+     * 顺序码表示同一地址码所标识的区域范围内，对同年、月、日出生的人员编定的顺序号。顺序码的奇数分给男性，偶数分给女性。
+     * 校验码是根据前面十七位数字码，按照ISO 7064:1983.MOD 11-2校验码计算出来的检验码。
+     * 出生日期计算方法。
+     * 15位的身份证编码首先把出生年扩展为4位，简单的就是增加一个19或18,这样就包含了所有1800-1999年出生的人;
+     * 2000年后出生的肯定都是18位的了没有这个烦恼，至于1800年前出生的,那啥那时应该还没身份证号这个东东，⊙﹏⊙b汗...
+     * 下面是正则表达式:
+     * 出生日期1800-2099  /(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])/
+     * 身份证正则表达式 /^[1-9]\d{5}((1[89]|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dx]$/i
+     * 15位校验规则 6位地址编码+6位出生日期+3位顺序号
+     * 18位校验规则 6位地址编码+8位出生日期+3位顺序号+1位校验位
+     * 校验位规则     公式:∑(ai×Wi)(mod 11)……………………………………(1)
+     * 公式(1)中：
+     * i----表示号码字符从由至左包括校验码在内的位置序号；
+     * ai----表示第i位置上的号码字符值；
+     * Wi----示第i位置上的加权因子，其数值依据公式Wi=2^(n-1）(mod 11)计算得出。
+     * i 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1
+     * Wi 7 9 10 5 8 4 2 1 6 3 7 9 10 5 8 4 2 1
+     * </P>
+     *
+     * @author Yoojia.Chen (yoojia.chen@gmail.com)
+     * @version version 2015-05-21
+     * @since 2.0
+     */
+```
+     
 License
 ----
 

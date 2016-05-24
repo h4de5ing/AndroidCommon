@@ -35,10 +35,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * Create by h4de5ing 2016/5/21 021
@@ -47,13 +44,6 @@ import java.net.URL;
  */
 public class ImageUtils {
 
-    /**
-     * @param options   参数
-     * @param reqWidth  目标的宽度
-     * @param reqHeight 目标的高度
-     * @return
-     * @description 计算图片的压缩比率
-     */
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -68,13 +58,7 @@ public class ImageUtils {
         return inSampleSize;
     }
 
-    /**
-     * 获取图片角度
-     *
-     * @param imagePath 图片路径
-     * @return
-     */
-    public static int readPictureDegree(String imagePath) {
+    public static int getPictureDegree(String imagePath) {
         int i = 0;
         try {
             ExifInterface localExifInterface = new ExifInterface(imagePath);
@@ -100,27 +84,12 @@ public class ImageUtils {
         return i;
     }
 
-    /**
-     * 旋转图片
-     *
-     * @param paramInt    旋转角度
-     * @param paramBitmap 旋转的图片实体
-     * @return
-     */
     public static Bitmap rotaingImageView(int paramInt, Bitmap paramBitmap) {
         Matrix localMatrix = new Matrix();
         localMatrix.postRotate(paramInt);
         return Bitmap.createBitmap(paramBitmap, 0, 0, paramBitmap.getWidth(), paramBitmap.getHeight(), localMatrix, true);
     }
 
-    /**
-     * 加载本地图片，并压缩
-     *
-     * @param imagePath 图片路径
-     * @param outWidth  压缩后的图片宽度
-     * @param outHeight 压缩后的图片高度
-     * @return
-     */
     public static Bitmap decodeScaleImage(String imagePath, int outWidth, int outHeight) {
         BitmapFactory.Options localOptions = new BitmapFactory.Options();
         localOptions.inJustDecodeBounds = true;
@@ -129,7 +98,7 @@ public class ImageUtils {
         localOptions.inSampleSize = i;
         localOptions.inJustDecodeBounds = false;
         Bitmap localBitmap1 = BitmapFactory.decodeFile(imagePath, localOptions);
-        int j = readPictureDegree(imagePath);
+        int j = getPictureDegree(imagePath);
         Bitmap localBitmap2 = null;
         if ((localBitmap1 != null) && (j != 0)) {
             localBitmap2 = rotaingImageView(j, localBitmap1);
@@ -140,56 +109,6 @@ public class ImageUtils {
         return localBitmap1;
     }
 
-    /**
-     * 根据图片远程链接获取bitmap图像
-     *
-     * @param imageUrl  图片绝对地址（网络地址）
-     * @param outWidth  压缩后的图片宽度
-     * @param outHeight 压缩后的图片高度
-     * @return
-     */
-    public static Bitmap getbitmapWithUrl(String imageUrl, int outWidth, int outHeight) {
-        if (imageUrl == null || imageUrl.length() == 0 || imageUrl.trim().length() == 0) {
-            return null;
-        } else {
-            Bitmap bitmap = null;
-            URL myFileUrl;
-            try {
-                myFileUrl = new URL(imageUrl.trim());
-                HttpURLConnection conn;
-                conn = (HttpURLConnection) myFileUrl.openConnection();
-                conn.setDoInput(true);
-                conn.connect();
-                InputStream is = conn.getInputStream();
-                bitmap = BitmapFactory.decodeStream(is);
-                is.close();
-                bitmap = compressFixBitmap(bitmap, outWidth, outHeight);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-            return bitmap;
-        }
-    }
-
-    /**
-     * 根据图片远程链接获取bitmap图像并压缩
-     * <br/>固定压缩为480*480
-     *
-     * @param imageUrl 图片绝对地址（网络地址）
-     * @return
-     */
-    public static Bitmap getbitmapWithUrl(String imageUrl) {
-        return getbitmapWithUrl(imageUrl, 480, 480);
-    }
-
-    /**
-     * 获取圆角图片
-     *
-     * @param bitmap  图片实体
-     * @param roundPx 角度
-     * @return
-     */
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float roundPx) {
         if (bitmap == null) {
             return null;
@@ -209,25 +128,6 @@ public class ImageUtils {
         return output;
     }
 
-    /**
-     * 加载网络图片，并圆角化处理
-     *
-     * @param imageUrl 图片网络链接
-     * @param roundPx  角度
-     * @return
-     */
-    public static Bitmap getRoundedBitmapWithUrl(String imageUrl, float roundPx) {
-        Bitmap bitmap = getbitmapWithUrl(imageUrl);
-        return getRoundedCornerBitmap(bitmap, roundPx);
-    }
-
-    /**
-     * 解析uri的数据流为bitmap
-     *
-     * @param mContext 上下文
-     * @param uri      图片uri地址
-     * @return
-     */
     public static Bitmap decodeUriAsBitmap(Context mContext, Uri uri) {
         Bitmap bitmap;
         try {
@@ -238,13 +138,7 @@ public class ImageUtils {
         return bitmap;
     }
 
-    /**
-     * 图片转储为文件
-     *
-     * @param bitmap    图像
-     * @param imageFile 输出的文件路径
-     */
-    public static boolean saveBitmapTofile(Bitmap bitmap, File imageFile) {
+    public static boolean bitmap2File(Bitmap bitmap, File imageFile) {
         OutputStream os;
         try {
             os = new FileOutputStream(imageFile);
@@ -258,9 +152,6 @@ public class ImageUtils {
         }
     }
 
-    /**
-     * 质量压缩
-     */
     public static Bitmap compressImage(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -276,14 +167,6 @@ public class ImageUtils {
         return BitmapFactory.decodeStream(isBm, null, null);
     }
 
-    /**
-     * 固定大小压缩
-     *
-     * @param bitMap    被压缩的图片
-     * @param outWidth  压缩后的图片宽度
-     * @param outHeight 压缩后的图片高度
-     * @return
-     */
     public static Bitmap compressFixBitmap(Bitmap bitMap, int outWidth, int outHeight) {
         int width = bitMap.getWidth();
         int height = bitMap.getHeight();

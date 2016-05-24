@@ -33,9 +33,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- */
 public class GsonUtil {
     private static Gson gson = null;
 
@@ -63,8 +60,7 @@ public class GsonUtil {
     }
 
 
-    public static String objectToJsonDateSerializer(Object ts,
-                                                    final String dateformat) {
+    public static String objectToJsonDateSerializer(Object ts, final String dateformat) {
         String jsonStr = null;
         gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(Date.class,

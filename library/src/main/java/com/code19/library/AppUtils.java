@@ -117,6 +117,10 @@ public class AppUtils {
         return appVersionCode;
     }
 
+    public static String getAppInstaller(Context context, String packageName) {
+        return context.getPackageManager().getInstallerPackageName(packageName);
+    }
+
     public static String getAppPackageName(Context context) {
         return context.getPackageName();
     }
