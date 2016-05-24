@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class AppUtils {
 
-    public static String getAppName(String packageName, Context context) {
+    public static String getAppName(Context context,String packageName) {
         PackageManager pm = context.getPackageManager();
         String appName = null;
         try {
@@ -48,7 +48,7 @@ public class AppUtils {
     }
 
 
-    public static Drawable getAppIcon(String packageName, Context context) {
+    public static Drawable getAppIcon(Context context,String packageName) {
         PackageManager pm = context.getPackageManager();
         Drawable appIcon = null;
         try {
@@ -61,7 +61,7 @@ public class AppUtils {
     }
 
 
-    public static long getAppDate(String packageName, Context context) {
+    public static long getAppDate(Context context,String packageName ) {
         long lastUpdateTime = 0;
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
@@ -73,7 +73,7 @@ public class AppUtils {
     }
 
 
-    public static long getAppSize(String packageName, Context context) {
+    public static long getAppSize(Context context,String packageName ) {
         long appSize = 0;
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
@@ -84,7 +84,7 @@ public class AppUtils {
         return appSize;
     }
 
-    public static String getAppApk(String packageName, Context context) {
+    public static String getAppApk(Context context,String packageName) {
         String sourceDir = null;
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
@@ -95,7 +95,7 @@ public class AppUtils {
         return sourceDir;
     }
 
-    public static String getAppVersionName(String packageName, Context context) {
+    public static String getAppVersionName(Context context,String packageName)  {
         String appVersion = null;
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
@@ -106,7 +106,7 @@ public class AppUtils {
         return appVersion;
     }
 
-    public static int getAppVersionCode(String packageName, Context context) {
+    public static int getAppVersionCode(Context context,String packageName)  {
         int appVersionCode = 0;
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);

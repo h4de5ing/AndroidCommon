@@ -20,19 +20,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.code19.androidcommon.MainActivity">
 
     <Button
-        android:id="@+id/fire"
+        android:id="@+id/apputils"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:text="@string/fire"/>
+        android:text="@string/apputils"/>
+
     <Button
-        android:id="@+id/dial"
+        android:id="@+id/cacheutils"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:text="@string/fire"/>
+        android:text="@string/cacheutils"/>
+
+    <Button
+        android:id="@+id/bitmaputils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/bitmaputils"/>
+
+    <Button
+        android:id="@+id/densityutils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/densityutils"/>
+
+    <Button
+        android:id="@+id/dateutils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/dateutils"/>
+
+    <Button
+        android:id="@+id/fileutils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/fileutils"/>
+
+    <Button
+        android:id="@+id/jsonutils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/jsonutils"/>
+
+    <Button
+        android:id="@+id/netutils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/netutils"/>
+
+    <Button
+        android:id="@+id/systemutils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/systemutils"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/virificationutils"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/viewutils"/>
 </LinearLayout>

@@ -15,6 +15,20 @@
   -->
 
 <resources>
-    <string name="app_name">AndroidCommon</string>
-    <string name="fire">发射核弹</string>
+    <string name="app_name">Android工具库</string>
+    <string name="loading">加载中...</string>
+    <string name="apputils">应用工具</string>
+    <string name="cacheutils">缓存工具</string>
+    <string name="bitmaputils">Bitmap工具</string>
+    <string name="cipherutils">加密工具</string>
+    <string name="dateutils">日期时间工具</string>
+    <string name="densityutils">屏幕工具</string>
+    <string name="deviceutils">设备工具</string>
+    <string name="fileutils">文件工具</string>
+    <string name="jsonutils">Json工具</string>
+    <string name="netutils">网络工具</string>
+    <string name="sputils">属性工具</string>
+    <string name="systemutils">系统工具</string>
+    <string name="virificationutils">验证工具</string>
+    <string name="viewutils">View工具</string>
 </resources>
