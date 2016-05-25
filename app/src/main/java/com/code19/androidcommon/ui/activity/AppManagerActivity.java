@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.code19.androidcommon;
+package com.code19.androidcommon.ui.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -24,6 +24,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.code19.androidcommon.R;
 import com.code19.androidcommon.model.AppBean;
 import com.code19.androidcommon.presenter.AppPresenter;
 import com.code19.androidcommon.ui.adapter.AppRecyAdapter;
@@ -31,7 +32,7 @@ import com.code19.androidcommon.view.IAppView;
 
 import java.util.List;
 
-public class AppManager extends AppCompatActivity implements IAppView {
+public class AppManagerActivity extends AppCompatActivity implements IAppView {
     private static final String TAG = "ghost";
 
     private AppPresenter mPresenter;

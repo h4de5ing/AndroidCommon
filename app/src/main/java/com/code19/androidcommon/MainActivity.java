@@ -23,6 +23,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.code19.androidcommon.ui.activity.AppManagerActivity;
+import com.code19.androidcommon.ui.activity.DeviceActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "ghost";
     private Context c = this;
@@ -31,47 +34,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button virification = (Button) findViewById(R.id.virification);
+        Button deviceutils = (Button) findViewById(R.id.deviceutils);
         Button systemutils = (Button) findViewById(R.id.systemutils);
         Button netutils = (Button) findViewById(R.id.netutils);
-        Button jsonutils = (Button) findViewById(R.id.jsonutils);
         Button fileutils = (Button) findViewById(R.id.fileutils);
-        Button dateutils = (Button) findViewById(R.id.dateutils);
         Button densityutils = (Button) findViewById(R.id.densityutils);
-        Button bitmaputils = (Button) findViewById(R.id.bitmaputils);
-        Button cacheutils = (Button) findViewById(R.id.cacheutils);
         Button apputils = (Button) findViewById(R.id.apputils);
         systemutils.setOnClickListener(this);
         netutils.setOnClickListener(this);
-        jsonutils.setOnClickListener(this);
         fileutils.setOnClickListener(this);
-        dateutils.setOnClickListener(this);
         densityutils.setOnClickListener(this);
-        bitmaputils.setOnClickListener(this);
-        cacheutils.setOnClickListener(this);
         apputils.setOnClickListener(this);
+        deviceutils.setOnClickListener(this);
+        virification.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.apputils:
-                startActivity(new Intent(MainActivity.this, AppManager.class));
+                startActivity(new Intent(MainActivity.this, AppManagerActivity.class));
                 break;
-            case R.id.cacheutils:
-                break;
-            case R.id.bitmaputils:
+            case R.id.deviceutils:
+                startActivity(new Intent(MainActivity.this, DeviceActivity.class));
                 break;
             case R.id.densityutils:
                 break;
-            case R.id.dateutils:
-                break;
             case R.id.fileutils:
-                break;
-            case R.id.jsonutils:
                 break;
             case R.id.netutils:
                 break;
             case R.id.systemutils:
+                break;
+            case R.id.virification:
+
                 break;
         }
     }

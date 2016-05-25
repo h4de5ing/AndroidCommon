@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.code19.androidcommon.AppManager">
+    tools:context=".ui.activity.AppManagerActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recy_app"

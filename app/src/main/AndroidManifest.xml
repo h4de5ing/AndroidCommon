@@ -38,7 +38,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AppManager">
+        <activity android:name=".ui.activity.AppManagerActivity">
+        </activity>
+        <activity android:name=".ui.activity.DeviceActivity">
+        </activity>
+        <activity android:name=".ui.activity.VirificationActivity">
         </activity>
     </application>
 
