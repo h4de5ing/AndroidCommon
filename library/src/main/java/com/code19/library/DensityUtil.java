@@ -17,7 +17,10 @@
 package com.code19.library;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 /**
  * Create by h4de5ing 2016/5/7 007
@@ -57,12 +60,22 @@ public class DensityUtil {
 
 
     public static int getScreenW(Context c) {
-        DisplayMetrics dm = c.getResources().getDisplayMetrics();
-        return dm.widthPixels;
+        DisplayMetrics metrics = c.getResources().getDisplayMetrics();
+        return metrics.widthPixels;
     }
 
     public static int getScreenH(Context c) {
-        DisplayMetrics dm = c.getResources().getDisplayMetrics();
-        return dm.heightPixels;
+        WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        int heightPixels = 0;
+        try {
+            heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+            Point realSize = new Point();
+            Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
+            heightPixels = realSize.y;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return heightPixels;
     }
 }

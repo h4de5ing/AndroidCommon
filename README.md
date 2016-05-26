@@ -113,7 +113,7 @@ compile 'com.code19.library:library:0.0.5'
     * getRadioVersion 获取基带版本(无线电固件版本 Api14以上)
     * getUA 获取的浏览器指纹(User-Agent)
     * getDensity 获取得屏幕密度
-    * getAccounts 获取google账号
+    * getGoogleAccounts 获取google账号
     * isRunningOnEmulator 当前设备是否是模拟器  
     * showSoftInputMethod 显示软键盘
     * hideSoftInputMethod 隐藏软键盘
