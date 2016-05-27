@@ -19,6 +19,7 @@ package com.code19.androidcommon.ui.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.code19.androidcommon.R;
@@ -78,7 +79,8 @@ public class DeviceActivity extends AppCompatActivity {
         sb.append("getDensity--" + DeviceUtils.getDensity(c) + "\r\n");
         //sb.append("getAccounts--" + DeviceUtils.getGoogleAccounts(c)[0] + "\r\n");
         sb.append("isRunningOnEmulator--" + DeviceUtils.isRunningOnEmulator() + "\r\n");
-        sb.append("ScreenWidth x ScreenHeight--" + DensityUtil.getScreenW(getApplicationContext()) + "x" + DensityUtil.getScreenH(getApplicationContext()) + "\r\n");
+        sb.append("ScreenWidth x ScreenHeight--" + DensityUtil.getScreenW(c) + "x" + (DensityUtil.getScreenH(c) + DensityUtil.getStatusBarH(c) + DensityUtil.getNavigationBarrH(c)) + "\r\n");
+        Log.i("ghost", "StatusBar:" + DensityUtil.getStatusBarH(c) + ",Nav:" + DensityUtil.getNavigationBarrH(c));
         mDeviceutilstextview.setText(sb.toString());
     }
 }

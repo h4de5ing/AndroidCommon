@@ -69,6 +69,8 @@ compile 'com.code19.library:library:0.0.5'
     * getDialogW 获取dialog宽度
     * getScreenW 获取屏幕宽度
     * getScreenH 获取屏幕高度
+    * getStatusBarH 获取状态栏高度
+    * getNavigationBarrH 获取导航栏高度
     
 - DeviceUtils.java 设备信息工具
     * getAndroidID 获取AndroidID

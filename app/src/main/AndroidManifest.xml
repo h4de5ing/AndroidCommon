@@ -42,7 +42,7 @@
         </activity>
         <activity android:name=".ui.activity.DeviceActivity">
         </activity>
-        <activity android:name=".ui.activity.VirificationActivity">
+        <activity android:name=".ui.activity.VerificationActivity">
         </activity>
     </application>
 

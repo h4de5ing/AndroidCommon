@@ -17,10 +17,10 @@
 package com.code19.library;
 
 import android.content.Context;
-import android.graphics.Point;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.WindowManager;
+
+import java.lang.reflect.Field;
 
 /**
  * Create by h4de5ing 2016/5/7 007
@@ -60,22 +60,33 @@ public class DensityUtil {
 
 
     public static int getScreenW(Context c) {
-        DisplayMetrics metrics = c.getResources().getDisplayMetrics();
-        return metrics.widthPixels;
+        return c.getResources().getDisplayMetrics().widthPixels;
     }
 
     public static int getScreenH(Context c) {
-        WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        int heightPixels = 0;
+        return c.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    public static int getStatusBarH(Context context) {
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, statusBarHeight = 0;
         try {
-            heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-            Point realSize = new Point();
-            Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
-            heightPixels = realSize.y;
-        } catch (Exception e) {
-            e.printStackTrace();
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
-        return heightPixels;
+        return statusBarHeight;
+    }
+
+    public static int getNavigationBarrH(Context c) {
+        Resources resources = c.getResources();
+        int identifier = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        return resources.getDimensionPixelOffset(identifier);
     }
 }
