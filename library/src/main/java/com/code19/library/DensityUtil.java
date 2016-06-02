@@ -16,11 +16,16 @@
 
 package com.code19.library;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * Create by h4de5ing 2016/5/7 007
@@ -65,6 +70,28 @@ public class DensityUtil {
 
     public static int getScreenH(Context c) {
         return c.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static int getScreenRealH(Context context) {
+        int h = 0;
+        WindowManager winMgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = winMgr.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= 17) {
+            display.getRealMetrics(dm);
+            h = dm.heightPixels;
+        } else {
+            try {
+                Method method = Class.forName("android.view.Display").getMethod("getRealMetrics", DisplayMetrics.class);
+                method.invoke(display, dm);
+                h = dm.heightPixels;
+            } catch (Exception e) {
+                display.getMetrics(dm);
+                h = dm.heightPixels;
+            }
+        }
+        return h;
     }
 
     public static int getStatusBarH(Context context) {

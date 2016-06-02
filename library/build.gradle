@@ -23,9 +23,10 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.+'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2+'
+    compile 'com.android.support:design:23.4.0'
 }
 def siteUrl = 'https://github.com/h4de5ing/AndroidCommon'
 def gitUrl = 'https://github.com/h4de5ing/AndroidCommon.git'   // Git仓库的url

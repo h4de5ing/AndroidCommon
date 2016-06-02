@@ -93,6 +93,21 @@ public final class SystemUtils {
         context.startActivity(intent);
     }
 
+    static final String suSearchPaths[] = {"/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/"};
+
+    public static boolean isRooted() {
+        File file = null;
+        boolean flag1 = false;
+        for (int i = 0; i < suSearchPaths.length; ++i) {
+            file = new File(suSearchPaths[i] + "su");
+            if (file != null && file.exists()) {
+                flag1 = true;
+                break;
+            }
+        }
+        return flag1;
+    }
+
 
     public static String getAppVersionName(Context context) {
         String version = "0";
