@@ -18,6 +18,7 @@ package com.code19.library;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 /**
  * Create by h4de5ing 2016/5/7 007
@@ -29,7 +30,7 @@ public class SPUtils {
     public static void setSP(Context context, String filename, String key, Object object) {
         String type = object.getClass().getSimpleName();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
+        Editor edit = sp.edit();
         if ("String".equals(type)) {
             edit.putString(key, (String) object);
         } else if ("Integer".equals(type)) {
@@ -61,5 +62,13 @@ public class SPUtils {
         }
         return null;
     }
+
+    public static void cleanAllSP(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
+    }
+
 
 }

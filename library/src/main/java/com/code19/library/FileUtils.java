@@ -221,4 +221,29 @@ public class FileUtils {
         return file.delete();
     }
 
+    public static void openImage(Context mContext, String imagePath) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(new File(imagePath));
+        intent.setDataAndType(uri, "image/*");
+        mContext.startActivity(intent);
+    }
+
+    public static void openVideo(Context mContext, String videoPath) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("oneshot", 0);
+        intent.putExtra("configchange", 0);
+        Uri uri = Uri.fromFile(new File(videoPath));
+        intent.setDataAndType(uri, "video/*");
+        mContext.startActivity(intent);
+    }
+
+    public static void openURL(Context mContext, String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        mContext.startActivity(intent);
+    }
+
 }

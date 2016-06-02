@@ -110,7 +110,8 @@ public class BitmapUtils {
         }
         return bitmap;
     }
-	   public static Bitmap createCircularClip(Bitmap input, int width, int height) {
+
+    public static Bitmap createCircularClip(Bitmap input, int width, int height) {
         if (input == null) return null;
 
         final int inWidth = input.getWidth();

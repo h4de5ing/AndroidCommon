@@ -28,10 +28,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -56,6 +58,12 @@ public final class SystemUtils {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
             activity.startActivity(intent);
         }
+    }
+
+    public static void sendMail(Context mContext, String mailID) {
+        Uri uri = Uri.parse("mailto:" + mailID);
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        mContext.startActivity(intent);
     }
 
     public static void hideKeyBoard(Activity aty) {
@@ -98,9 +106,9 @@ public final class SystemUtils {
     public static boolean isRooted() {
         File file = null;
         boolean flag1 = false;
-        for (int i = 0; i < suSearchPaths.length; ++i) {
-            file = new File(suSearchPaths[i] + "su");
-            if (file != null && file.exists()) {
+        for (String suSearchPath : suSearchPaths) {
+            file = new File(suSearchPath + "su");
+            if (file.isFile() && file.exists()) {
                 flag1 = true;
                 break;
             }
@@ -274,5 +282,45 @@ public final class SystemUtils {
             return ctx.getResources().getConfiguration().locale.getLanguage();
         }
         return null;
+    }
+
+    /**
+     * <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+     */
+    public static boolean isGpsEnabled(Context context) {
+        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    public static void showSoftInputMethod(Context context, EditText editText) {
+        if (context != null && editText != null) {
+            editText.requestFocus();
+            InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.showSoftInput(editText, 0);
+        }
+    }
+
+
+    public static void closeSoftInputMethod(Context context, EditText editText) {
+        if (context != null && editText != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            }
+        }
+    }
+
+    public static void showSoftInput(Context context) {
+        InputMethodManager inputMethodManager = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+
+    public static void closeSoftInput(Context context) {
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null && ((Activity) context).getCurrentFocus() != null) {
+            inputMethodManager.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

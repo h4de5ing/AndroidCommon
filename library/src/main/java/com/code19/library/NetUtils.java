@@ -22,8 +22,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import java.util.List;
 
 /**
  * Blog : http://blog.csdn.net/u011240877
@@ -156,5 +161,39 @@ public class NetUtils {
             default:
                 return false;
         }
+    }
+
+    public static void setWifiEnabled(Context context, boolean enabled) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(enabled);
+    }
+
+    public static List<ScanResult> getWifiScanResults(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        return wifiManager.startScan() ? wifiManager.getScanResults() : null;
+    }
+
+    public static ScanResult getScanResultsByBSSID(Context context, String bssid) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        ScanResult scanResult = null;
+        boolean f = wifiManager.startScan();
+        if (!f) {
+            getScanResultsByBSSID(context, bssid);
+        }
+        List<ScanResult> list = wifiManager.getScanResults();
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                scanResult = list.get(i);
+                if (scanResult.BSSID.equals(bssid)) {
+                    break;
+                }
+            }
+        }
+        return scanResult;
+    }
+
+    public static WifiInfo getWifiConnectionInfo(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        return wifiManager.getConnectionInfo();
     }
 }

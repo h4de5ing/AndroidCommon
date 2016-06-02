@@ -31,9 +31,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
-import android.widget.EditText;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -376,22 +374,4 @@ public class DeviceUtils {
                 || Build.HARDWARE.contains("vbox86");
     }
 
-
-    public static void showSoftInputMethod(Context context, EditText editText) {
-        if (context != null && editText != null) {
-            editText.requestFocus();
-            InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.showSoftInput(editText, 0);
-        }
-    }
-
-
-    public static void hideSoftInputMethod(Context context, EditText editText) {
-        if (context != null && editText != null) {
-            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-            }
-        }
-    }
 }

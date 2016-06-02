@@ -24,14 +24,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -74,23 +73,16 @@ public class ViewUtils {
         return motionX >= vLoc[0] && motionX <= (vLoc[0] + v.getWidth()) && motionY >= vLoc[1] && motionY <= (vLoc[1] + v.getHeight());
     }
 
-
-    public static <T extends View> T findViewById(View layout, int id) {
-        return (T) layout.findViewById(id);
-    }
-
     public static Bitmap bigImage(Bitmap bmp, float big) {
         int bmpWidth = bmp.getWidth();
         int bmpHeight = bmp.getHeight();
         Matrix matrix = new Matrix();
         matrix.postScale(big, big);
-        Bitmap resizeBmp = Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeight, matrix, true);
-
-        return resizeBmp;
+        return Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeight, matrix, true);
     }
 
 
-    public static void tvUnderLine(TextView textView) {
+    public static void setTVUnderLine(TextView textView) {
         textView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         textView.getPaint().setAntiAlias(true);
     }
@@ -129,8 +121,6 @@ public class ViewUtils {
         popupWindow.setTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.showAsDropDown(root);
-//        popupWindow.show
-
         return popupView;
     }
 
@@ -198,11 +188,30 @@ public class ViewUtils {
         return 0;
     }
 
-    public static Point getScreenSize(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Point screenSize = new Point();
-        wm.getDefaultDisplay().getSize(screenSize);
-        return screenSize;
+    public static void measureView(View view) {
+        ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p == null) {
+            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+
+        int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0, p.width);
+        int lpHeight = p.height;
+        int childHeightSpec;
+        if (lpHeight > 0) {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
+        } else {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        }
+        view.measure(childWidthSpec, childHeightSpec);
     }
 
+    public static int getViewWidth(View view) {
+        measureView(view);
+        return view.getMeasuredWidth();
+    }
+
+    public static int getViewHeight(View view) {
+        measureView(view);
+        return view.getMeasuredHeight();
+    }
 }
