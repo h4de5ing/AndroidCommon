@@ -62,7 +62,8 @@ public class NetUtils {
             if ("WIFI".equalsIgnoreCase(typeName)) {
                 type = NETWORK_TYPE_WIFI;
             } else if ("MOBILE".equalsIgnoreCase(typeName)) {
-                String proxyHost = android.net.Proxy.getDefaultHost();
+                //String proxyHost = android.net.Proxy.getDefaultHost();//deprecated
+                String proxyHost = System.getProperty("http.proxyHost");
                 type = TextUtils.isEmpty(proxyHost) ? (isFastMobileNetwork(context) ? NETWORK_TYPE_3G : NETWORK_TYPE_2G) : NETWORK_TYPE_WAP;
             } else {
                 type = NETWORK_TYPE_UNKNOWN;

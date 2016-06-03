@@ -104,7 +104,7 @@ public final class SystemUtils {
     static final String suSearchPaths[] = {"/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/"};
 
     public static boolean isRooted() {
-        File file = null;
+        File file;
         boolean flag1 = false;
         for (String suSearchPath : suSearchPaths) {
             file = new File(suSearchPath + "su");
@@ -199,7 +199,7 @@ public final class SystemUtils {
 
 
     public static int gc(Context cxt) {
-        long i = getDeviceUsableMemory(cxt);
+        //long i = getDeviceUsableMemory(cxt);
         int count = 0;
         ActivityManager am = (ActivityManager) cxt.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningServiceInfo> serviceList = am.getRunningServices(100);

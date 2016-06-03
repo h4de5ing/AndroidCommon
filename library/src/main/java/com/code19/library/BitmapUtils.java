@@ -74,10 +74,9 @@ public class BitmapUtils {
     }
 
     public static Bitmap getImageThumbnail(String imagePath) {
-        Bitmap bitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        bitmap = BitmapFactory.decodeFile(imagePath, options);
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
         options.inJustDecodeBounds = false;
         int h = options.outHeight;
         int w = options.outWidth;

@@ -232,7 +232,7 @@ public class DeviceUtils {
      * <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
      */
     public static String getGSFID(Context context) {
-        String result = null;
+        String result;
         final Uri URI = Uri.parse("content://com.google.android.gsf.gservices");
         final String ID_KEY = "android_id";
         String[] params = {ID_KEY};

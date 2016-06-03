@@ -55,15 +55,6 @@ public class DensityUtil {
         return (int) (spValue * fontScale + 0.5f);
     }
 
-    public static int getDialogW(Context c) {
-        DisplayMetrics dm = new DisplayMetrics();
-        dm = c.getResources().getDisplayMetrics();
-        int w = dm.widthPixels - 100;
-        // int w = aty.getWindowManager().getDefaultDisplay().getWidth() - 100;
-        return w;
-    }
-
-
     public static int getScreenW(Context c) {
         return c.getResources().getDisplayMetrics().widthPixels;
     }
@@ -74,7 +65,7 @@ public class DensityUtil {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static int getScreenRealH(Context context) {
-        int h = 0;
+        int h;
         WindowManager winMgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = winMgr.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
@@ -95,15 +86,15 @@ public class DensityUtil {
     }
 
     public static int getStatusBarH(Context context) {
-        Class<?> c = null;
-        Object obj = null;
-        Field field = null;
-        int x = 0, statusBarHeight = 0;
+        Class<?> c;
+        Object obj;
+        Field field;
+        int statusBarHeight = 0;
         try {
             c = Class.forName("com.android.internal.R$dimen");
             obj = c.newInstance();
             field = c.getField("status_bar_height");
-            x = Integer.parseInt(field.get(obj).toString());
+            int x = Integer.parseInt(field.get(obj).toString());
             statusBarHeight = context.getResources().getDimensionPixelSize(x);
         } catch (Exception e1) {
             e1.printStackTrace();

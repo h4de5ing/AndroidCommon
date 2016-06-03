@@ -115,7 +115,7 @@ public class FileUtils {
         try {
             gzip = new GZIPOutputStream(os);
             byte[] buf = new byte[1024];
-            int len = 0;
+            int len;
             while ((len = is.read(buf)) != -1) {
                 gzip.write(buf, 0, len);
                 gzip.flush();
@@ -133,7 +133,7 @@ public class FileUtils {
         try {
             gzip = new GZIPInputStream(is);
             byte[] buf = new byte[1024];
-            int len = 0;
+            int len;
             while ((len = gzip.read(buf)) != -1) {
                 os.write(buf, 0, len);
             }
@@ -151,7 +151,7 @@ public class FileUtils {
 
     public static void Stream2File(InputStream is, String fileName) {
         byte[] b = new byte[1024];
-        int len = -1;
+        int len;
         FileOutputStream os = null;
         try {
             os = new FileOutputStream(new File(fileName));

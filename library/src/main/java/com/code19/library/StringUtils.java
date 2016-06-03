@@ -102,7 +102,7 @@ public class StringUtils {
         for (int i = 0; i < chs.length(); i++) {
             key = chs.substring(i, i + 1);
             if (key.getBytes().length >= 2) {
-                value = (String) convert(key);
+                value = convert(key);
                 if (value == null) {
                     value = "unknown";
                 }
@@ -122,7 +122,7 @@ public class StringUtils {
     }
 
     public static boolean isEmpty(String str) {
-        return str == null || str.trim().length() == 0 || str.trim().length() == 0;
+        return str == null || str.trim().length() == 0 || "".equals(str);
     }
 
     public static int chineseLength(String str) {
@@ -180,11 +180,7 @@ public class StringUtils {
         if (!isEmpty(str)) {
             for (int i = 0; i < str.length(); i++) {
                 String temp = str.substring(i, i + 1);
-                if (temp.matches(chinese)) {
-                    isChinese = true;
-                } else {
-                    isChinese = false;
-                }
+                isChinese = temp.matches(chinese);
             }
         }
         return isChinese;

@@ -79,7 +79,7 @@ public class DeviceActivity extends AppCompatActivity {
         sb.append("getUA--" + DeviceUtils.getUA(c) + "\n");
         sb.append("getDensity--" + DeviceUtils.getDensity(c) + "\n");
         //sb.append("getAccounts--" + DeviceUtils.getGoogleAccounts(c)[0] + "\n");
-        sb.append("isRunningOnEmulator--" + DeviceUtils.isRunningOnEmulator() + "\n");
+        sb.append("isRunningOnEmulator--" + SystemUtils.isRunningOnEmulator() + "\n");
         sb.append("isRooted--" + SystemUtils.isRooted() + "\n");
         sb.append("ScreenWidth x ScreenHeight--" + DensityUtil.getScreenW(c) + "x" + (DensityUtil.getScreenRealH(c)) + "\n");
         Log.i("ghost", "StatusBar:" + DensityUtil.getStatusBarH(c) + ",Nav:" + DensityUtil.getNavigationBarrH(c));

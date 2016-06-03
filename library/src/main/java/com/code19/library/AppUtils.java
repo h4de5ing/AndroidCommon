@@ -35,7 +35,6 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -216,9 +215,7 @@ public class AppUtils {
         boolean isRunning = false;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningServiceInfo> servicesList = activityManager.getRunningServices(Integer.MAX_VALUE);
-        Iterator<RunningServiceInfo> l = servicesList.iterator();
-        while (l.hasNext()) {
-            RunningServiceInfo si = (RunningServiceInfo) l.next();
+        for (RunningServiceInfo si : servicesList) {
             if (className.equals(si.service.getClassName())) {
                 isRunning = true;
             }
@@ -242,22 +239,15 @@ public class AppUtils {
 
     public static int getNumCores() {
         try {
-            //Get directory containing CPU info
             File dir = new File("/sys/devices/system/cpu/");
-            //Filter to only list the devices we care about
             File[] files = dir.listFiles(new FileFilter() {
 
                 @Override
                 public boolean accept(File pathname) {
-                    //Check if filename is "cpu", followed by a single digit number
-                    if (Pattern.matches("cpu[0-9]", pathname.getName())) {
-                        return true;
-                    }
-                    return false;
+                    return Pattern.matches("cpu[0-9]", pathname.getName());
                 }
 
             });
-            //Return the number of cores (virtual CPU devices)
             return files.length;
         } catch (Exception e) {
             e.printStackTrace();
@@ -267,9 +257,9 @@ public class AppUtils {
 
     public static void killProcesses(Context context, int pid, String processName) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        String packageName = null;
+        String packageName ;
         try {
-            if (processName.indexOf(":") == -1) {
+            if (!processName.contains(":")) {
                 packageName = processName;
             } else {
                 packageName = processName.split(":")[0];
@@ -284,7 +274,7 @@ public class AppUtils {
     }
 
     public static String runScript(String script) {
-        String sRet = "";
+        String sRet;
         try {
             final Process m_process = Runtime.getRuntime().exec(script);
             final StringBuilder sbread = new StringBuilder();
@@ -293,7 +283,7 @@ public class AppUtils {
                     BufferedReader bufferedReader = new BufferedReader(
                             new InputStreamReader(m_process.getInputStream()),
                             8192);
-                    String ls_1 = null;
+                    String ls_1;
                     try {
                         while ((ls_1 = bufferedReader.readLine()) != null) {
                             sbread.append(ls_1).append("\n");
@@ -317,7 +307,7 @@ public class AppUtils {
                     BufferedReader bufferedReader = new BufferedReader(
                             new InputStreamReader(m_process.getErrorStream()),
                             8192);
-                    String ls_1 = null;
+                    String ls_1 ;
                     try {
                         while ((ls_1 = bufferedReader.readLine()) != null) {
                             sberr.append(ls_1).append("\n");
@@ -335,7 +325,7 @@ public class AppUtils {
             });
             terr.start();
 
-            int retvalue = m_process.waitFor();
+            m_process.waitFor();
             while (tout.isAlive()) {
                 Thread.sleep(50);
             }
