@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'   //插件
-apply plugin: 'com.jfrog.bintray'    //插件
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
-version = "0.0.5"  //版本号,更新代码后修改这个值
+version = "0.0.6"  //版本号,更新代码后修改这个值
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -28,18 +28,16 @@ dependencies {
     compile 'com.google.code.gson:gson:2+'
     compile 'com.android.support:design:23.4.0'
 }
-def siteUrl = 'https://github.com/h4de5ing/AndroidCommon'
+def siteUrl = 'https://github.com/h4de5ing/AndroidCommon'  //网站
 def gitUrl = 'https://github.com/h4de5ing/AndroidCommon.git'   // Git仓库的url
 group = "com.code19.library"
-install{
+install {
     repositories.mavenInstaller {
         pom {
             project {
                 packaging 'aar'
-                // Add your description here
                 name 'Android common library'  //项目的描述
                 url siteUrl
-                // Set your license
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -47,10 +45,10 @@ install{
                     }
                 }
                 developers {
-                    developer {
-                        id 'h4de5ing'   //开发者id
-                        name 'h4de5ing' //开发者名称
-                        email 'android@19code.com'  //开发者邮箱
+                    developer {  //开发者信息
+                        id 'h4de5ing'
+                        name 'h4de5ing'
+                        email 'android@19code.com'
                     }
                 }
                 scm {
@@ -80,7 +78,7 @@ artifacts {
 }
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
+bintray {  //用户名和上传key的位置
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']

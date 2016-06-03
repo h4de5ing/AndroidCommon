@@ -115,7 +115,7 @@ public class FileUtils {
         try {
             gzip = new GZIPOutputStream(os);
             byte[] buf = new byte[1024];
-            int len = -1;
+            int len = 0;
             while ((len = is.read(buf)) != -1) {
                 gzip.write(buf, 0, len);
                 gzip.flush();
@@ -133,7 +133,7 @@ public class FileUtils {
         try {
             gzip = new GZIPInputStream(is);
             byte[] buf = new byte[1024];
-            int len = -1;
+            int len = 0;
             while ((len = gzip.read(buf)) != -1) {
                 os.write(buf, 0, len);
             }

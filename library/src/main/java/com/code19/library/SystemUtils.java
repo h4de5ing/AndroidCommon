@@ -30,6 +30,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -74,8 +75,7 @@ public final class SystemUtils {
     public static boolean isBackground(Context context) {
         ActivityManager activityManager = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
-        List<RunningAppProcessInfo> appProcesses = activityManager
-                .getRunningAppProcesses();
+        List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
         for (RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
                 return appProcess.importance == RunningAppProcessInfo.IMPORTANCE_BACKGROUND;
@@ -116,6 +116,16 @@ public final class SystemUtils {
         return flag1;
     }
 
+    public static boolean isRunningOnEmulator() {
+        return Build.BRAND.contains("generic")
+                || Build.DEVICE.contains("generic")
+                || Build.PRODUCT.contains("sdk")
+                || Build.HARDWARE.contains("goldfish")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || Build.PRODUCT.contains("vbox86p")
+                || Build.DEVICE.contains("vbox86p")
+                || Build.HARDWARE.contains("vbox86");
+    }
 
     public static String getAppVersionName(Context context) {
         String version = "0";

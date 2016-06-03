@@ -144,7 +144,7 @@ public class AppUtils {
                             .getPackageName())) {
                         return true;
                     }
-                    Log.d(Config.TAG, "Have you  declared permission " + permission + " in AndroidManifest.xml ?");
+                    Log.d("AppUtils", "Have you  declared permission " + permission + " in AndroidManifest.xml ?");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

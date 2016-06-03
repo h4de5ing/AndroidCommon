@@ -363,15 +363,5 @@ public class DeviceUtils {
         return null;
     }
 
-    public static boolean isRunningOnEmulator() {
-        return Build.BRAND.contains("generic")
-                || Build.DEVICE.contains("generic")
-                || Build.PRODUCT.contains("sdk")
-                || Build.HARDWARE.contains("goldfish")
-                || Build.MANUFACTURER.contains("Genymotion")
-                || Build.PRODUCT.contains("vbox86p")
-                || Build.DEVICE.contains("vbox86p")
-                || Build.HARDWARE.contains("vbox86");
-    }
 
 }

@@ -1,7 +1,7 @@
 # 使用方式
 * 这个library还在功能迭代中,功能不尽完善...
 ```gradle 
-compile 'com.code19.library:library:0.0.5'
+compile 'com.code19.library:library:0.0.6'
 ```
 # 常用工具类
 - 每一个Android开发者在日常开发中都会积累一些自己的代码片段
@@ -56,7 +56,18 @@ compile 'com.code19.library:library:0.0.5'
     * base64Decode Base64解密
     * XorEncode 异或加密
     * XorDecode 异或解密
-    
+
+- CoordinateTransformUtil.java GPS坐标转换工具
+    * 百度坐标（BD09）、国测局坐标（火星坐标，GCJ02）、和WGS84坐标系之间的转换的工具
+    * bd09towgs84 百度坐标系(BD-09)转WGS坐标(百度坐标纬度,百度坐标经度),WGS84坐标数组
+    * wgs84tobd09 WGS坐标转百度坐标系(BD-09)(WGS84坐标系的经度,WGS84坐标系的纬度),百度坐标数组
+    * gcj02tobd09 火星坐标系(GCJ-02)转百度坐标系(BD-09)(火星坐标经度,火星坐标纬度),百度坐标数组
+    * bd09togcj02 百度坐标系(BD-09)转火星坐标系(GCJ-02)(百度坐标纬度,百度坐标经度),火星坐标数组
+    * wgs84togcj02 WGS84转GCJ02(火星坐标系)(WGS84坐标系的经度,WGS84坐标系的纬度),火星坐标数组
+    * gcj02towgs84 GCJ02(火星坐标系)转GPS84(火星坐标系的经度,火星坐标系纬度),WGS84坐标数组
+    * transformlat 纬度转换
+    * transformlng 经度转换
+    * out_of_china 判断是否在国内，不在国内不做偏移
 - DateUtil.java 日期工具类
     * formatDataTime 格式化日期时间
     * formatDate 格式化日期
