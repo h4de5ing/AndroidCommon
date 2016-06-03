@@ -7,8 +7,9 @@ compile 'com.code19.library:library:0.0.5'
 - 每一个Android开发者在日常开发中都会积累一些自己的代码片段
 - 目的：
        * 1.将常用功能模块做成工具类
-       * 2.将常用第三方框架封装成工具类
+       * 2.封装Android系统api,简化api的使用
        * 3.收集一些高效的正确的代码片段避免下次踩坑
+       * 4.尽量少依赖第三方
 - 能力一般,水平有限,难免有Bug,如果有任何问题,请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
 - 如果你有更好的代码,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
@@ -33,7 +34,13 @@ compile 'com.code19.library:library:0.0.5'
     * installApk 安装应用
     * uninstallApk 卸载应用
     * isSystemApp 是否是系统应用
-    
+    * isServiceRunning 服务是否在运行
+    * stopRunningService 停止服务
+    * getNumCores 获取Cpu内核数
+    * killProcesses 结束进程
+    * runScript 运行脚本
+    * getRootPermission 获得root权限
+
 - BitmapUtils.java Bitmap工具类
    * decodeFile 解析文件为bitmap
    * getImageThumbnail 获取图片缩略图
@@ -59,8 +66,7 @@ compile 'com.code19.library:library:0.0.5'
     * getTime 获取系统时间
     * subtractDate 计算两个时间差
     * getDateAfter 得到几天后的时间
-    * getInterval 类似微博过去时间显示效果
-    
+
 - DensityUtil.java 屏幕工具类
     * dip2px dp转像素
     * px2dip 像素转dp
@@ -69,6 +75,7 @@ compile 'com.code19.library:library:0.0.5'
     * getDialogW 获取dialog宽度
     * getScreenW 获取屏幕宽度
     * getScreenH 获取屏幕高度
+    * getScreenRealSize 获取屏幕的真实高度
     * getStatusBarH 获取状态栏高度
     * getNavigationBarrH 获取导航栏高度
     
@@ -116,10 +123,8 @@ compile 'com.code19.library:library:0.0.5'
     * getUA 获取的浏览器指纹(User-Agent)
     * getDensity 获取得屏幕密度
     * getGoogleAccounts 获取google账号
-    * isRunningOnEmulator 当前设备是否是模拟器  
-    * showSoftInputMethod 显示软键盘
-    * hideSoftInputMethod 隐藏软键盘
-    
+
+
 - FileUtils.java  文件工具类
     * closeIO 关闭IO流
     * isFileExist 文件是否存在
@@ -135,7 +140,10 @@ compile 'com.code19.library:library:0.0.5'
     * createFolder 创建文件夹(支持覆盖已存在的同名文件夹)
     * getFolderName 获取文件夹名称
     * deleteFile 删除目录下的文件
-    
+    * openImage 打开图片
+    * openVideo 打开视频
+    * openURL 打开URL
+
 - ImageUtils.java 图片工具类
     * calculateInSampleSize 计算图片的压缩比率
     * getPictureDegree 获取图片的角度
@@ -162,22 +170,39 @@ compile 'com.code19.library:library:0.0.5'
     * isNetworkAvailable 网络可用性
     * isWiFi 是否wifi
     * openNetSetting 打开网络设置界面
+    * setWifiEnabled 设置wifi状态
+    * getWifiScanResults 获取wifi列表
+    * getScanResultsByBSSID 过滤扫描结果
+    * getWifiConnectionInfo 获取wifi连接信息
     
 - SPUtils.java SharedPreferences工具
-    * setBoolean 存储布尔型属性
-    * getBoolean 获取布尔型属性
-    * setInt 存储整型属性
-    * getInt 获取整型属性
-    * setString 存储字符串型属性
-    * getString 获取字符串属性
- 
+    * setSP 存储SharedPreferences值
+    * getSp 获取SharedPreferences值
+    * cleanAllSP 清除所有的SP值
+
+- StringUtils.java 字符串工具
+    * getChsAscii 汉字转成ASCII码
+    * convert 单字解析
+    * getSelling 词组解析
+    * parseEmpty 将null转化为""
+    * isEmpty 是否是空字符串
+    * chineseLength 中文长度
+    * strLength 字符串长度
+    * subStringLength 获取指定长度的字符所在位置
+    * isChinese 是否是中文
+    * isContainChinese 是否包含中文
+    * strFormat2 不足2位前面补0
+
 - SystemUtils.java 系统工具
     * sendSMS 调用系统发送短信
-    * forwardToDial 跳转到拨号页面
+    * forwardToDial 跳转到拨号
+    * sendMail 发邮件
     * hideKeyBoard 隐藏系统键盘
     * isBackground 判断当前应用程序是否后台运行
     * isSleeping 判断手机是否处理睡眠
     * installApk 安装apk
+    * isRooted 是否root
+    * isRunningOnEmulator 当前设备是否是模拟器
     * getAppVersionName 获取当前应用程序的版本名称
     * getAppVersionCode 获取当前应用程序的版本号
     * goHome 返回Home
@@ -191,7 +216,12 @@ compile 'com.code19.library:library:0.0.5'
     * shareFile 分享文件(此方法是调用FileUtils.shareFile中的方式)
     * getShareTargets 获取可接受分享的应用
     * getCurrentLanguage 获取当前系统的语言 
-    * getLanguage 获取当前系统的语言 
+    * getLanguage 获取当前系统的语言
+    * isGpsEnabled GPS是否打开
+    * showSoftInputMethod 显示软键盘
+    * closeSoftInputMethod 关闭软键盘
+    * showSoftInput 显示软键盘
+    * closeSoftInput 关闭软键盘
 
 - VerificationUtils.java 验证工具类
     * matcherRealName 判断姓名格式  
@@ -214,6 +244,13 @@ compile 'com.code19.library:library:0.0.5'
     * testRegex 是否匹配正则
     
 - ViewUtils.java View工具
+    * removeSelfFromParent
+    * requestLayoutParent
+    * isTouchInView
+    * bigImage
+    * setTVUnderLine 给TextView设置下划线
+    * showPopupWindow
+    * dismissPopup
     * captureView 截图
     * createViewBitmap 截图
     * convertViewToBitmap 截图
@@ -221,8 +258,10 @@ compile 'com.code19.library:library:0.0.5'
     * getStatusBarHeight 获取状态栏高度
     * getToolbarHeight 获取工具栏高度
     * getNavigationBarHeight 获取导航栏高度
-    * getScreenSize 获取屏幕尺寸
-    
+    * measureView 测量view
+    * getViewWidth 获取view的宽度
+    * getViewHeight 获取view的高度
+
     
     
 ```shell 
@@ -258,7 +297,9 @@ compile 'com.code19.library:library:0.0.5'
      * @since 2.0
      */
 ```
-     
+
+# 这个库参考了众多网络的中的代码,在此对这些无私奉献的人致以最诚挚的感谢。
+
 License
 ----
 
