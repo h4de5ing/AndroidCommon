@@ -209,7 +209,7 @@ public class StringUtils {
         return str;
     }
 
-    public static int conver2Int(Object value, int defaultValue) {
+    public static int convert2Int(Object value, int defaultValue) {
         if (value == null || "".equals(value.toString().trim())) {
             return defaultValue;
         }

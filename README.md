@@ -68,6 +68,7 @@ compile 'com.code19.library:library:0.0.6'
     * transformlat 纬度转换
     * transformlng 经度转换
     * out_of_china 判断是否在国内，不在国内不做偏移
+
 - DateUtil.java 日期工具类
     * formatDataTime 格式化日期时间
     * formatDate 格式化日期
@@ -202,6 +203,7 @@ compile 'com.code19.library:library:0.0.6'
     * isChinese 是否是中文
     * isContainChinese 是否包含中文
     * strFormat2 不足2位前面补0
+    * convert2Int 类型安全转换
 
 - SystemUtils.java 系统工具
     * sendSMS 调用系统发送短信
