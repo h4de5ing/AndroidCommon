@@ -209,4 +209,16 @@ public class StringUtils {
         return str;
     }
 
+    public static int conver2Int(Object value, int defaultValue) {
+        if (value == null || "".equals(value.toString().trim())) {
+            return defaultValue;
+        }
+        try {
+            return Double.valueOf(value.toString()).intValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defaultValue;
+        }
+    }
+
 }
