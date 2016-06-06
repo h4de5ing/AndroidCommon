@@ -13,10 +13,7 @@ compile 'com.code19.library:library:0.0.6'
 - 能力一般,水平有限,难免有Bug,如果有任何问题,请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
 - 如果你有更好的代码,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
-## app Module中的类:
-    MainActivity.java 测试项目中的主类
-    HandlerActivity.java Handler的正确使用方式事例
-    
+   
 ## library Module中的类：
 
 - AppUtils.java 应用工具类
@@ -78,6 +75,8 @@ compile 'com.code19.library:library:0.0.6'
     * getTime 获取系统时间
     * subtractDate 计算两个时间差
     * getDateAfter 得到几天后的时间
+    * getWeekOfMonth 获取当前时间为本月的第几周
+    * getDayOfWeek 获取当前时间为本周的第几天
 
 - DensityUtil.java 屏幕工具类
     * dip2px dp转像素
@@ -204,10 +203,12 @@ compile 'com.code19.library:library:0.0.6'
     * isContainChinese 是否包含中文
     * strFormat2 不足2位前面补0
     * convert2Int 类型安全转换
+    * decimalFormat 指定小数输出
 
 - SystemUtils.java 系统工具
     * sendSMS 调用系统发送短信
     * forwardToDial 跳转到拨号
+    * callPhone 直接呼叫号码
     * sendMail 发邮件
     * hideKeyBoard 隐藏系统键盘
     * isBackground 判断当前应用程序是否后台运行
@@ -254,6 +255,7 @@ compile 'com.code19.library:library:0.0.6'
     * matcherIdentityCard 判断身份证号码格式
     * isNumeric 是否数值型
     * testRegex 是否匹配正则
+    * checkPostcode 匹配中国邮政编码
     
 - ViewUtils.java View工具
     * removeSelfFromParent

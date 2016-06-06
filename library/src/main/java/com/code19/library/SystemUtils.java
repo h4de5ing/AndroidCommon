@@ -15,6 +15,7 @@
  */
 package com.code19.library;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -32,6 +33,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Parcelable;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -56,15 +58,22 @@ public final class SystemUtils {
 
     public static void forwardToDial(Activity activity, String phoneNumber) {
         if (activity != null && !TextUtils.isEmpty(phoneNumber)) {
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
-            activity.startActivity(intent);
+            activity.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
+        }
+    }
+
+    public static void callPhone(Activity activity, String phoneNumber) {
+        if (activity != null && !TextUtils.isEmpty(phoneNumber)) {
+            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
         }
     }
 
     public static void sendMail(Context mContext, String mailID) {
         Uri uri = Uri.parse("mailto:" + mailID);
-        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-        mContext.startActivity(intent);
+        mContext.startActivity(new Intent(Intent.ACTION_SENDTO, uri));
     }
 
     public static void hideKeyBoard(Activity aty) {
@@ -73,8 +82,7 @@ public final class SystemUtils {
 
 
     public static boolean isBackground(Context context) {
-        ActivityManager activityManager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
         for (RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
@@ -190,8 +198,7 @@ public final class SystemUtils {
 
 
     public static int getDeviceUsableMemory(Context cxt) {
-        ActivityManager am = (ActivityManager) cxt
-                .getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) cxt.getSystemService(Context.ACTIVITY_SERVICE);
         MemoryInfo mi = new MemoryInfo();
         am.getMemoryInfo(mi);
         return (int) (mi.availMem / (1024 * 1024));

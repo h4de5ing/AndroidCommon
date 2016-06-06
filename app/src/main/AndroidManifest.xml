@@ -42,7 +42,11 @@
         </activity>
         <activity android:name=".ui.activity.DeviceActivity">
         </activity>
-        <activity android:name=".ui.activity.VerificationActivity">
+        <activity
+            android:name=".ui.activity.VerificationActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"
+            ><!--界面不被键盘遮住-->
+            <!--键盘遮住界面android:windowSoftInputMode="adjustResize"-->
         </activity>
     </application>
 

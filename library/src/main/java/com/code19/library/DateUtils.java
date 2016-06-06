@@ -23,7 +23,6 @@ import java.util.Date;
 
 /**
  * Create by h4de5ing 2016/5/7 007
- *
  */
 public class DateUtils {
     private static final SimpleDateFormat DATE_FORMAT_DATETIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -80,5 +79,22 @@ public class DateUtils {
         now.setTime(d);
         now.set(Calendar.DATE, now.get(Calendar.DATE) + day);
         return now.getTime();
+    }
+
+    public static int getWeekOfMonth() {
+        Calendar calendar = Calendar.getInstance();
+        int week = calendar.get(Calendar.WEEK_OF_MONTH);
+        return week - 1;
+    }
+
+    public static int getDayOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        if (day == 1) {
+            day = 7;
+        } else {
+            day = day - 1;
+        }
+        return day;
     }
 }

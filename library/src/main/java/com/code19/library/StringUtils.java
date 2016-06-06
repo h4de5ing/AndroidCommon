@@ -1,5 +1,7 @@
 package com.code19.library;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Gh0st on 2016/6/2 002.
  */
@@ -219,6 +221,11 @@ public class StringUtils {
             e.printStackTrace();
             return defaultValue;
         }
+    }
+
+    public static String decimalFormat(String s, String format) {
+        DecimalFormat decimalFormat = new DecimalFormat(format);
+        return decimalFormat.format(s);
     }
 
 }

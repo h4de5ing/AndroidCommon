@@ -218,4 +218,9 @@ public class VerificationUtils {
     public static boolean testRegex(String regex, String inputValue) {
         return Pattern.compile(regex).matcher(inputValue).matches();
     }
+
+    public static boolean checkPostcode(String postcode) {
+        String regex = "[1-9]\\d{5}";
+        return Pattern.matches(regex, postcode);
+    }
 }
