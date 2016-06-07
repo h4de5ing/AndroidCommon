@@ -223,7 +223,7 @@ public class L {
         message = headString + LINE_SEPARATOR + message;
         String[] lines = message.split(LINE_SEPARATOR);
         for (String line : lines) {
-            Log.d(tag, "║ " + line);
+            Log.d(tag, "|" + line);
         }
         printLine(tag, false);
     }
@@ -253,7 +253,7 @@ public class L {
         String[] lines = xml.split(LINE_SEPARATOR);
         for (String line : lines) {
             if (!TextUtils.isEmpty(line)) {
-                Log.d(tag, "║ " + line);
+                Log.d(tag, "|" + line);
             }
         }
         printLine(tag, false);
