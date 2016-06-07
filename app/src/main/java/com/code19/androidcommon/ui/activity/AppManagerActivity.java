@@ -44,6 +44,7 @@ public class AppManagerActivity extends AppCompatActivity implements IAppView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_manager);
         mRecyapp = (RecyclerView) findViewById(R.id.recy_app);
+        mRecyapp.setHasFixedSize(true);
         mRecyapp.setLayoutManager(new GridLayoutManager(this, 4));
         mRecyapp.setItemAnimator(new DefaultItemAnimator());
         initProgress();

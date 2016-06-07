@@ -22,7 +22,7 @@
     <string name="bitmaputils">Bitmap工具</string>
     <string name="cipherutils">加密工具</string>
     <string name="dateutils">日期时间工具</string>
-    <string name="densityutils">屏幕工具</string>
+    <string name="logutils">日志工具</string>
     <string name="deviceutils">设备工具</string>
     <string name="fileutils">文件工具</string>
     <string name="jsonutils">Json工具</string>

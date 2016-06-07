@@ -40,11 +40,11 @@
         android:text="@string/deviceutils"/>
 
     <Button
-        android:id="@+id/densityutils"
+        android:id="@+id/logutils"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:text="@string/densityutils"/>
+        android:text="@string/logutils"/>
 
     <Button
         android:id="@+id/fileutils"

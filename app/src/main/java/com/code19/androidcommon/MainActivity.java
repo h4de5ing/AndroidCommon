@@ -26,6 +26,7 @@ import android.widget.Button;
 import com.code19.androidcommon.ui.activity.AppManagerActivity;
 import com.code19.androidcommon.ui.activity.DeviceActivity;
 import com.code19.androidcommon.ui.activity.VerificationActivity;
+import com.code19.library.L;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "ghost";
@@ -40,12 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button systemutils = (Button) findViewById(R.id.systemutils);
         Button netutils = (Button) findViewById(R.id.netutils);
         Button fileutils = (Button) findViewById(R.id.fileutils);
-        Button densityutils = (Button) findViewById(R.id.densityutils);
+        Button logutils = (Button) findViewById(R.id.logutils);
         Button apputils = (Button) findViewById(R.id.apputils);
         systemutils.setOnClickListener(this);
         netutils.setOnClickListener(this);
         fileutils.setOnClickListener(this);
-        densityutils.setOnClickListener(this);
+        logutils.setOnClickListener(this);
         apputils.setOnClickListener(this);
         deviceutils.setOnClickListener(this);
         virification.setOnClickListener(this);
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.deviceutils:
                 startActivity(new Intent(MainActivity.this, DeviceActivity.class));
                 break;
-            case R.id.densityutils:
+            case R.id.logutils:
+                testLog();
                 break;
             case R.id.fileutils:
                 break;
@@ -72,5 +74,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, VerificationActivity.class));
                 break;
         }
+    }
+
+    private String xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!--  Copyright w3school.com.cn --><note><to>George</to><from>John</from><heading>Reminder</heading><body>Don't forget the meeting!</body></note>";
+    private String json = "{'type1': {'0': {'age': 12,'name': 'zhangsdan'},'1': {'age': 13,'name': 'lisi'},'num': '123'},'type3': {'0': {'age': 14,'name': 'wangwu'},'1': {'age': 15,'name': 'maliu'},'num': '456',}}";
+
+    private void testLog() {
+        L.init(true, "admin");
+        L.v("Verbose...");
+        L.d("Debug...");
+        L.i("info。。。");
+        L.w("Warn...");
+        L.e("Error...");
+        L.a("ASSERT...");
+        L.json(json);
+        L.xml(xml);
     }
 }

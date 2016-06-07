@@ -173,6 +173,18 @@ compile 'com.code19.library:library:0.0.6'
     * object2Json Object对象转换为JSONArray
     * string2JSONObject json字符串生成JSONObject对象
     
+- L.java 日志工具
+    * init 初始化日志开关和TAG(默认日志为开,TAG为"ghost")
+    * v VERBOSE 
+    * d DEBUG
+    * i INFO
+    * w WARN
+    * e ERROR
+    * a ASSERT
+    * json 输出json
+    * xml 输出xml
+    
+    
 - NetUtils.java 网络工具
     * getNetworkType 获取网络类型
     * getNetworkTypeName 获取网络名称
