@@ -13,6 +13,14 @@ compile 'com.code19.library:library:0.0.7'
 - 能力一般,水平有限,难免有Bug,如果有任何问题,请<a href="https://github.com/h4de5ing/AndroidCommon/issues">反馈</a>
 - 如果你有更好的代码,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
+* 感谢各位的star,你们的支持是我继续的动力,好了,本着多一点真诚,少一点套路的原则,完善一下文档
+* 为了让更多人用上这个库,现在推出Eclipse <a href="https://github.com/h4de5ing/AndroidCommon/blob/master/">lib下载</a>
+
+```
+调用方法如此简单：
+调用结果 = 类名.方法名( 参数 )
+AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
+```
    
 ## library Module中的类：
 
