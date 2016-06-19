@@ -140,7 +140,7 @@ public class StringUtils {
     }
 
     public static boolean isEmpty(String str) {
-        return str == null || str.trim().length() == 0 || "".equals(str);
+        return str == null || str.trim().length() == 0;
     }
 
     public static int chineseLength(String str) {
