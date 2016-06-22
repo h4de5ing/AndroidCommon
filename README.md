@@ -14,7 +14,7 @@ compile 'com.code19.library:library:0.0.7'
 - 如果你有更好的代码,请提交<a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
  
 * 感谢各位的star,你们的支持是我继续的动力,好了,本着多一点真诚,少一点套路的原则,完善一下文档
-* 为了让更多人用上这个库,现在推出Eclipse <a href="https://github.com/h4de5ing/AndroidCommon/blob/master/com.code19.library-0.07.jar">lib下载</a>
+* 为了让更多人用上这个库,现在推出Eclipse <a href="https://github.com/h4de5ing/AndroidCommon/raw/master/com.code19.library-0.07.jar">lib下载</a>
 
 ```
 调用方法如此简单：

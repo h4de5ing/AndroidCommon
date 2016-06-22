@@ -19,16 +19,15 @@ package com.code19.androidcommon.ui.activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.code19.androidcommon.R;
 import com.code19.androidcommon.model.AppBean;
 import com.code19.androidcommon.presenter.AppPresenter;
 import com.code19.androidcommon.ui.adapter.AppRecyAdapter;
 import com.code19.androidcommon.view.IAppView;
+import com.code19.library.L;
 
 import java.util.List;
 
@@ -44,9 +43,8 @@ public class AppManagerActivity extends AppCompatActivity implements IAppView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_manager);
         mRecyapp = (RecyclerView) findViewById(R.id.recy_app);
-        mRecyapp.setHasFixedSize(true);
         mRecyapp.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecyapp.setItemAnimator(new DefaultItemAnimator());
+        mRecyapp.setHasFixedSize(true);
         initProgress();
         mPresenter = new AppPresenter(this, this);
         new Thread(new Runnable() {
@@ -78,7 +76,7 @@ public class AppManagerActivity extends AppCompatActivity implements IAppView {
     @Override
     public void referData(List<AppBean> list) {
         for (AppBean bean : list) {
-            Log.i(TAG, "app: " + bean.toString());
+            L.i(TAG, "app: " + bean.toString());
         }
         mRecyapp.setAdapter(new AppRecyAdapter(this, list));
     }
