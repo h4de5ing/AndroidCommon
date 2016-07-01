@@ -161,6 +161,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * openImage 打开图片
     * openVideo 打开视频
     * openURL 打开URL
+    * downloadFile 下载文件
+    * upgradeApp 升级应用
 
 - ImageUtils.java 图片工具类
     * calculateInSampleSize 计算图片的压缩比率
