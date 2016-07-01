@@ -43,7 +43,7 @@ public class DeviceActivity extends AppCompatActivity {
     private void initDeviecesInfos() {
         StringBuilder sb = new StringBuilder();
         sb.append("AndroidID--" + DeviceUtils.getAndroidID(c) + "\n");
-        sb.append("getIMSI--" + DeviceUtils.getIMEI(c) + "\n");
+        sb.append("getIMEI--" + DeviceUtils.getIMEI(c) + "\n");
         sb.append("getIMSI--" + DeviceUtils.getIMSI(c) + "\n");
         sb.append("getWifiMacAddr--" + DeviceUtils.getWifiMacAddr(c) + "\n");
         //sb.append("getIP--" + DeviceUtils.getIP(c) + "\n");

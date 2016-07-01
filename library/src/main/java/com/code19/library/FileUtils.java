@@ -16,10 +16,13 @@
 
 package com.code19.library;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.format.Formatter;
+
+import com.code19.library.service.DownloadService;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -246,4 +249,16 @@ public class FileUtils {
         mContext.startActivity(intent);
     }
 
+    public static void downloadFile(Context context, String fileurl) {
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileurl));
+        request.setDestinationInExternalPublicDir("/Download/", fileurl.substring(fileurl.lastIndexOf("/") + 1));
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        downloadManager.enqueue(request);
+    }
+
+    public static void upgradeApp(Context context, String fileurl) {
+        Intent intent = new Intent(context, DownloadService.class);
+        intent.putExtra("fileurl", fileurl);
+        context.startService(intent);
+    }
 }

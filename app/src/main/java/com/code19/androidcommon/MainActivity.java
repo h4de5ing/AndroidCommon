@@ -26,10 +26,10 @@ import android.widget.Button;
 import com.code19.androidcommon.ui.activity.AppManagerActivity;
 import com.code19.androidcommon.ui.activity.DeviceActivity;
 import com.code19.androidcommon.ui.activity.VerificationActivity;
+import com.code19.library.FileUtils;
 import com.code19.library.L;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "ghost";
     private Context c = this;
 
     @Override
@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 testLog();
                 break;
             case R.id.fileutils:
+                String url = "http://3lin9.19code.com/app.apk";
+                FileUtils.upgradeApp(MainActivity.this, url);
                 break;
             case R.id.netutils:
                 break;

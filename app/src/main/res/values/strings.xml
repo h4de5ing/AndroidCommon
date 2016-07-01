@@ -24,7 +24,7 @@
     <string name="dateutils">日期时间工具</string>
     <string name="logutils">日志工具</string>
     <string name="deviceutils">设备工具</string>
-    <string name="fileutils">文件工具</string>
+    <string name="fileutils">文件工具(升级应用)</string>
     <string name="jsonutils">Json工具</string>
     <string name="netutils">网络工具</string>
     <string name="sputils">属性工具</string>
