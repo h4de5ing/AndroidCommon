@@ -1,7 +1,7 @@
 # 使用方式
 * 这个library还在功能迭代中,功能不尽完善...
 ```gradle 
-compile 'com.code19.library:library:0.0.8'
+compile 'com.code19.library:library:0.0.9'
 ```
 # 常用工具类
 - 每一个Android开发者在日常开发中都会积累一些自己的代码片段
@@ -45,10 +45,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * runScript 运行脚本
     * getRootPermission 获得root权限
     * runApp 启动应用
-
-- BitmapUtils.java Bitmap工具类
-   * decodeFile 解析文件为bitmap
-   * getImageThumbnail 获取图片缩略图
         
 - CacheUtils.java 缓存工具类
     * setCache 设置缓存
