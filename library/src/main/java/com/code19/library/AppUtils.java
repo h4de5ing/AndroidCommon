@@ -130,10 +130,6 @@ public class AppUtils {
         return context.getPackageManager().getInstallerPackageName(packageName);
     }
 
-    public static String getAppPackageName(Context context) {
-        return context.getPackageName();
-    }
-
     public static boolean hasPermission(Context context, String permission) {
         if (context != null && !TextUtils.isEmpty(permission)) {
             try {
@@ -257,7 +253,7 @@ public class AppUtils {
 
     public static void killProcesses(Context context, int pid, String processName) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        String packageName ;
+        String packageName;
         try {
             if (!processName.contains(":")) {
                 packageName = processName;
@@ -307,7 +303,7 @@ public class AppUtils {
                     BufferedReader bufferedReader = new BufferedReader(
                             new InputStreamReader(m_process.getErrorStream()),
                             8192);
-                    String ls_1 ;
+                    String ls_1;
                     try {
                         while ((ls_1 = bufferedReader.readLine()) != null) {
                             sberr.append(ls_1).append("\n");
@@ -366,5 +362,9 @@ public class AppUtils {
             }
         }
         return true;
+    }
+
+    public static void runApp(Context context, String packagename) {
+        context.startActivity(new Intent(context.getPackageManager().getLaunchIntentForPackage(packagename)));
     }
 }

@@ -63,6 +63,7 @@ public class AppBiz implements IAppBiz {
                 appBean.setAppVerCode(appVersionCode);
                 appBean.setAppInstaller(appInstaller);
                 appBean.setSystemApp(systemApp);
+                appBean.setAppPackage(info.packageName);
                 list.add(appBean);
             }
         }

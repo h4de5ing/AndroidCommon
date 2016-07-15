@@ -1,7 +1,7 @@
 # 使用方式
 * 这个library还在功能迭代中,功能不尽完善...
 ```gradle 
-compile 'com.code19.library:library:0.0.7'
+compile 'com.code19.library:library:0.0.8'
 ```
 # 常用工具类
 - 每一个Android开发者在日常开发中都会积累一些自己的代码片段
@@ -33,7 +33,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppVersionName 获取应用版本名称
     * getAppVersionCode 获取应用版本号
     * getAppInstaller 获取应用的安装市场
-    * getAppPackageName 获取应用包名
     * hasPermission 是否有权限
     * isInstalled 应用是否安装
     * installApk 安装应用
@@ -45,6 +44,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * killProcesses 结束进程
     * runScript 运行脚本
     * getRootPermission 获得root权限
+    * runApp 启动应用
 
 - BitmapUtils.java Bitmap工具类
    * decodeFile 解析文件为bitmap

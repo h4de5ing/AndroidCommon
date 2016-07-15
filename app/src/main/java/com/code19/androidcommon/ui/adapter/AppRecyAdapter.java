@@ -23,10 +23,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.code19.androidcommon.R;
 import com.code19.androidcommon.model.AppBean;
+import com.code19.library.AppUtils;
+import com.code19.library.L;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class AppRecyAdapter extends RecyclerView.Adapter<AppRecyAdapter.AppViewH
         this.mDatas = list;
         this.mLayoutInflater = LayoutInflater.from(context);
     }
+
 
     @Override
     public AppViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,7 +73,9 @@ public class AppRecyAdapter extends RecyclerView.Adapter<AppRecyAdapter.AppViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "点击了Item" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    L.i(mDatas.get(getAdapterPosition()).getAppPackage(), getAdapterPosition());
+                    //Toast.makeText(mContext, "点击了Item" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    AppUtils.runApp(mContext, mDatas.get(getAdapterPosition()).getAppPackage());
                 }
             });
         }

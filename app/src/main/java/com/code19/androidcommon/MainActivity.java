@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         L.init(true, "admin");
         L.v("Verbose...");
         L.d("Debug...");
-        L.i("info。。。");
+        L.i("info...");
         L.w("Warn...");
         L.e("Error...");
         L.a("ASSERT...");

@@ -31,6 +31,16 @@ public class AppBean {
     private int appVerCode;
     private String appInstaller;
     private boolean isSystemApp;
+    private String appPackage;
+
+    public String getAppPackage() {
+        return appPackage;
+    }
+
+    public void setAppPackage(String appPackage) {
+        this.appPackage = appPackage;
+    }
+
 
     public String getAppName() {
         return appName;

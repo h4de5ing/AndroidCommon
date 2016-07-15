@@ -74,10 +74,6 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:text="@string/virificationutils"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="TextFields"/>
 <!--
     android:inputType="phone"
     android:inputType="none"

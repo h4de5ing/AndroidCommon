@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 
 import com.code19.library.AppUtils;
 import com.code19.library.L;
@@ -36,7 +35,6 @@ public class DownloadService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
