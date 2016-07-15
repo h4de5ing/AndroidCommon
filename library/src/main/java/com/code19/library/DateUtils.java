@@ -70,6 +70,10 @@ public class DateUtils {
         return cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
     }
 
+    public static String getDate() {
+        return new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis());
+    }
+
     public static long subtractDate(Date dateStart, Date dateEnd) {
         return dateEnd.getTime() - dateStart.getTime();
     }

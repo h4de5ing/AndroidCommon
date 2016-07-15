@@ -16,6 +16,7 @@
 
 package com.code19.library;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -23,8 +24,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -306,6 +313,24 @@ public class L {
             Log.d(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════");
         } else {
             Log.d(tag, "╚═══════════════════════════════════════════════════════════════════════════════════════");
+        }
+    }
+
+    public static void crash2File(Context context, String msg) {
+        File file = new File(context.getExternalFilesDir("crash_" + DateUtils.getDate() + ".log").getAbsolutePath());
+        FileOutputStream trace = null;
+        try {
+            trace = new FileOutputStream(file, true);
+            OutputStreamWriter writer = new OutputStreamWriter(trace, "utf-8");
+            writer.write("#_"+DateUtils.getDate() + "\n");
+            writer.write(msg + "\n");
+            writer.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

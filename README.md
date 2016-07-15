@@ -80,6 +80,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * formatTime 格式化时间
     * formatDateCustom 自定义格式的格式化日期时间
     * string2Date 将时间字符串转换成Date
+    * getDate 获取系统日期
     * getTime 获取系统时间
     * subtractDate 计算两个时间差
     * getDateAfter 得到几天后的时间
@@ -193,6 +194,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * a ASSERT
     * json 输出json
     * xml 输出xml
+    * crash2File 将日志输出到文件中
     
     
 - NetUtils.java 网络工具
