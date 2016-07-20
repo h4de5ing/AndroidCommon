@@ -30,7 +30,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class CipherUtils {
 
-    public static String encode(String input) {
+    public static String md5(String input) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             byte[] inputByteArray = input.getBytes();
@@ -50,7 +50,7 @@ public class CipherUtils {
     }
 
 
-    public static String encode(InputStream in) {
+    public static String md5(InputStream in) {
         int bufferSize = 256 * 1024;
         DigestInputStream digestInputStream = null;
         try {
@@ -94,7 +94,7 @@ public class CipherUtils {
     }
 
 
-    public static String XorEncode(String str,String privatekey) {
+    public static String XorEncode(String str, String privatekey) {
         int[] snNum = new int[str.length()];
         String result = "";
         String temp = "";
@@ -116,7 +116,7 @@ public class CipherUtils {
         return result;
     }
 
-    public static String XorDecode(String str,String privateKey) {
+    public static String XorDecode(String str, String privateKey) {
         char[] snNum = new char[str.length() / 3];
         String result = "";
 
@@ -130,5 +130,10 @@ public class CipherUtils {
             result += snNum[k];
         }
         return result;
+    }
+
+    //TODO 未完成sha1加密方法
+    public static String sha1(String decript) {
+        return null;
     }
 }

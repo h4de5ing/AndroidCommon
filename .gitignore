@@ -8,3 +8,4 @@
 /.idea
 /library/src/test
 /library/src/androidTest
+/*.properties

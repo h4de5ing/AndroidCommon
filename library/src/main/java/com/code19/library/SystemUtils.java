@@ -37,6 +37,7 @@ import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -338,6 +339,38 @@ public final class SystemUtils {
         InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null && ((Activity) context).getCurrentFocus() != null) {
             inputMethodManager.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    public static void toWeChatScan(Context context) {
+        try {
+            Uri uri = Uri.parse("weixin://dl/scan");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, R.string.wechaterr, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void toAliPayScan(Context context) {
+        try {
+            //支付宝跳过开启动画打开扫码和付款码的url scheme分别是alipayqr://platformapi/startapp?saId=10000007和
+            //alipayqr://platformapi/startapp?saId=20000056
+            Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, R.string.alipayerr, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void toAliPayPayCode(Context context) {
+        try {
+            Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=20000056");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, R.string.alipayerr, Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -51,8 +51,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getCache 获取缓存
 
 - CipherUtils.java 密码工具类
-    * encode(String input) 获取字符串md5值
-    * encode(InputStream in) 获取输入流的md5值
+    * md5(String input) 获取字符串md5值
+    * md5(InputStream in) 获取输入流的md5值
     * base64Encode Base64加密
     * base64Decode Base64解密
     * XorEncode 异或加密
@@ -255,6 +255,9 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * closeSoftInputMethod 关闭软键盘
     * showSoftInput 显示软键盘
     * closeSoftInput 关闭软键盘
+    * toWeChatScan 打开微信扫描
+    * toAliPayScan 打开支付宝扫描
+    * toAliPayPayCode 打开支付宝支付码
 
 - VerificationUtils.java 验证工具类
     * matcherRealName 判断姓名格式  
