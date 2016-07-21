@@ -160,6 +160,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * openURL 打开URL
     * downloadFile 下载文件
     * upgradeApp 升级应用
+    * getExtraPath 获取内存绝对路径
 
 - ImageUtils.java 图片工具类
     * calculateInSampleSize 计算图片的压缩比率

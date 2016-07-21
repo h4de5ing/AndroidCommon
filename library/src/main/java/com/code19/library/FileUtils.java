@@ -20,6 +20,7 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.text.format.Formatter;
 
 import com.code19.library.service.DownloadService;
@@ -260,5 +261,14 @@ public class FileUtils {
         Intent intent = new Intent(context, DownloadService.class);
         intent.putExtra("fileurl", fileurl);
         context.startService(intent);
+    }
+
+    public static String getExtraPath() {
+        String storagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/code19";
+        File file = new File(storagePath);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        return storagePath;
     }
 }
