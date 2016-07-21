@@ -167,10 +167,10 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * rotaingImageView 旋转图片
     * decodeScaleImage 加载图片并压缩
     * getRoundedCornerBitmap 获取圆角图片
-    //* decodeUriAsBitmap 解析URL流为图片
     * bitmap2File bitmap存为文件
     * compressImage 质量压缩
-    * compressFixBitmap 固定大小压缩 
+    * compressFixBitmap 固定大小压缩
+    * bitmap2png 将bitmap保存成图片
     
 - JsonUtils.java Json工具类(需要依赖Gson 2.0以上)
     * toJson 对象转json

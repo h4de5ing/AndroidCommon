@@ -16,7 +16,6 @@
 
 package com.code19.library;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -27,7 +26,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.ExifInterface;
-import android.net.Uri;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -128,16 +126,6 @@ public class ImageUtils {
         return output;
     }
 
-    public static Bitmap decodeUriAsBitmap(Context mContext, Uri uri) {
-        Bitmap bitmap;
-        try {
-            bitmap = BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(uri));
-        } catch (FileNotFoundException e) {
-            return null;
-        }
-        return bitmap;
-    }
-
     public static boolean bitmap2File(Bitmap bitmap, File imageFile) {
         OutputStream os;
         try {
@@ -175,5 +163,25 @@ public class ImageUtils {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         return Bitmap.createBitmap(bitMap, 0, 0, width, height, matrix, true);
+    }
+
+    public static boolean bitmap2png(Bitmap bitmap, String filename) {
+        boolean compress = false;
+        File file = new File(filename);
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            compress = bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            compress = true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return compress;
     }
 }
