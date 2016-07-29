@@ -317,7 +317,8 @@ public class L {
     }
 
     public static void crash2File(Context context, String msg) {
-        File file = new File(context.getExternalFilesDir("crash_" + DateUtils.getDate() + ".log").getAbsolutePath());
+        String absolutePath = context.getExternalCacheDir().getAbsolutePath();
+        File file = new File(absolutePath+"/log_" + System.currentTimeMillis() + ".log");
         FileOutputStream trace = null;
         try {
             trace = new FileOutputStream(file, true);

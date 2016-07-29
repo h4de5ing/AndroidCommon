@@ -30,7 +30,6 @@ import android.media.ExifInterface;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -163,25 +162,5 @@ public class ImageUtils {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         return Bitmap.createBitmap(bitMap, 0, 0, width, height, matrix, true);
-    }
-
-    public static boolean bitmap2png(Bitmap bitmap, String filename) {
-        boolean compress = false;
-        File file = new File(filename);
-        if (file.exists()) {
-            file.delete();
-        }
-        try {
-            FileOutputStream outputStream = new FileOutputStream(file);
-            compress = bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
-            outputStream.flush();
-            outputStream.close();
-            compress = true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return compress;
     }
 }
