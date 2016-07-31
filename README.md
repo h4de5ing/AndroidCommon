@@ -1,7 +1,7 @@
 # 使用方式
 * 这个library还在功能迭代中,功能不尽完善...
 ```gradle 
-compile 'com.code19.library:library:0.0.9'
+compile 'com.code19.library:library:0.1.0'
 ```
 # 常用工具类
 - 每一个Android开发者在日常开发中都会积累一些自己的代码片段

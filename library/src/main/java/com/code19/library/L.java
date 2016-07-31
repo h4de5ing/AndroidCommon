@@ -25,13 +25,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -180,6 +179,7 @@ public class L {
         if (tag == null) {
             tag = TAG;
         }
+        printLine(tag, true);
         switch (type) {
             case VERBOSE:
                 Log.v(tag, sub);
@@ -200,6 +200,7 @@ public class L {
                 Log.wtf(tag, sub);
                 break;
         }
+        printLine(tag, false);
     }
 
     private static void printJson(String tag, String json, String headString) {
@@ -316,22 +317,33 @@ public class L {
         }
     }
 
-    public static void crash2File(Context context, String msg) {
-        String absolutePath = context.getExternalCacheDir().getAbsolutePath();
-        File file = new File(absolutePath+"/log_" + System.currentTimeMillis() + ".log");
-        FileOutputStream trace = null;
+    public static void crash2File(Context context, Throwable throwable) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("-------------");
+        builder.append("\nandroidid:" + DeviceUtils.getAndroidID(context));
+        builder.append("\nlanguage:" + DeviceUtils.getLanguage());
+        builder.append("\ncountry:" + DeviceUtils.getCountry(context));
+        builder.append("\nappVersionName:" + SystemUtils.getAppVersionName(context));
+        builder.append("\nappVersionCode:" + SystemUtils.getAppVersionCode(context));
+        builder.append("\nmodel:" + DeviceUtils.getModel());
+        builder.append("\nbuildVersionRelease:" + DeviceUtils.getBuildVersionRelease());
+        builder.append("\nbuildVersionSDK:" + DeviceUtils.getBuildVersionSDK());
+        builder.append("\ncurrentTime:" + DateUtils.getDateTime());
+        File file = new File(context.getExternalCacheDir().getAbsolutePath() + "/log_" + System.currentTimeMillis() + ".log");
+        StringWriter writer = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(writer);
+        throwable.printStackTrace(printWriter);
+        OutputStreamWriter osw = null;
         try {
-            trace = new FileOutputStream(file, true);
-            OutputStreamWriter writer = new OutputStreamWriter(trace, "utf-8");
-            writer.write("#_"+DateUtils.getDate() + "\n");
-            writer.write(msg + "\n");
+            osw = new OutputStreamWriter(new FileOutputStream(file, true), "utf-8");
+            osw.write(builder.toString() + "\n" + writer.toString());
             writer.flush();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            osw.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            FileUtils.closeIO(writer);
+            FileUtils.closeIO(osw);
         }
     }
 }
