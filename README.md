@@ -78,6 +78,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * string2Date 将时间字符串转换成Date
     * getDate 获取系统日期
     * getTime 获取系统时间
+    * getDateTime 获取系统日期时间
     * subtractDate 计算两个时间差
     * getDateAfter 得到几天后的时间
     * getWeekOfMonth 获取当前时间为本月的第几周

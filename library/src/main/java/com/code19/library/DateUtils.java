@@ -73,6 +73,12 @@ public class DateUtils {
     public static String getDate() {
         return new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis());
     }
+    public static String getDateTime(){
+        return DATE_FORMAT_DATETIME.format(System.currentTimeMillis());
+    }
+    public static String getDateTime(String format){
+        return new SimpleDateFormat(format).format(System.currentTimeMillis());
+    }
 
     public static long subtractDate(Date dateStart, Date dateEnd) {
         return dateEnd.getTime() - dateStart.getTime();
