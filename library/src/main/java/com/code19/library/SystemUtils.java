@@ -243,6 +243,18 @@ public final class SystemUtils {
         return count;
     }
 
+    public static String getProcessName(Context appContext) {
+        String currentProcessName = null;
+        int pid = android.os.Process.myPid();
+        ActivityManager manager = (ActivityManager) appContext.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo processInfo : manager.getRunningAppProcesses()) {
+            if (processInfo.pid == pid) {
+                currentProcessName = processInfo.processName;
+                break;
+            }
+        }
+        return currentProcessName;
+    }
 
     public static void createDeskShortCut(Context cxt, String shortCutName, int icon, Class<?> cls) {
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");

@@ -243,6 +243,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * hexdigest 32位签名
     * getDeviceUsableMemory 获取设备可用空间
     * gc 清理后台进程和服务
+    * getProcessName 获取进程名字
     * createDeskShortCut 创建桌面快捷方式
     * createShortcut 创建快捷方式
     * shareText 分享文本
