@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 
 import com.code19.library.service.DownloadService;
@@ -30,11 +31,13 @@ import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.zip.GZIPInputStream;
@@ -44,6 +47,7 @@ import java.util.zip.GZIPOutputStream;
  * Create by h4de5ing 2016/5/7 007
  */
 public class FileUtils {
+
     public static void closeIO(Closeable... closeables) {
         if (null == closeables || closeables.length <= 0) {
             return;
@@ -68,11 +72,11 @@ public class FileUtils {
         return new File(filePath).exists();
     }
 
-    public static boolean writeFile(String filename, String content) {
+    public static boolean writeFile(String filename, String content, boolean append) {
         boolean isSuccess = false;
         BufferedWriter bufferedWriter = null;
         try {
-            bufferedWriter = new BufferedWriter(new FileWriter(filename, false));
+            bufferedWriter = new BufferedWriter(new FileWriter(filename, append));
             bufferedWriter.write(content);
             isSuccess = true;
         } catch (IOException e) {
@@ -100,10 +104,46 @@ public class FileUtils {
         return str;
     }
 
-    public static void copyFileFast(FileInputStream is, FileOutputStream os) throws IOException {
-        FileChannel in = is.getChannel();
-        FileChannel out = os.getChannel();
-        in.transferTo(0, in.size(), out);
+    public static StringBuilder readFile(String filename, String charsetName) {
+        File file = new File(filename);
+        StringBuilder fileContent = new StringBuilder("");
+        if (file == null || !file.isFile()) {
+            return null;
+        }
+        BufferedReader reader = null;
+        try {
+            InputStreamReader is = new InputStreamReader(new FileInputStream(file), charsetName);
+            reader = new BufferedReader(is);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                if (!fileContent.toString().equals("")) {
+                    fileContent.append("\r\n");
+                }
+                fileContent.append(line);
+            }
+            return fileContent;
+        } catch (IOException e) {
+            throw new RuntimeException("IOException occurred. ", e);
+        } finally {
+            closeIO(reader);
+        }
+    }
+
+    public static void copyFileFast(File in, File out) {
+        FileChannel filein = null;
+        FileChannel fileout = null;
+        try {
+            filein = new FileInputStream(in).getChannel();
+            fileout = new FileOutputStream(out).getChannel();
+            filein.transferTo(0, filein.size(), fileout);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            closeIO(filein);
+            closeIO(fileout);
+        }
     }
 
     public static void shareFile(Context context, String title, String filePath) {
@@ -193,6 +233,28 @@ public class FileUtils {
         }
     }
 
+    public static String getFileName(String filePath) {
+        if (StringUtils.isEmpty(filePath)) {
+            return filePath;
+        }
+
+        int filePosi = filePath.lastIndexOf(File.separator);
+        return (filePosi == -1) ? filePath : filePath.substring(filePosi + 1);
+    }
+
+    public static long getFileSize(String filepath) {
+        if (TextUtils.isEmpty(filepath)) {
+            return -1;
+        }
+        File file = new File(filepath);
+        return (file.exists() && file.isFile() ? file.length() : -1);
+    }
+
+    public static boolean rename(String filepath, String newName) {
+        File file = new File(filepath);
+        return file.exists() && file.renameTo(new File(newName));
+    }
+
     public static String getFolderName(String filePath) {
         if (filePath == null || filePath.length() == 0 || filePath.trim().length() == 0) {
             return filePath;
@@ -263,8 +325,21 @@ public class FileUtils {
         context.startService(intent);
     }
 
-    public static String getExtraPath() {
-        String storagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/code19";
+    public static boolean isSDCardAvailable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+    }
+
+    public static String getAppExternalPath(String packageName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Environment.getExternalStorageDirectory().getAbsolutePath());
+        sb.append(File.separator);
+        sb.append("Android/data/");
+        sb.append(packageName);
+        return sb.toString();
+    }
+
+    public static String getExtraPath(String folder) {
+        String storagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.pathSeparator + folder;
         File file = new File(storagePath);
         if (!file.exists()) {
             file.mkdir();

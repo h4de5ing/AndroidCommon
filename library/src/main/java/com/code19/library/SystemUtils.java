@@ -366,8 +366,6 @@ public final class SystemUtils {
 
     public static void toAliPayScan(Context context) {
         try {
-            //支付宝跳过开启动画打开扫码和付款码的url scheme分别是alipayqr://platformapi/startapp?saId=10000007和
-            //alipayqr://platformapi/startapp?saId=20000056
             Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             context.startActivity(intent);

@@ -146,6 +146,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * isFileExist 文件是否存在
     * writeFile 将字符串写入到文件
     * readFile 从文件中读取字符串
+    * readFile 从文件中读取字符串(可设置编码)
     * copyFileFast 快速复制
     * shareFile 分享文件
     * zip zip压缩
@@ -154,14 +155,19 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * Stream2File 将输入流写入到文件
     * createFolder 创建文件夹
     * createFolder 创建文件夹(支持覆盖已存在的同名文件夹)
+    * getFileName 获取文件名
+    * getFileSize 获取文件大小
+    * rename 重名名文件\文件夹
     * getFolderName 获取文件夹名称
     * deleteFile 删除目录下的文件
     * openImage 打开图片
     * openVideo 打开视频
     * openURL 打开URL
     * downloadFile 下载文件
-    * upgradeApp 升级应用
-    * getExtraPath 获取内存绝对路径
+    * upgradeApp 通过APKURL升级应用
+    * isSDCardAvailable 是否挂在SDCard
+    * getAppExternalPath 获取应用在SDCard上的工作路径
+    * getExtraPath 获取SDCard上目录的路径
 
 - ImageUtils.java 图片工具类
     * calculateInSampleSize 计算图片的压缩比率
