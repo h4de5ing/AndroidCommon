@@ -130,7 +130,7 @@ public class FileUtils {
 
     public static void copyFile(InputStream in, OutputStream out) {
         try {
-            byte[] b = new byte[2 * 1024];
+            byte[] b = new byte[2 * 1024 * 1024]; //2M memory
             int len = -1;
             while ((len = in.read(b)) > 0) {
                 out.write(b, 0, len);
@@ -141,7 +141,6 @@ public class FileUtils {
         } finally {
             closeIO(in, out);
         }
-
     }
 
     public static void copyFileFast(File in, File out) {

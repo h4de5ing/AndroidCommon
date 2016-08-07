@@ -59,6 +59,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * XorDecode 异或解密
     * desEncode Des加密
     * desDecode Des解密
+    * sha1 文件hash校验
 
 - CoordinateTransformUtil.java GPS坐标转换工具
     * 百度坐标（BD09）、国测局坐标（火星坐标，GCJ02）、和WGS84坐标系之间的转换的工具
