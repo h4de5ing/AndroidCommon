@@ -51,12 +51,14 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getCache 获取缓存
 
 - CipherUtils.java 密码工具类
-    * md5(String input) 获取字符串md5值
-    * md5(InputStream in) 获取输入流的md5值
+    * md5(String input) 字符串md5
+    * md5(InputStream in) 输入流md5
     * base64Encode Base64加密
     * base64Decode Base64解密
     * XorEncode 异或加密
     * XorDecode 异或解密
+    * desEncode Des加密
+    * desDecode Des解密
 
 - CoordinateTransformUtil.java GPS坐标转换工具
     * 百度坐标（BD09）、国测局坐标（火星坐标，GCJ02）、和WGS84坐标系之间的转换的工具

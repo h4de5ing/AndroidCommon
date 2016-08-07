@@ -18,15 +18,31 @@ package com.code19.library;
 
 import android.util.Base64;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.DigestInputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.IvParameterSpec;
 
 /**
  * Create by h4de5ing 2016/5/7 007
- * checked
  */
 public class CipherUtils {
 
@@ -132,8 +148,98 @@ public class CipherUtils {
         return result;
     }
 
-    //TODO 未完成sha1加密方法
-    public static String sha1(String decript) {
+    private static byte iv[] = {1, 2, 3, 4, 5, 6, 7, 8};
+
+    /**
+     * @param srcFile  source file
+     * @param destFile encode after file
+     * @param password password.length()==8*n
+     * @throws InvalidKeyException if password.length!=8*n
+     */
+    public static void desEncode(String srcFile, String destFile, String password) throws InvalidKeyException {
+        desCrypto(srcFile, destFile, password, true);
+    }
+
+    public static void desDecode(String srcFile, String destFile, String password) throws InvalidKeyException {
+        desCrypto(srcFile, destFile, password, false);
+    }
+
+    private static void desCrypto(String srcFile, String destFile, String password, boolean isEncode) throws InvalidKeyException {
+        InputStream is = null;
+        OutputStream out = null;
+        CipherInputStream cis = null;
+        int mode;
+        if (isEncode) {
+            mode = Cipher.ENCRYPT_MODE;
+        } else {
+            mode = Cipher.DECRYPT_MODE;
+        }
+        try {
+            SecureRandom secureRandom = new SecureRandom();
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey secretKey = keyFactory.generateSecret(new DESKeySpec(password.getBytes()));
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
+            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+            cipher.init(mode, secretKey, ivParameterSpec, secureRandom);
+            File file = new File(srcFile);
+            is = new FileInputStream(file);
+            out = new FileOutputStream(destFile);
+            cis = new CipherInputStream(is, cipher);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = cis.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } finally {
+            FileUtils.closeIO(is, out, cis);
+        }
+    }
+
+    public static String sha1(File file) {
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+            byte[] b = new byte[1024 * 1024 * 10];//10M memory
+            int len = 0;
+            while ((len = in.read(b)) > 0) {
+                messageDigest.update(b, 0, len);
+            }
+            return byte2Hex(messageDigest.digest());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            FileUtils.closeIO(in);
+        }
         return null;
+    }
+
+    private static String byte2Hex(byte[] b) {
+        StringBuilder sb = new StringBuilder();
+        for (byte aB : b) {
+            String s = Integer.toHexString(aB & 0xFF);
+            if (s.length() == 1) {
+                sb.append("0");
+            }
+            //sb.append(s.toUpperCase());
+            sb.append(s);
+        }
+        return sb.toString();
     }
 }
