@@ -104,8 +104,7 @@ public class FileUtils {
         return str;
     }
 
-    public static StringBuilder readFile(String filename, String charsetName) {
-        File file = new File(filename);
+    public static StringBuilder readFile(File file, String charsetName) {
         StringBuilder fileContent = new StringBuilder("");
         if (file == null || !file.isFile()) {
             return null;
@@ -129,6 +128,22 @@ public class FileUtils {
         }
     }
 
+    public static void copyFile(InputStream in, OutputStream out) {
+        try {
+            byte[] b = new byte[2 * 1024];
+            int len = -1;
+            while ((len = in.read(b)) > 0) {
+                out.write(b, 0, len);
+                out.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            closeIO(in, out);
+        }
+
+    }
+
     public static void copyFileFast(File in, File out) {
         FileChannel filein = null;
         FileChannel fileout = null;
@@ -141,8 +156,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeIO(filein);
-            closeIO(fileout);
+            closeIO(filein, fileout);
         }
     }
 
@@ -167,8 +181,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeIO(is);
-            closeIO(gzip);
+            closeIO(is, gzip);
         }
     }
 
@@ -184,8 +197,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeIO(gzip);
-            closeIO(os);
+            closeIO(gzip, os);
         }
     }
 
@@ -193,12 +205,12 @@ public class FileUtils {
         return Formatter.formatFileSize(context, size);
     }
 
-    public static void Stream2File(InputStream is, String fileName) {
+    public static void Stream2File(InputStream is, File file) {
         byte[] b = new byte[1024];
         int len;
         FileOutputStream os = null;
         try {
-            os = new FileOutputStream(new File(fileName));
+            os = new FileOutputStream(file);
             while ((len = is.read(b)) != -1) {
                 os.write(b, 0, len);
                 os.flush();
@@ -206,8 +218,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeIO(is);
-            closeIO(os);
+            closeIO(is, os);
         }
     }
 

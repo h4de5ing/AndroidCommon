@@ -147,6 +147,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * writeFile 将字符串写入到文件
     * readFile 从文件中读取字符串
     * readFile 从文件中读取字符串(可设置编码)
+    * copyFile 复制文件
     * copyFileFast 快速复制
     * shareFile 分享文件
     * zip zip压缩

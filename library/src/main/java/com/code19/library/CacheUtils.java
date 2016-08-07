@@ -29,7 +29,7 @@ public class CacheUtils {
     public static void setCache(Context context, String key, String strCache) {
         String encodeName = CipherUtils.md5(key);
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            FileUtils.writeFile(context.getExternalCacheDir() + "/" + encodeName, strCache);
+            FileUtils.writeFile(context.getExternalCacheDir() + "/" + encodeName, strCache, false);
         }
     }
 

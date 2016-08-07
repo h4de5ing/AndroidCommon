@@ -342,8 +342,7 @@ public class L {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            FileUtils.closeIO(writer);
-            FileUtils.closeIO(osw);
+            FileUtils.closeIO(writer,osw);
         }
     }
 }
