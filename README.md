@@ -89,9 +89,11 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 
 - DensityUtil.java 屏幕工具类
     * dip2px dp转像素
+    * dip2sp dip转sp
     * px2dip 像素转dp
     * px2sp 像素转sp 
     * sp2px sp转像素
+    * sp2dip sp转dip
     * getScreenW 获取屏幕宽度
     * getScreenH 获取屏幕高度
     * getScreenRealSize 获取屏幕的真实高度

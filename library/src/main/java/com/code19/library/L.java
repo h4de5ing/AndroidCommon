@@ -44,8 +44,8 @@ import javax.xml.transform.stream.StreamSource;
  * https://github.com/ZhaoKaiQiang/KLog
  */
 public class L {
-    public static String TAG = "ghost";
-    public static boolean LOG_DEBUG = true;
+    private static String TAG = "ghost";
+    private static boolean LOG_DEBUG = true;
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private static final int VERBOSE = 2;
     private static final int DEBUG = 3;
@@ -82,7 +82,8 @@ public class L {
     public static void i(Object... msg) {
         StringBuilder sb = new StringBuilder();
         for (Object obj : msg) {
-            sb.append(obj + ",");
+            sb.append(obj);
+            sb.append(",");
         }
         log(INFO, null, String.valueOf(sb));
     }
@@ -309,7 +310,7 @@ public class L {
         }
     }
 
-    public static void printLine(String tag, boolean isTop) {
+    private static void printLine(String tag, boolean isTop) {
         if (isTop) {
             Log.d(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════");
         } else {
@@ -332,6 +333,7 @@ public class L {
         File file = new File(context.getExternalCacheDir().getAbsolutePath() + "/log_" + System.currentTimeMillis() + ".log");
         StringWriter writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
+
         throwable.printStackTrace(printWriter);
         OutputStreamWriter osw = null;
         try {
@@ -342,7 +344,7 @@ public class L {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            FileUtils.closeIO(writer,osw);
+            FileUtils.closeIO(writer, osw);
         }
     }
 }

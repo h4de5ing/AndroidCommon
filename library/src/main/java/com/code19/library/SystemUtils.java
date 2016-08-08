@@ -110,7 +110,7 @@ public final class SystemUtils {
         context.startActivity(intent);
     }
 
-    static final String suSearchPaths[] = {"/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/"};
+    private static final String suSearchPaths[] = {"/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/"};
 
     public static boolean isRooted() {
         File file;
@@ -166,9 +166,10 @@ public final class SystemUtils {
     }
 
 
-    public static String getSign(Context context, String pkgName) {
+    public static String getSign(Context context) {
+        String pkgName = context.getPackageName();
         try {
-            PackageInfo pis = context.getPackageManager().getPackageInfo(pkgName, PackageManager.GET_SIGNATURES);
+            PackageInfo pis = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
             return hexdigest(pis.signatures[0].toByteArray());
         } catch (NameNotFoundException e) {
             throw new RuntimeException(SystemUtils.class.getName() + "the " + pkgName + "'s application not found");
@@ -220,7 +221,7 @@ public final class SystemUtils {
                     count++;
                 } catch (Exception e) {
                     e.getStackTrace();
-                    continue;
+                    //continue;
                 }
             }
 
@@ -235,7 +236,7 @@ public final class SystemUtils {
                             count++;
                         } catch (Exception e) {
                             e.getStackTrace();
-                            continue;
+                            //continue;
                         }
                     }
                 }

@@ -20,7 +20,6 @@ import android.util.Base64;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -190,11 +189,9 @@ public class CipherUtils {
             while ((len = cis.read(buffer)) > 0) {
                 out.write(buffer, 0, len);
             }
-        } catch (FileNotFoundException e) {
+        } catch (InvalidAlgorithmParameterException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
             e.printStackTrace();
@@ -218,8 +215,6 @@ public class CipherUtils {
                 messageDigest.update(b, 0, len);
             }
             return byte2Hex(messageDigest.digest());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (IOException e) {
