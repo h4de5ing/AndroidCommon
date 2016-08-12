@@ -22,6 +22,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:id="@+id/main"
     tools:context="com.code19.androidcommon.MainActivity">
 
 
@@ -105,5 +106,5 @@
     android:inputType="phone" 拨号键盘
     android:inputType="datetime" 时间日期
     android:inputType="date" 日期键盘
-android:inputType="time" 时间键盘-->
+    android:inputType="time" 时间键盘-->
 </LinearLayout>

@@ -18,35 +18,39 @@ package com.code19.androidcommon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.code19.androidcommon.ui.activity.AppManagerActivity;
 import com.code19.androidcommon.ui.activity.DeviceActivity;
 import com.code19.androidcommon.ui.activity.VerificationActivity;
 import com.code19.library.FileUtils;
+import com.code19.library.ImageUtils;
 import com.code19.library.L;
-
-import java.io.File;
+import com.code19.library.ViewUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context c = this;
+    private LinearLayout mMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mMain = (LinearLayout) findViewById(R.id.main);
         Button virification = (Button) findViewById(R.id.virification);
         Button deviceutils = (Button) findViewById(R.id.deviceutils);
         Button systemutils = (Button) findViewById(R.id.systemutils);
-        Button netutils = (Button) findViewById(R.id.testutils);
+        Button testutils = (Button) findViewById(R.id.testutils);
         Button fileutils = (Button) findViewById(R.id.fileutils);
         Button logutils = (Button) findViewById(R.id.logutils);
         Button apputils = (Button) findViewById(R.id.apputils);
         systemutils.setOnClickListener(this);
-        netutils.setOnClickListener(this);
+        testutils.setOnClickListener(this);
         fileutils.setOnClickListener(this);
         logutils.setOnClickListener(this);
         apputils.setOnClickListener(this);
@@ -71,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FileUtils.upgradeApp(MainActivity.this, url);
                 break;
             case R.id.testutils:
-                L.i(String.format(getFilesDir().getParent() + File.separator + "%s", "databases"));
-                L.i(String.format(String.format(getFilesDir().getParent() + File.separator + "%s", "shared_prefs")));
+                Bitmap bitmap = ViewUtils.createViewBitmap(mMain);
+                ImageUtils.bitmap2gallery(this, bitmap, "main.png");
                 break;
             case R.id.systemutils:
                 break;

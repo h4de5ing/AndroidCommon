@@ -48,8 +48,7 @@ public class CipherUtils {
     public static String md5(String input) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            byte[] inputByteArray = input.getBytes();
-            messageDigest.update(inputByteArray);
+            messageDigest.update(input.getBytes());
             byte[] resultByteArray = messageDigest.digest();
             char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
             char[] resultCharArray = new char[resultByteArray.length * 2];
@@ -64,6 +63,25 @@ public class CipherUtils {
         }
     }
 
+    public static String md5L(String input) {
+        try {
+            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            mdInst.update(input.getBytes());
+            byte[] md = mdInst.digest();
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMd : md) {
+                String shaHex = Integer.toHexString(aMd & 0xFF);
+                if (shaHex.length() < 2) {
+                    hexString.append(0);
+                }
+                hexString.append(shaHex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     public static String md5(InputStream in) {
         int bufferSize = 256 * 1024;
@@ -155,11 +173,11 @@ public class CipherUtils {
      * @param password password.length()==8*n
      * @throws InvalidKeyException if password.length!=8*n
      */
-    public static void desEncode(String srcFile, String destFile, String password) throws InvalidKeyException {
+    public static void DESEncode(String srcFile, String destFile, String password) throws InvalidKeyException {
         desCrypto(srcFile, destFile, password, true);
     }
 
-    public static void desDecode(String srcFile, String destFile, String password) throws InvalidKeyException {
+    public static void DESDecode(String srcFile, String destFile, String password) throws InvalidKeyException {
         desCrypto(srcFile, destFile, password, false);
     }
 
@@ -204,13 +222,34 @@ public class CipherUtils {
         }
     }
 
+    public static String sha1(String str) {
+        try {
+            MessageDigest digest = java.security.MessageDigest.getInstance("SHA-1");
+            digest.update(str.getBytes());
+            byte messageDigest[] = digest.digest();
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String shaHex = Integer.toHexString(aMessageDigest & 0xFF);
+                if (shaHex.length() < 2) {
+                    hexString.append(0);
+                }
+                hexString.append(shaHex);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public static String sha1(File file) {
         FileInputStream in = null;
         try {
             in = new FileInputStream(file);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
             byte[] b = new byte[1024 * 1024 * 10];//10M memory
-            int len = 0;
+            int len;
             while ((len = in.read(b)) > 0) {
                 messageDigest.update(b, 0, len);
             }

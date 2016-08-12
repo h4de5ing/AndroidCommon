@@ -358,7 +358,7 @@ public class FileUtils {
     }
 
     public static String getExtraPath(String folder) {
-        String storagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.pathSeparator + folder;
+        String storagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + folder;
         File file = new File(storagePath);
         if (!file.exists()) {
             file.mkdir();

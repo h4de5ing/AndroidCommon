@@ -55,13 +55,15 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 
 - CipherUtils.java 密码工具类
     * md5(String input) 字符串md5
+    * md5L(String input) 字符串md5,返回小写密文
     * md5(InputStream in) 输入流md5
     * base64Encode Base64加密
     * base64Decode Base64解密
     * XorEncode 异或加密
     * XorDecode 异或解密
-    * desEncode Des加密
-    * desDecode Des解密
+    * DESEncode 文件Des加密
+    * DESDecode 文件Des解密
+    * sha1 字符串sha1值
     * sha1 文件hash校验
 
 - CoordinateTransformUtil.java GPS坐标转换工具

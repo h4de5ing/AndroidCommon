@@ -16,6 +16,8 @@
 
 package com.code19.library;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -26,10 +28,13 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.ExifInterface;
+import android.net.Uri;
+import android.provider.MediaStore;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -137,6 +142,28 @@ public class ImageUtils {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static boolean bitmap2gallery(Context context, Bitmap bitmap, String filename) {
+        boolean saveSuccess;
+        String extraPath = FileUtils.getExtraPath("19code");
+        File file = new File(extraPath, filename);
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            boolean compress = bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getPath(), filename, null);
+            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file)));
+            saveSuccess = compress;
+        } catch (FileNotFoundException e) {
+            saveSuccess = false;
+            e.printStackTrace();
+        } catch (IOException e) {
+            saveSuccess = false;
+            e.printStackTrace();
+        }
+        return saveSuccess;
     }
 
     public static Bitmap compressImage(Bitmap image) {

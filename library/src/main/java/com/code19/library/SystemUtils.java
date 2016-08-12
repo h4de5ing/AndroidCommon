@@ -157,7 +157,6 @@ public final class SystemUtils {
         return version;
     }
 
-
     public static void goHome(Context context) {
         Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
         mHomeIntent.addCategory(Intent.CATEGORY_HOME);
