@@ -68,6 +68,14 @@ public class FileUtils {
         return new File(filename).delete();
     }
 
+    public static void deleteFileByDirectory(File directory) {
+        if (directory.exists() && directory.isDirectory()) {
+            for (File file : directory.listFiles()) {
+                file.delete();
+            }
+        }
+    }
+
     public static boolean isFileExist(String filePath) {
         return new File(filePath).exists();
     }
@@ -339,13 +347,14 @@ public class FileUtils {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
-    public static String getAppExternalPath(String packageName) {
-        StringBuilder sb = new StringBuilder();
+    public static String getAppExternalPath(Context context) {
+/*        StringBuilder sb = new StringBuilder();
         sb.append(Environment.getExternalStorageDirectory().getAbsolutePath());
         sb.append(File.separator);
         sb.append("Android/data/");
         sb.append(packageName);
-        return sb.toString();
+        return sb.toString();*/
+        return context.getObbDir().getAbsolutePath();
     }
 
     public static String getExtraPath(String folder) {

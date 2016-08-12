@@ -55,11 +55,11 @@
 
 
     <Button
-        android:id="@+id/netutils"
+        android:id="@+id/testutils"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:text="@string/netutils"/>
+        android:text="@string/testutils"/>
 
     <Button
         android:id="@+id/systemutils"

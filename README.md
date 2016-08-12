@@ -33,6 +33,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppVersionName 获取应用版本名称
     * getAppVersionCode 获取应用版本号
     * getAppInstaller 获取应用的安装市场
+    * getNumCores 获取Cpu内核数
+    * getRootPermission 获得root权限
     * hasPermission 是否有权限
     * isInstalled 应用是否安装
     * installApk 安装应用
@@ -40,11 +42,12 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * isSystemApp 是否是系统应用
     * isServiceRunning 服务是否在运行
     * stopRunningService 停止服务
-    * getNumCores 获取Cpu内核数
     * killProcesses 结束进程
     * runScript 运行脚本
-    * getRootPermission 获得root权限
     * runApp 启动应用
+    * cleanCache 清除应用内部缓存
+    * cleanDatabases 清除应用内部数据库
+    * cleanSharedPreference 清除应用内部SP
         
 - CacheUtils.java 缓存工具类
     * setCache 设置缓存
@@ -165,7 +168,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getFileSize 获取文件大小
     * rename 重名名文件\文件夹
     * getFolderName 获取文件夹名称
-    * deleteFile 删除目录下的文件
+    * deleteFile 删除文件
+    * deleteFileByDirectory 删除目录下的所有文件
     * openImage 打开图片
     * openVideo 打开视频
     * openURL 打开URL

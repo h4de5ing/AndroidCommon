@@ -29,6 +29,8 @@ import com.code19.androidcommon.ui.activity.VerificationActivity;
 import com.code19.library.FileUtils;
 import com.code19.library.L;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context c = this;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button virification = (Button) findViewById(R.id.virification);
         Button deviceutils = (Button) findViewById(R.id.deviceutils);
         Button systemutils = (Button) findViewById(R.id.systemutils);
-        Button netutils = (Button) findViewById(R.id.netutils);
+        Button netutils = (Button) findViewById(R.id.testutils);
         Button fileutils = (Button) findViewById(R.id.fileutils);
         Button logutils = (Button) findViewById(R.id.logutils);
         Button apputils = (Button) findViewById(R.id.apputils);
@@ -68,7 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String url = "http://3lin9.19code.com/app.apk";
                 FileUtils.upgradeApp(MainActivity.this, url);
                 break;
-            case R.id.netutils:
+            case R.id.testutils:
+                L.i(String.format(getFilesDir().getParent() + File.separator + "%s", "databases"));
+                L.i(String.format(String.format(getFilesDir().getParent() + File.separator + "%s", "shared_prefs")));
                 break;
             case R.id.systemutils:
                 break;

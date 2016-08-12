@@ -94,14 +94,16 @@ public class AppUtils {
     }
 
     public static String getAppApk(Context context, String packageName) {
-        String sourceDir = null;
+/*        String sourceDir = null;
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
             sourceDir = applicationInfo.sourceDir;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        return sourceDir;
+        return sourceDir;*/
+        //return context.getPackageResourcePath();
+        return context.getPackageCodePath();
     }
 
     public static String getAppVersionName(Context context, String packageName) {
@@ -128,6 +130,51 @@ public class AppUtils {
 
     public static String getAppInstaller(Context context, String packageName) {
         return context.getPackageManager().getInstallerPackageName(packageName);
+    }
+
+    public static int getNumCores() {
+        try {
+            File dir = new File("/sys/devices/system/cpu/");
+            File[] files = dir.listFiles(new FileFilter() {
+
+                @Override
+                public boolean accept(File pathname) {
+                    return Pattern.matches("cpu[0-9]", pathname.getName());
+                }
+
+            });
+            return files.length;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    public static boolean getRootPermission(Context context) {
+        String packageCodePath = context.getPackageCodePath();
+        Process process = null;
+        DataOutputStream os = null;
+        try {
+            String cmd = "chmod 777 " + packageCodePath;
+            process = Runtime.getRuntime().exec("su");
+            os = new DataOutputStream(process.getOutputStream());
+            os.writeBytes(cmd + "\n");
+            os.writeBytes("exit\n");
+            os.flush();
+            process.waitFor();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+                process.destroy();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 
     public static boolean hasPermission(Context context, String permission) {
@@ -233,23 +280,6 @@ public class AppUtils {
         return ret;
     }
 
-    public static int getNumCores() {
-        try {
-            File dir = new File("/sys/devices/system/cpu/");
-            File[] files = dir.listFiles(new FileFilter() {
-
-                @Override
-                public boolean accept(File pathname) {
-                    return Pattern.matches("cpu[0-9]", pathname.getName());
-                }
-
-            });
-            return files.length;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 1;
-        }
-    }
 
     public static void killProcesses(Context context, int pid, String processName) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -337,34 +367,21 @@ public class AppUtils {
         return sRet;
     }
 
-    public static boolean getRootPermission(Context context) {
-        String packageCodePath = context.getPackageCodePath();
-        Process process = null;
-        DataOutputStream os = null;
-        try {
-            String cmd = "chmod 777 " + packageCodePath;
-            process = Runtime.getRuntime().exec("su");
-            os = new DataOutputStream(process.getOutputStream());
-            os.writeBytes(cmd + "\n");
-            os.writeBytes("exit\n");
-            os.flush();
-            process.waitFor();
-        } catch (Exception e) {
-            return false;
-        } finally {
-            try {
-                if (os != null) {
-                    os.close();
-                }
-                process.destroy();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return true;
-    }
-
     public static void runApp(Context context, String packagename) {
         context.startActivity(new Intent(context.getPackageManager().getLaunchIntentForPackage(packagename)));
+    }
+
+    public static void cleanCache(Context context) {
+        FileUtils.deleteFileByDirectory(context.getCacheDir());
+    }
+
+    public static void cleanDatabases(Context context) {
+        String filepath = String.format(String.format(context.getFilesDir().getParent() + File.separator + "%s", "databases"));
+        FileUtils.deleteFileByDirectory(new File(filepath));
+    }
+
+    public static void cleanSharedPreference(Context context){
+        String filepath = String.format(String.format(context.getFilesDir().getParent() + File.separator + "%s", "shared_prefs"));
+        FileUtils.deleteFileByDirectory(new File(filepath));
     }
 }
