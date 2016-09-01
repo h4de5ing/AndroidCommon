@@ -33,7 +33,7 @@ public class HandlerActivity extends AppCompatActivity {
         private final WeakReference<HandlerActivity> mMainActivityWeakReference;
 
         public MyHandler(HandlerActivity activity) {
-            mMainActivityWeakReference = new WeakReference<HandlerActivity>(activity);
+            mMainActivityWeakReference = new WeakReference<>(activity);
         }
 
         @Override

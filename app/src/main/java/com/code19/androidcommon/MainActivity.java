@@ -16,7 +16,6 @@
 
 package com.code19.androidcommon;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -30,11 +29,9 @@ import com.code19.androidcommon.ui.activity.DeviceActivity;
 import com.code19.androidcommon.ui.activity.VerificationActivity;
 import com.code19.library.FileUtils;
 import com.code19.library.ImageUtils;
-import com.code19.library.L;
 import com.code19.library.ViewUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Context c = this;
     private LinearLayout mMain;
 
     @Override
@@ -44,15 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMain = (LinearLayout) findViewById(R.id.main);
         Button virification = (Button) findViewById(R.id.virification);
         Button deviceutils = (Button) findViewById(R.id.deviceutils);
-        Button systemutils = (Button) findViewById(R.id.systemutils);
         Button testutils = (Button) findViewById(R.id.testutils);
         Button fileutils = (Button) findViewById(R.id.fileutils);
-        Button logutils = (Button) findViewById(R.id.logutils);
         Button apputils = (Button) findViewById(R.id.apputils);
-        systemutils.setOnClickListener(this);
         testutils.setOnClickListener(this);
         fileutils.setOnClickListener(this);
-        logutils.setOnClickListener(this);
         apputils.setOnClickListener(this);
         deviceutils.setOnClickListener(this);
         virification.setOnClickListener(this);
@@ -67,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.deviceutils:
                 startActivity(new Intent(MainActivity.this, DeviceActivity.class));
                 break;
-            case R.id.logutils:
-                testLog();
-                break;
             case R.id.fileutils:
                 String url = "http://3lin9.19code.com/app.apk";
                 FileUtils.upgradeApp(MainActivity.this, url);
@@ -78,26 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bitmap bitmap = ViewUtils.createViewBitmap(mMain);
                 ImageUtils.bitmap2gallery(this, bitmap, "main.png");
                 break;
-            case R.id.systemutils:
-                break;
             case R.id.virification:
                 startActivity(new Intent(MainActivity.this, VerificationActivity.class));
                 break;
         }
-    }
-
-    private String xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!--  Copyright w3school.com.cn --><note><to>George</to><from>John</from><heading>Reminder</heading><body>Don't forget the meeting!</body></note>";
-    private String json = "{'type1': {'0': {'age': 12,'name': 'zhangsdan'},'1': {'age': 13,'name': 'lisi'},'num': '123'},'type3': {'0': {'age': 14,'name': 'wangwu'},'1': {'age': 15,'name': 'maliu'},'num': '456',}}";
-
-    private void testLog() {
-        L.init(true, "admin");
-        L.v("Verbose...");
-        L.d("Debug...");
-        L.i("info...");
-        L.w("Warn...");
-        L.e("Error...");
-        L.a("ASSERT...");
-        L.json(json);
-        L.xml(xml);
     }
 }
