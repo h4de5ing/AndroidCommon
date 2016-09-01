@@ -61,8 +61,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * base64Decode Base64解密
     * XorEncode 异或加密
     * XorDecode 异或解密
-    * DESEncode 文件Des加密
-    * DESDecode 文件Des解密
     * sha1 字符串sha1值
     * sha1 文件hash校验
 

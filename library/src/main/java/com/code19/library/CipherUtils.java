@@ -165,63 +165,6 @@ public class CipherUtils {
         return result;
     }
 
-    private static byte iv[] = {1, 2, 3, 4, 5, 6, 7, 8};
-
-    /**
-     * @param srcFile  source file
-     * @param destFile encode after file
-     * @param password password.length()==8*n
-     * @throws InvalidKeyException if password.length!=8*n
-     */
-    public static void DESEncode(String srcFile, String destFile, String password) throws InvalidKeyException {
-        desCrypto(srcFile, destFile, password, true);
-    }
-
-    public static void DESDecode(String srcFile, String destFile, String password) throws InvalidKeyException {
-        desCrypto(srcFile, destFile, password, false);
-    }
-
-    private static void desCrypto(String srcFile, String destFile, String password, boolean isEncode) throws InvalidKeyException {
-        InputStream is = null;
-        OutputStream out = null;
-        CipherInputStream cis = null;
-        int mode;
-        if (isEncode) {
-            mode = Cipher.ENCRYPT_MODE;
-        } else {
-            mode = Cipher.DECRYPT_MODE;
-        }
-        try {
-            SecureRandom secureRandom = new SecureRandom();
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            SecretKey secretKey = keyFactory.generateSecret(new DESKeySpec(password.getBytes()));
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
-            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-            cipher.init(mode, secretKey, ivParameterSpec, secureRandom);
-            File file = new File(srcFile);
-            is = new FileInputStream(file);
-            out = new FileOutputStream(destFile);
-            cis = new CipherInputStream(is, cipher);
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = cis.read(buffer)) > 0) {
-                out.write(buffer, 0, len);
-            }
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } finally {
-            FileUtils.closeIO(is, out, cis);
-        }
-    }
-
     public static String sha1(String str) {
         try {
             MessageDigest digest = java.security.MessageDigest.getInstance("SHA-1");
