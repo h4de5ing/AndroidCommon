@@ -40,6 +40,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -279,6 +280,23 @@ public class FileUtils {
         }
         int filePos = filePath.lastIndexOf(File.separator);
         return (filePos == -1) ? "" : filePath.substring(0, filePos);
+    }
+
+    public static ArrayList<File> getFilesArray(String path) {
+        File file = new File(path);
+        File files[] = file.listFiles();
+        ArrayList<File> listFile = new ArrayList<File>();
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isFile()) {
+                    listFile.add(files[i]);
+                }
+                if (files[i].isDirectory()) {
+                    listFile.addAll(getFilesArray(files[i].toString()));
+                }
+            }
+        }
+        return listFile;
     }
 
     public static boolean deleteFiles(String folder) {

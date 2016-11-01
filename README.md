@@ -144,6 +144,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getFileSize
     * rename
     * getFolderName
+    * getFilesArray
     * deleteFile
     * deleteFileByDirectory
     * openImage
@@ -192,6 +193,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * isWiFi
     * openNetSetting
     * setWifiEnabled
+    * setDataEnabled
     * getWifiScanResults
     * getScanResultsByBSSID
     * getWifiConnectionInfo
@@ -253,6 +255,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * toWeChatScan
     * toAliPayScan
     * toAliPayPayCode
+    * getRandomNumber
 
 - VerificationUtils.java
     * matcherRealName
@@ -284,7 +287,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * measureView
     * getViewWidth
     * getViewHeight
-
+    * getActivity
 
 # Thanks to all the open source programmers
 License

@@ -156,6 +156,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getFileSize 获取文件大小
     * rename 重名名文件\文件夹
     * getFolderName 获取文件夹名称
+    * getFilesArray 获取文件夹下所有文件
     * deleteFile 删除文件
     * deleteFileByDirectory 删除目录下的所有文件
     * openImage 打开图片
@@ -204,6 +205,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * isWiFi 是否wifi
     * openNetSetting 打开网络设置界面
     * setWifiEnabled 设置wifi状态
+    * setDataEnabled 设置数据流量状态
     * getWifiScanResults 获取wifi列表
     * getScanResultsByBSSID 过滤扫描结果
     * getWifiConnectionInfo 获取wifi连接信息
@@ -308,6 +310,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * toWeChatScan 打开微信扫描
     * toAliPayScan 打开支付宝扫描
     * toAliPayPayCode 打开支付宝支付码
+    * getRandomNumber 获取随机数
 
 - VerificationUtils.java 验证工具类
     * matcherRealName 判断姓名格式  
@@ -348,7 +351,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * measureView 测量view
     * getViewWidth 获取view的宽度
     * getViewHeight 获取view的高度
-
+    * getActivity 获取view的上下文
     
     
 ```shell 

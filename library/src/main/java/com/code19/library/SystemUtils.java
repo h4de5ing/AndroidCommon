@@ -44,6 +44,7 @@ import java.io.File;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 @SuppressLint("SimpleDateFormat")
 public final class SystemUtils {
@@ -96,7 +97,16 @@ public final class SystemUtils {
     public static void hideKeyBoard(Activity aty) {
         ((InputMethodManager) aty.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(aty.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
+/*    public static void openInputKeyBoard(Context mContext, EditText mEditText){
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
 
+    public static void closeInputKeyBoard(Context mContext, EditText mEditText){
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEditText.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }*/
 
     public static boolean isBackground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -396,5 +406,9 @@ public final class SystemUtils {
         } catch (Exception e) {
             Toast.makeText(context, R.string.alipayerr, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static int getRandomNumber(int min, int max) {
+        return new Random().nextInt(max) % (max - min + 1) + min;
     }
 }

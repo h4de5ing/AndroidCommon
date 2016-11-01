@@ -18,6 +18,7 @@ package com.code19.library;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -33,6 +34,8 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.support.design.widget.Snackbar;
 
 
 /**
@@ -213,5 +216,32 @@ public class ViewUtils {
     public static int getViewHeight(View view) {
         measureView(view);
         return view.getMeasuredHeight();
+    }
+
+    public static Activity getActivity(View view) {
+        Context context = view.getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity) context;
+            }
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        throw new IllegalStateException("View " + view + " is not attached to an Activity");
+    }
+
+    public static void showToast(Context context, String content) {
+        Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToast(Context context, int res) {
+        Toast.makeText(context, res, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showSnackbar(View view, String msg) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public static void showSnackbar(View view, int res) {
+        Snackbar.make(view, res, Snackbar.LENGTH_SHORT).show();
     }
 }

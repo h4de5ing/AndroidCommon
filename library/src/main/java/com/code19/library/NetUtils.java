@@ -28,6 +28,9 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -166,6 +169,27 @@ public class NetUtils {
     public static void setWifiEnabled(Context context, boolean enabled) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(enabled);
+    }
+
+    public static void setDataEnabled(Context context, boolean enabled) {
+        ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Class<?> conMgrClass = null;
+        Field iConMgrField = null;
+        Object iConMgr = null;
+        Class<?> iConMgrClass = null;
+        Method setMobileDataEnabledMethod = null;
+        try {
+            conMgrClass = Class.forName(conMgr.getClass().getName());
+            iConMgrField = conMgrClass.getDeclaredField("mService");
+            iConMgrField.setAccessible(true);
+            iConMgr = iConMgrField.get(conMgr);
+            iConMgrClass = Class.forName(iConMgr.getClass().getName());
+            setMobileDataEnabledMethod = iConMgrClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+            setMobileDataEnabledMethod.setAccessible(true);
+            setMobileDataEnabledMethod.invoke(iConMgr, enabled);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static List<ScanResult> getWifiScanResults(Context context) {
