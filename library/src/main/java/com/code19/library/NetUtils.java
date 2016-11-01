@@ -32,7 +32,6 @@ import java.util.List;
 
 /**
  * Blog : http://blog.csdn.net/u011240877
- * checked
  */
 public class NetUtils {
 

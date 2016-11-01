@@ -42,7 +42,6 @@ import java.util.UUID;
 
 /**
  * https://github.com/nisrulz/easydeviceinfo
- * unchecked
  */
 public class DeviceUtils {
 
@@ -116,11 +115,6 @@ public class DeviceUtils {
     public static String getSIMSerial(Context ctx) {
         TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
         return tm.getSimSerialNumber();
-    }
-
-    public static String getPhoneNumber(Context ctx) {
-        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getLine1Number();
     }
 
     public static String getMNC(Context ctx) {
@@ -228,9 +222,7 @@ public class DeviceUtils {
         return Build.VERSION.RELEASE;
     }
 
-    /**
-     * <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-     */
+    //<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
     public static String getGSFID(Context context) {
         String result;
         final Uri URI = Uri.parse("content://com.google.android.gsf.gservices");
@@ -246,9 +238,7 @@ public class DeviceUtils {
         return result;
     }
 
-    /**
-     * <uses-permission android:name="android.permission.BLUETOOTH"/>
-     */
+    //<uses-permission android:name="android.permission.BLUETOOTH"/>
     @SuppressWarnings("MissingPermission")
     public static String getBluetoothMAC(Context context) {
         String result = null;
@@ -347,9 +337,7 @@ public class DeviceUtils {
         return densityStr;
     }
 
-    /**
-     * <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-     */
+    //<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     @SuppressWarnings("MissingPermission")
     public static String[] getGoogleAccounts(Context ctx) {
         if (ctx.checkCallingOrSelfPermission(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {

@@ -30,7 +30,6 @@ import java.lang.reflect.Method;
 
 /**
  * Create by h4de5ing 2016/5/7 007
- * checked
  */
 public class DensityUtil {
 
