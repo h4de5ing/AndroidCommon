@@ -247,6 +247,9 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * forwardToDial 跳转到拨号
     * callPhone 直接呼叫号码
     * sendMail 发邮件
+    * openWeb 打开浏览器
+    * openContacts 打开联系人
+    * openSettings 打开系统设置
     * hideKeyBoard 隐藏系统键盘
     * isBackground 判断当前应用程序是否后台运行
     * isSleeping 判断手机是否处理睡眠
