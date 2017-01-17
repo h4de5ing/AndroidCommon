@@ -25,7 +25,7 @@ import android.content.SharedPreferences.Editor;
  */
 public class SPUtils {
 
-    public static void setSP(Context context, String filename, String key, Object object) {
+    public static void setSP(Context context, String key, Object object) {
         String type = object.getClass().getSimpleName();
         String packageName = context.getPackageName();
         SharedPreferences sp = context.getSharedPreferences(packageName, Context.MODE_PRIVATE);
