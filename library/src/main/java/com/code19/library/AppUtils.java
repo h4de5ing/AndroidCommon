@@ -93,16 +93,14 @@ public class AppUtils {
     }
 
     public static String getAppApk(Context context, String packageName) {
-/*        String sourceDir = null;
+        String sourceDir = null;
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
             sourceDir = applicationInfo.sourceDir;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        return sourceDir;*/
-        //return context.getPackageResourcePath();
-        return context.getPackageCodePath();
+        return sourceDir;
     }
 
     public static String getAppVersionName(Context context, String packageName) {
