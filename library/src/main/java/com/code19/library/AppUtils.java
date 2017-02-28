@@ -129,6 +129,15 @@ public class AppUtils {
         return context.getPackageManager().getInstallerPackageName(packageName);
     }
 
+    public static String getAppSign(Context context,Sting packageName) {
+        try {
+            PackageInfo pis = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+            return hexdigest(pis.signatures[0].toByteArray());
+        } catch (NameNotFoundException e) {
+            throw new RuntimeException(AppUtils.class.getName() + "the " + pkgName + "'s application not found");
+        }
+    }
+
     public static int getNumCores() {
         try {
             File dir = new File("/sys/devices/system/cpu/");

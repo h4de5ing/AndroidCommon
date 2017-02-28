@@ -191,16 +191,6 @@ public final class SystemUtils {
     }
 
 
-    public static String getSign(Context context) {
-        String pkgName = context.getPackageName();
-        try {
-            PackageInfo pis = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
-            return hexdigest(pis.signatures[0].toByteArray());
-        } catch (NameNotFoundException e) {
-            throw new RuntimeException(SystemUtils.class.getName() + "the " + pkgName + "'s application not found");
-        }
-    }
-
 
     public static String hexdigest(byte[] paramArrayOfByte) {
         final char[] hexDigits = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102};

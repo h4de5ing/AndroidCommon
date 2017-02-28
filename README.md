@@ -5,7 +5,7 @@ compile 'com.code19.library:library:0.1.1'
 # Common Utils
 - Collection Chop <a href="https://github.com/h4de5ing/AndroidCommon/issues">Issues</a>
 - Show Me The Best Code <a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
- 
+
 ```
 Demo:
 AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
@@ -22,6 +22,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppVersionName
     * getAppVersionCode
     * getAppInstaller
+    * getAppSign
     * getNumCores
     * getRootPermission
     * hasPermission
@@ -197,7 +198,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getWifiScanResults
     * getScanResultsByBSSID
     * getWifiConnectionInfo
-    
+
 - SPUtils.java
     * setSP
     * getSp
@@ -235,7 +236,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppVersionName
     * getAppVersionCode
     * goHome
-    * getSign
     * hexdigest
     * getDeviceUsableMemory
     * gc

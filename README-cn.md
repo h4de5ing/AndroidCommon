@@ -22,6 +22,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppVersionName 获取应用版本名称
     * getAppVersionCode 获取应用版本号
     * getAppInstaller 获取应用的安装市场
+    * getAppSign 获取应用签名
     * getNumCores 获取Cpu内核数
     * getRootPermission 获得root权限
     * hasPermission 是否有权限
@@ -290,7 +291,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppVersionName 获取当前应用程序的版本名称
     * getAppVersionCode 获取当前应用程序的版本号
     * goHome 返回Home
-    * getSign 获取应用签名
     * hexdigest 32位签名
     * getDeviceUsableMemory 获取设备可用空间
     * gc 清理后台进程和服务
