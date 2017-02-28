@@ -288,8 +288,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * installApk 安装apk
     * isRooted 是否root
     * isRunningOnEmulator 当前设备是否是模拟器
-    * getAppVersionName 获取当前应用程序的版本名称
-    * getAppVersionCode 获取当前应用程序的版本号
     * goHome 返回Home
     * hexdigest 32位签名
     * getDeviceUsableMemory 获取设备可用空间

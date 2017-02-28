@@ -233,8 +233,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * installApk
     * isRooted
     * isRunningOnEmulator
-    * getAppVersionName
-    * getAppVersionCode
     * goHome
     * hexdigest
     * getDeviceUsableMemory

@@ -26,7 +26,6 @@ import android.app.KeyguardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -162,26 +161,6 @@ public final class SystemUtils {
                 || Build.HARDWARE.contains("vbox86");
     }
 
-    public static String getAppVersionName(Context context) {
-        String version = "0";
-        try {
-            version = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return version;
-    }
-
-
-    public static int getAppVersionCode(Context context) {
-        int version = 0;
-        try {
-            version = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return version;
-    }
 
     public static void goHome(Context context) {
         Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
@@ -189,7 +168,6 @@ public final class SystemUtils {
         mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         context.startActivity(mHomeIntent);
     }
-
 
 
     public static String hexdigest(byte[] paramArrayOfByte) {
