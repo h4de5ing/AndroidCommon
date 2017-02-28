@@ -16,7 +16,6 @@
 
 package com.code19.library;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -24,11 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -318,33 +312,4 @@ public class L {
         }
     }
 
-/*    public static void crash2File(Context context, Throwable throwable) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("-------------");
-        builder.append("\nandroidid:" + DeviceUtils.getAndroidID(context));
-        builder.append("\nlanguage:" + DeviceUtils.getLanguage());
-        builder.append("\ncountry:" + DeviceUtils.getCountry(context));
-        builder.append("\nappVersionName:" + SystemUtils.getAppVersionName(context));
-        builder.append("\nappVersionCode:" + SystemUtils.getAppVersionCode(context));
-        builder.append("\nmodel:" + DeviceUtils.getModel());
-        builder.append("\nbuildVersionRelease:" + DeviceUtils.getBuildVersionRelease());
-        builder.append("\nbuildVersionSDK:" + DeviceUtils.getBuildVersionSDK());
-        builder.append("\ncurrentTime:" + DateUtils.getDateTime());
-        File file = new File(context.getExternalCacheDir().getAbsolutePath() + "/log_" + System.currentTimeMillis() + ".log");
-        StringWriter writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-
-        throwable.printStackTrace(printWriter);
-        OutputStreamWriter osw = null;
-        try {
-            osw = new OutputStreamWriter(new FileOutputStream(file, true), "utf-8");
-            osw.write(builder.toString() + "\n" + writer.toString());
-            writer.flush();
-            osw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            FileUtils.closeIO(writer, osw);
-        }
-    }*/
 }

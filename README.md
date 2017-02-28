@@ -157,16 +157,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppExternalPath
     * getExtraPath
 
-- ImageUtils.java
-    * calculateInSampleSize
-    * getPictureDegree
-    * rotaingImageView
-    * decodeScaleImage
-    * getRoundedCornerBitmap
-    * bitmap2File
-    * compressImage
-    * compressFixBitmap
-    
 - JsonUtils.java
     * toJson
     * fromJson

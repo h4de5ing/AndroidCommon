@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 version = "0.1.1"  //版本号,更新代码后修改这个值
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         minSdkVersion 15
@@ -23,10 +23,10 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
+    //compile fileTree(include: ['*.jar'], dir: 'libs')
+    //testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2+'
-    compile 'com.android.support:design:24.2.1'
+    //compile 'com.android.support:design:24.2.1'
 }
 def siteUrl = 'https://github.com/h4de5ing/AndroidCommon'
 def gitUrl = 'https://github.com/h4de5ing/AndroidCommon.git'

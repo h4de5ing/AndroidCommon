@@ -35,7 +35,6 @@ import android.view.ViewParent;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.design.widget.Snackbar;
 
 
 /**
@@ -235,13 +234,5 @@ public class ViewUtils {
 
     public static void showToast(Context context, int res) {
         Toast.makeText(context, res, Toast.LENGTH_SHORT).show();
-    }
-
-    public static void showSnackbar(View view, String msg) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
-    }
-
-    public static void showSnackbar(View view, int res) {
-        Snackbar.make(view, res, Snackbar.LENGTH_SHORT).show();
     }
 }

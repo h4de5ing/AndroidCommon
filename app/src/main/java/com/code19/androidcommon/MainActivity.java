@@ -17,7 +17,6 @@
 package com.code19.androidcommon;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,8 +27,6 @@ import com.code19.androidcommon.ui.activity.AppManagerActivity;
 import com.code19.androidcommon.ui.activity.DeviceActivity;
 import com.code19.androidcommon.ui.activity.VerificationActivity;
 import com.code19.library.FileUtils;
-import com.code19.library.ImageUtils;
-import com.code19.library.ViewUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout mMain;
@@ -65,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FileUtils.upgradeApp(MainActivity.this, url);
                 break;
             case R.id.testutils:
-                Bitmap bitmap = ViewUtils.createViewBitmap(mMain);
-                ImageUtils.bitmap2gallery(this, bitmap, "main.png");
+                //Bitmap bitmap = ViewUtils.createViewBitmap(mMain);
+                //ImageUtils.bitmap2gallery(this, bitmap, "main.png");
                 break;
             case R.id.virification:
                 startActivity(new Intent(MainActivity.this, VerificationActivity.class));

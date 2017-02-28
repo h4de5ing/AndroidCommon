@@ -169,16 +169,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppExternalPath 获取应用在SDCard上的工作路径
     * getExtraPath 获取SDCard上目录的路径
 
-- ImageUtils.java 图片工具类
-    * calculateInSampleSize 计算图片的压缩比率
-    * getPictureDegree 获取图片的角度
-    * rotaingImageView 旋转图片
-    * decodeScaleImage 加载图片并压缩
-    * getRoundedCornerBitmap 获取圆角图片
-    * bitmap2File 将bitmap保存为文件
-    * compressImage 质量压缩
-    * compressFixBitmap 固定大小压缩
-    
 - JsonUtils.java Json工具类(需要依赖Gson 2.0以上)
     * toJson 对象转json
     * fromJson json转对象
