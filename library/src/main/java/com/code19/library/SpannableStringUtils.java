@@ -39,11 +39,10 @@ import static android.graphics.BlurMaskFilter.Blur;
  *     author: Blankj
  *     blog  : http://blankj.com
  *     time  : 16/12/13
- *     desc  : SpannableString相关工具类
+ *     https://github.com/smuyyh/CommonLibary
  *     https://github.com/Blankj/AndroidUtilCode
- *     https://github.com/smuyyh/CommonLibary/
- *     http://www.jianshu.com/p/72494773aace
- *     用法文档 http://www.jianshu.com/p/ab1a72750824
+ *     https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/src/main/java/com/blankj/utilcode/utils/SpannableStringUtils.java
+ *     doc http://www.jianshu.com/p/ab1a72750824
  * </pre>
  */
 public class SpannableStringUtils {
@@ -52,12 +51,6 @@ public class SpannableStringUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /**
-     * 获取建造者
-     *
-     * @param text 样式字符串文本
-     * @return {@link Builder}
-     */
     public static Builder getBuilder(Context context, @NonNull CharSequence text) {
         return new Builder(context, text);
     }
@@ -128,62 +121,26 @@ public class SpannableStringUtils {
             mBuilder = new SpannableStringBuilder();
         }
 
-        /**
-         * 设置标识
-         *
-         * @param flag <ul>
-         *             <li>{@link Spanned#SPAN_INCLUSIVE_EXCLUSIVE}</li>
-         *             <li>{@link Spanned#SPAN_INCLUSIVE_INCLUSIVE}</li>
-         *             <li>{@link Spanned#SPAN_EXCLUSIVE_EXCLUSIVE}</li>
-         *             <li>{@link Spanned#SPAN_EXCLUSIVE_INCLUSIVE}</li>
-         *             </ul>
-         * @return {@link Builder}
-         */
         public Builder setFlag(int flag) {
             this.flag = flag;
             return this;
         }
 
-        /**
-         * 设置前景色
-         *
-         * @param color 前景色
-         * @return {@link Builder}
-         */
         public Builder setForegroundColor(@ColorInt int color) {
             this.foregroundColor = color;
             return this;
         }
 
-        /**
-         * 设置背景色
-         *
-         * @param color 背景色
-         * @return {@link Builder}
-         */
         public Builder setBackgroundColor(@ColorInt int color) {
             this.backgroundColor = color;
             return this;
         }
 
-        /**
-         * 设置引用线的颜色
-         *
-         * @param color 引用线的颜色
-         * @return {@link Builder}
-         */
         public Builder setQuoteColor(@ColorInt int color) {
             this.quoteColor = color;
             return this;
         }
 
-        /**
-         * 设置缩进
-         *
-         * @param first 首行缩进
-         * @param rest  剩余行缩进
-         * @return {@link Builder}
-         */
         public Builder setLeadingMargin(int first, int rest) {
             this.first = first;
             this.rest = rest;
@@ -191,13 +148,6 @@ public class SpannableStringUtils {
             return this;
         }
 
-        /**
-         * 设置列表标记
-         *
-         * @param gapWidth 列表标记和文字间距离
-         * @param color    列表标记的颜色
-         * @return {@link Builder}
-         */
         public Builder setBullet(int gapWidth, int color) {
             this.gapWidth = gapWidth;
             bulletColor = color;
@@ -205,216 +155,110 @@ public class SpannableStringUtils {
             return this;
         }
 
-        /**
-         * 设置字体比例
-         *
-         * @param proportion 比例
-         * @return {@link Builder}
-         */
         public Builder setProportion(float proportion) {
             this.proportion = proportion;
             return this;
         }
 
-        /**
-         * 设置字体横向比例
-         *
-         * @param proportion 比例
-         * @return {@link Builder}
-         */
         public Builder setXProportion(float proportion) {
             this.xProportion = proportion;
             return this;
         }
 
-        /**
-         * 设置删除线
-         *
-         * @return {@link Builder}
-         */
         public Builder setStrikethrough() {
             this.isStrikethrough = true;
             return this;
         }
 
-        /**
-         * 设置下划线
-         *
-         * @return {@link Builder}
-         */
+
         public Builder setUnderline() {
             this.isUnderline = true;
             return this;
         }
 
-        /**
-         * 设置上标
-         *
-         * @return {@link Builder}
-         */
+
         public Builder setSuperscript() {
             this.isSuperscript = true;
             return this;
         }
 
-        /**
-         * 设置下标
-         *
-         * @return {@link Builder}
-         */
+
         public Builder setSubscript() {
             this.isSubscript = true;
             return this;
         }
 
-        /**
-         * 设置粗体
-         *
-         * @return {@link Builder}
-         */
+
         public Builder setBold() {
             isBold = true;
             return this;
         }
 
-        /**
-         * 设置斜体
-         *
-         * @return {@link Builder}
-         */
+
         public Builder setItalic() {
             isItalic = true;
             return this;
         }
 
-        /**
-         * 设置粗斜体
-         *
-         * @return {@link Builder}
-         */
+
         public Builder setBoldItalic() {
             isBoldItalic = true;
             return this;
         }
 
-        /**
-         * 设置字体
-         *
-         * @param fontFamily 字体
-         *                   <ul>
-         *                   <li>monospace</li>
-         *                   <li>serif</li>
-         *                   <li>sans-serif</li>
-         *                   </ul>
-         * @return {@link Builder}
-         */
+
         public Builder setFontFamily(@Nullable String fontFamily) {
             this.fontFamily = fontFamily;
             return this;
         }
 
-        /**
-         * 设置对齐
-         *
-         * @param align 对其方式
-         *              <ul>
-         *              <li>{@link Alignment#ALIGN_NORMAL}正常</li>
-         *              <li>{@link Alignment#ALIGN_OPPOSITE}相反</li>
-         *              <li>{@link Alignment#ALIGN_CENTER}居中</li>
-         *              </ul>
-         * @return {@link Builder}
-         */
+
         public Builder setAlign(@Nullable Alignment align) {
             this.align = align;
             return this;
         }
 
-        /**
-         * 设置图片
-         *
-         * @param bitmap 图片位图
-         * @return {@link Builder}
-         */
+
         public Builder setBitmap(@NonNull Bitmap bitmap) {
             this.bitmap = bitmap;
             imageIsBitmap = true;
             return this;
         }
 
-        /**
-         * 设置图片
-         *
-         * @param drawable 图片资源
-         * @return {@link Builder}
-         */
+
         public Builder setDrawable(@NonNull Drawable drawable) {
             this.drawable = drawable;
             imageIsDrawable = true;
             return this;
         }
 
-        /**
-         * 设置图片
-         *
-         * @param uri 图片uri
-         * @return {@link Builder}
-         */
+
         public Builder setUri(@NonNull Uri uri) {
             this.uri = uri;
             imageIsUri = true;
             return this;
         }
 
-        /**
-         * 设置图片
-         *
-         * @param resourceId 图片资源id
-         * @return {@link Builder}
-         */
+
         public Builder setResourceId(@DrawableRes int resourceId) {
             this.resourceId = resourceId;
             imageIsResourceId = true;
             return this;
         }
 
-        /**
-         * 设置点击事件
-         * <p>需添加view.setMovementMethod(LinkMovementMethod.getInstance())</p>
-         *
-         * @param clickSpan 点击事件
-         * @return {@link Builder}
-         */
+
         public Builder setClickSpan(@NonNull ClickableSpan clickSpan) {
             this.clickSpan = clickSpan;
             return this;
         }
 
-        /**
-         * 设置超链接
-         * <p>需添加view.setMovementMethod(LinkMovementMethod.getInstance())</p>
-         *
-         * @param url 超链接
-         * @return {@link Builder}
-         */
+
         public Builder setUrl(@NonNull String url) {
             this.url = url;
             return this;
         }
 
-        /**
-         * 设置模糊
-         * <p>尚存bug，其他地方存在相同的字体的话，相同字体出现在之前的话那么就不会模糊，出现在之后的话那会一起模糊</p>
-         * <p>推荐还是把所有字体都模糊这样使用</p>
-         *
-         * @param radius 模糊半径（需大于0）
-         * @param style  模糊样式<ul>
-         *               <li>{@link Blur#NORMAL}</li>
-         *               <li>{@link Blur#SOLID}</li>
-         *               <li>{@link Blur#OUTER}</li>
-         *               <li>{@link Blur#INNER}</li>
-         *               </ul>
-         * @return {@link Builder}
-         */
+
         public Builder setBlur(float radius, Blur style) {
             this.radius = radius;
             this.style = style;
@@ -422,31 +266,18 @@ public class SpannableStringUtils {
             return this;
         }
 
-        /**
-         * 追加样式字符串
-         *
-         * @param text 样式字符串文本
-         * @return {@link Builder}
-         */
+
         public Builder append(@NonNull CharSequence text) {
             setSpan();
             this.text = text;
             return this;
         }
 
-        /**
-         * 创建样式字符串
-         *
-         * @return 样式字符串
-         */
         public SpannableStringBuilder create() {
             setSpan();
             return mBuilder;
         }
 
-        /**
-         * 设置样式
-         */
         private void setSpan() {
             int start = mBuilder.length();
             mBuilder.append(this.text);

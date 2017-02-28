@@ -38,6 +38,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.code19.library.SystemUtils.hexdigest;
+
 /**
  * Create by h4de5ing 2016/5/18 018
  */
@@ -129,12 +131,12 @@ public class AppUtils {
         return context.getPackageManager().getInstallerPackageName(packageName);
     }
 
-    public static String getAppSign(Context context,Sting packageName) {
+    public static String getAppSign(Context context, String packageName) {
         try {
             PackageInfo pis = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
             return hexdigest(pis.signatures[0].toByteArray());
-        } catch (NameNotFoundException e) {
-            throw new RuntimeException(AppUtils.class.getName() + "the " + pkgName + "'s application not found");
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(AppUtils.class.getName() + "the " + packageName + "'s application not found");
         }
     }
 

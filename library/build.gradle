@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.1.1"  //版本号,更新代码后修改这个值
+version = "0.1.2"  //版本号,更新代码后修改这个值
 android {
     compileSdkVersion 24
     buildToolsVersion '25.0.0'

@@ -1,6 +1,6 @@
 # How to use In Android Studio
 ```gradle
-compile 'com.code19.library:library:0.1.1'
+compile 'com.code19.library:library:0.1.2'
 ```
 # Common Utils
 - Collection Chop <a href="https://github.com/h4de5ing/AndroidCommon/issues">Issues</a>
