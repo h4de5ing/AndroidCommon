@@ -29,7 +29,6 @@ import java.util.Map;
 
 /**
  * Create by h4de5ing 2016/5/7 007
- * checked
  */
 public class JsonUtils {
     public static String toJson(Object obj) {

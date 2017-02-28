@@ -318,7 +318,7 @@ public class L {
         }
     }
 
-    public static void crash2File(Context context, Throwable throwable) {
+/*    public static void crash2File(Context context, Throwable throwable) {
         StringBuilder builder = new StringBuilder();
         builder.append("-------------");
         builder.append("\nandroidid:" + DeviceUtils.getAndroidID(context));
@@ -346,5 +346,5 @@ public class L {
         } finally {
             FileUtils.closeIO(writer, osw);
         }
-    }
+    }*/
 }

@@ -23,6 +23,7 @@ import android.app.ActivityManager.MemoryInfo;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.KeyguardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -43,10 +44,8 @@ import java.io.File;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
-/**
- * @author kymjs (https://github.com/kymjs)
- */
 @SuppressLint("SimpleDateFormat")
 public final class SystemUtils {
 
@@ -77,10 +76,37 @@ public final class SystemUtils {
         mContext.startActivity(new Intent(Intent.ACTION_SENDTO, uri));
     }
 
+    public static void openWeb(Context context, String url) {
+        Uri uri = Uri.parse(url);
+        context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
+
+    public static void openContacts(Activity context, int requestCode) {
+        Uri uri = Uri.parse("content://contacts/people");
+        context.startActivityForResult(new Intent(Intent.ACTION_PICK, uri), requestCode);
+    }
+
+    public static void openSettings(Activity context, String action) {
+        Intent intent = new Intent();
+        ComponentName comp = new ComponentName("com.android.settings", action);
+        intent.setComponent(comp);
+        intent.setAction("android.intent.action.VIEW");
+        context.startActivityForResult(intent, 0);
+    }
+
     public static void hideKeyBoard(Activity aty) {
         ((InputMethodManager) aty.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(aty.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
+/*    public static void openInputKeyBoard(Context mContext, EditText mEditText){
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
 
+    public static void closeInputKeyBoard(Context mContext, EditText mEditText){
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEditText.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }*/
 
     public static boolean isBackground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -314,9 +340,7 @@ public final class SystemUtils {
         return null;
     }
 
-    /**
-     * <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-     */
+    //<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     public static boolean isGpsEnabled(Context context) {
         LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -382,5 +406,9 @@ public final class SystemUtils {
         } catch (Exception e) {
             Toast.makeText(context, R.string.alipayerr, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static int getRandomNumber(int min, int max) {
+        return new Random().nextInt(max) % (max - min + 1) + min;
     }
 }

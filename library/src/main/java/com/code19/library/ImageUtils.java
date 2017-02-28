@@ -42,7 +42,6 @@ import java.io.OutputStream;
 /**
  * Create by h4de5ing 2016/5/21 021
  * https://github.com/sharinghuang/ASRabbit
- * unchecked
  */
 public class ImageUtils {
 

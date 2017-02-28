@@ -40,7 +40,6 @@ import java.util.regex.Pattern;
 
 /**
  * Create by h4de5ing 2016/5/18 018
- * checked
  */
 public class AppUtils {
 
@@ -94,16 +93,14 @@ public class AppUtils {
     }
 
     public static String getAppApk(Context context, String packageName) {
-/*        String sourceDir = null;
+        String sourceDir = null;
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
             sourceDir = applicationInfo.sourceDir;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        return sourceDir;*/
-        //return context.getPackageResourcePath();
-        return context.getPackageCodePath();
+        return sourceDir;
     }
 
     public static String getAppVersionName(Context context, String packageName) {
@@ -251,9 +248,6 @@ public class AppUtils {
         return isSys;
     }
 
-    /**
-     * className "com.xxx.xx..XXXService"
-     */
     public static boolean isServiceRunning(Context context, String className) {
         boolean isRunning = false;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -380,7 +374,7 @@ public class AppUtils {
         FileUtils.deleteFileByDirectory(new File(filepath));
     }
 
-    public static void cleanSharedPreference(Context context){
+    public static void cleanSharedPreference(Context context) {
         String filepath = String.format(String.format(context.getFilesDir().getParent() + File.separator + "%s", "shared_prefs"));
         FileUtils.deleteFileByDirectory(new File(filepath));
     }
