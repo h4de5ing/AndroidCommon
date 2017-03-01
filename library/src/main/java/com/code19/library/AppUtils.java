@@ -185,6 +185,17 @@ public class AppUtils {
         return true;
     }
 
+    public static String[] getAppPermissions(Context context, String packname) {
+        String[] requestedPermissions = null;
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(packname, PackageManager.GET_PERMISSIONS);
+            requestedPermissions = info.requestedPermissions;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return requestedPermissions;
+    }
+
     public static boolean hasPermission(Context context, String permission) {
         if (context != null && !TextUtils.isEmpty(permission)) {
             try {

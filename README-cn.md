@@ -25,6 +25,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppSign 获取应用签名
     * getNumCores 获取Cpu内核数
     * getRootPermission 获得root权限
+    * getAppPermissions 获取应用的所有权限
     * hasPermission 是否有权限
     * isInstalled 应用是否安装
     * installApk 安装应用
