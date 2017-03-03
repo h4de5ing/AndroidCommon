@@ -16,7 +16,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 - AppUtils.java 应用工具类
     * getAppName 获取应用名称
     * getAppIcon 获取应用图标
-    * getAppDate 获取应用更新日期
+    * getAppFirstInstallTime 获取应用第一次安装日期
+    * getAppLastUpdateTime 获取应用更新日期
     * getAppSize 获取应用大小
     * getAppApk 获取应用apk文件
     * getAppVersionName 获取应用版本名称

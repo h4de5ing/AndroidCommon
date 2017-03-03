@@ -69,9 +69,18 @@ public class AppUtils {
         }
         return appIcon;
     }
+    public static long getAppFirstInstallTime(Context context, String packageName) {
+        long lastUpdateTime = 0;
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+            lastUpdateTime = packageInfo.firstInstallTime;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return lastUpdateTime;
+    }
 
-
-    public static long getAppDate(Context context, String packageName) {
+    public static long getAppLastUpdateTime(Context context, String packageName) {
         long lastUpdateTime = 0;
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);

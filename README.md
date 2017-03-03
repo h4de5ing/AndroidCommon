@@ -16,7 +16,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 - AppUtils.java (about Application tools)
     * getAppName
     * getAppIcon
-    * getAppDate
+    * getAppFirstInstallTime
+    * getAppLastUpdateTime
     * getAppSize
     * getAppApk
     * getAppVersionName
