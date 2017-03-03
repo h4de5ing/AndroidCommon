@@ -69,6 +69,7 @@ public class AppUtils {
         }
         return appIcon;
     }
+
     public static long getAppFirstInstallTime(Context context, String packageName) {
         long lastUpdateTime = 0;
         try {
@@ -146,6 +147,17 @@ public class AppUtils {
             return hexdigest(pis.signatures[0].toByteArray());
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException(AppUtils.class.getName() + "the " + packageName + "'s application not found");
+        }
+    }
+
+    public static int getAppTargetSdkVersion(Context context, String packageName) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+            ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+            return applicationInfo.targetSdkVersion;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 
