@@ -161,6 +161,17 @@ public class AppUtils {
         }
     }
 
+    public static int getAppUid(Context context, String packageName) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+            ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+            return applicationInfo.uid;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public static int getNumCores() {
         try {
             File dir = new File("/sys/devices/system/cpu/");

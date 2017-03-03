@@ -25,6 +25,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppInstaller
     * getAppSign
     * getAppTargetSdkVersion
+    * getAppUid
     * getNumCores
     * getRootPermission
     * getAppPermissions
