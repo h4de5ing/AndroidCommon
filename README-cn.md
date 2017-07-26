@@ -204,7 +204,9 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getWifiScanResults 获取wifi列表
     * getScanResultsByBSSID 过滤扫描结果
     * getWifiConnectionInfo 获取wifi连接信息
-    
+
+- RadixUtils 进制工具类
+    *
 - SPUtils.java SharedPreferences工具
     * setSP 存储SharedPreferences值
     * getSp 获取SharedPreferences值
