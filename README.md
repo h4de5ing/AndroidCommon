@@ -43,9 +43,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * cleanDatabases
     * cleanSharedPreference
         
-- CacheUtils.java
-    * setCache
-    * getCache
 
 - CipherUtils.java
     * md5(String input)
@@ -216,7 +213,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 - SystemUtils.java
     * sendSMS
     * forwardToDial
-    * callPhone
     * sendMail
     * openWeb
     * openContacts
@@ -260,26 +256,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * matcherUrl
     * isNumeric
     * testRegex
-
-- ViewUtils.java
-    * removeSelfFromParent
-    * requestLayoutParent
-    * isTouchInView
-    * bigImage
-    * setTVUnderLine
-    * showPopupWindow
-    * dismissPopup
-    * captureView
-    * createViewBitmap
-    * convertViewToBitmap
-    * getActivityBitmap
-    * getStatusBarHeight
-    * getToolbarHeight
-    * getNavigationBarHeight
-    * measureView
-    * getViewWidth
-    * getViewHeight
-    * getActivity
 
 # Thanks to all the open source programmers
 License

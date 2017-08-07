@@ -230,7 +230,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 - SystemUtils.java 系统工具
     * sendSMS 调用系统发送短信
     * forwardToDial 跳转到拨号
-    * callPhone 直接呼叫号码
     * sendMail 发邮件
     * openWeb 打开浏览器
     * openContacts 打开联系人
@@ -326,27 +325,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * isNumeric 是否数值型
     * testRegex 是否匹配正则
     * checkPostcode 匹配中国邮政编码
-    
-- ViewUtils.java View工具
-    * removeSelfFromParent
-    * requestLayoutParent
-    * isTouchInView
-    * bigImage
-    * setTVUnderLine 给TextView设置下划线
-    * showPopupWindow
-    * dismissPopup
-    * captureView 截图
-    * createViewBitmap 截图
-    * convertViewToBitmap 截图
-    * getActivityBitmap 获取Activity的截图
-    * getStatusBarHeight 获取状态栏高度
-    * getToolbarHeight 获取工具栏高度
-    * getNavigationBarHeight 获取导航栏高度
-    * measureView 测量view
-    * getViewWidth 获取view的宽度
-    * getViewHeight 获取view的高度
-    * getActivity 获取view的上下文
-    
+
     
 ```shell 
 

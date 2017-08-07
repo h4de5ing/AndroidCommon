@@ -33,6 +33,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import static android.util.Log.getStackTraceString;
+
 /**
  * Created by Gh0st on 2016/6/7 007.
  * https://github.com/ZhaoKaiQiang/KLog
@@ -94,8 +96,8 @@ public class L {
         log(ERROR, null, msg);
     }
 
-    public static void e(String tag, String msg) {
-        log(ERROR, tag, msg);
+    public static void e(String tag, String msg, Throwable tr) {
+        log(ERROR, tag, msg + '\n' + getStackTraceString(tr));
     }
 
     public static void a(String msg) {
