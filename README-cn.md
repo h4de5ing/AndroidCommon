@@ -31,8 +31,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppPermissions 获取应用的所有权限
     * hasPermission 是否有权限
     * isInstalled 应用是否安装
-    * installApk 安装应用
-    * uninstallApk 卸载应用
+    * ~~installApk 安装应用~~
+    * ~~uninstallApk 卸载应用~~
     * isSystemApp 是否是系统应用
     * isServiceRunning 服务是否在运行
     * stopRunningService 停止服务

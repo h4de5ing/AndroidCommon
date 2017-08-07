@@ -8,7 +8,7 @@
  *       http://www.apache.org/licenses/LICENSE-2.0
  *
  *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   distributed under the License is distributed on++++++ an "AS IS" BASIS,
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
@@ -264,6 +264,7 @@ public class AppUtils {
         return installed;
     }
 
+    @Deprecated
     public static boolean installApk(Context context, String filePath) {
         File file = new File(filePath);
         if (!file.exists() || !file.isFile() || file.length() <= 0) {
@@ -276,6 +277,7 @@ public class AppUtils {
         return true;
     }
 
+    @Deprecated
     public static boolean uninstallApk(Context context, String packageName) {
         if (TextUtils.isEmpty(packageName)) {
             return false;
@@ -419,15 +421,18 @@ public class AppUtils {
         context.startActivity(new Intent(context.getPackageManager().getLaunchIntentForPackage(packagename)));
     }
 
+    @Deprecated
     public static void cleanCache(Context context) {
         FileUtils.deleteFileByDirectory(context.getCacheDir());
     }
 
+    @Deprecated
     public static void cleanDatabases(Context context) {
         String filepath = String.format(String.format(context.getFilesDir().getParent() + File.separator + "%s", "databases"));
         FileUtils.deleteFileByDirectory(new File(filepath));
     }
 
+    @Deprecated
     public static void cleanSharedPreference(Context context) {
         String filepath = String.format(String.format(context.getFilesDir().getParent() + File.separator + "%s", "shared_prefs"));
         FileUtils.deleteFileByDirectory(new File(filepath));

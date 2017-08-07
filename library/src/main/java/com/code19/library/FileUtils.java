@@ -24,8 +24,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 
-import com.code19.library.service.DownloadService;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -355,11 +353,6 @@ public class FileUtils {
         downloadManager.enqueue(request);
     }
 
-    public static void upgradeApp(Context context, String fileurl) {
-        Intent intent = new Intent(context, DownloadService.class);
-        intent.putExtra("fileurl", fileurl);
-        context.startService(intent);
-    }
 
     public static boolean isSDCardAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
@@ -375,6 +368,7 @@ public class FileUtils {
         return context.getObbDir().getAbsolutePath();
     }
 
+    @Deprecated
     public static String getExtraPath(String folder) {
         String storagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + folder;
         File file = new File(storagePath);

@@ -31,8 +31,8 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getAppPermissions
     * hasPermission
     * isInstalled
-    * installApk
-    * uninstallApk
+    * ~~installApk~~
+    * ~~uninstallApk~~
     * isSystemApp
     * isServiceRunning
     * stopRunningService
