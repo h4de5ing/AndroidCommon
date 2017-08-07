@@ -1,6 +1,6 @@
 # gradle使用方式
 ```gradle
-compile 'com.code19.library:library:0.1.2'
+compile 'com.code19.library:library:0.1.4'
 ```
 # 常用工具类
 - 常用代码片段收集 <a href="https://github.com/h4de5ing/AndroidCommon/issues">Issues</a>
