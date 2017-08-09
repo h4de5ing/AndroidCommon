@@ -2,13 +2,17 @@
 ```gradle
 compile 'com.code19.library:library:0.1.4'
 ```
+
+# notes
+[0.1.4 removed](https://github.com/h4de5ing/AndroidCommon/commit/f4cb414ce8a7732fb152c510833f782b0cf0fd6d "0.1.4 we removed") ``ToastUtils``,``ViewUtils.java``,``SpannableStringUtils.java``,if you used then,you can use 0.1.2.
+
 # Common Utils
-- Collection Chop <a href="https://github.com/h4de5ing/AndroidCommon/issues">Issues</a>
-- Show Me The Best Code <a href="https://github.com/h4de5ing/AndroidCommon/pulls">Pull request</a>
+- Collection Chop [Issues](https://github.com/h4de5ing/AndroidCommon/issues)
+- Show Me The Best Code [Pull request](https://github.com/h4de5ing/AndroidCommon/pulls)
 
 ```
 Demo:
-AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
+AppUtils.getAppName(MainActivity.this,"com.code19.androidcommon");
 ```
 ##  [中文文档](README-cn.md)
 ## library Module：
@@ -42,7 +46,6 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * cleanCache
     * cleanDatabases
     * cleanSharedPreference
-        
 
 - CipherUtils.java
     * md5(String input)
@@ -81,7 +84,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * getScreenRealSize
     * getStatusBarH
     * getNavigationBarrH
-    
+
 - DeviceUtils.java
     * getAndroidID
     * getIMEI
@@ -165,7 +168,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * collection2Json
     * object2Json
     * string2JSONObject
-    
+
 - L.java
     * init //Init the Log set Debug and Tag
     * v VERBOSE 
@@ -176,7 +179,7 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
     * a ASSERT
     * json
     * xml
-    
+
 - NetUtils.java
     * getNetworkType
     * getNetworkTypeName
@@ -261,17 +264,17 @@ AppUtils.getAppName(MainActivity.this,com.code19.androidcommon);
 License
 ----
 
-      Copyright (C)  2016 android@19code.com
-      
-      Licensed under the Apache License, Version 2.0 (the "License");  
-      you may not use this file except in compliance with the License.  
-      You may obtain a copy of the License at  
-      
+      Copyright (C)  2016 moxi1992@gmail.com
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
           http://www.apache.org/licenses/LICENSE-2.0
-      
-      Unless required by applicable law or agreed to in writing, software  
-      distributed under the License is distributed on an "AS IS" BASIS,  
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
-      See the License for the specific language governing permissions and  
-      limitations under the License.  
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
 
