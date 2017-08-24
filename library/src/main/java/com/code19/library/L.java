@@ -33,7 +33,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import static android.util.Log.getStackTraceString;
 
 /**
  * Created by Gh0st on 2016/6/7 007.
@@ -97,7 +96,7 @@ public class L {
     }
 
     public static void e(String tag, String msg, Throwable tr) {
-        log(ERROR, tag, msg + '\n' + getStackTraceString(tr));
+        log(ERROR, tag, msg + '\n' + Log.getStackTraceString(tr));
     }
 
     public static void a(String msg) {
@@ -155,49 +154,44 @@ public class L {
         if (TextUtils.isEmpty(tag)) {
             tag = TAG;
         }
-        int index = 0;
+        printLine(tag, true);
         int maxLength = 4000;
-        int countOfSub = msg.length() / maxLength;
-
-        if (countOfSub > 0) {  // The log is so long
-            for (int i = 0; i < countOfSub; i++) {
-                String sub = msg.substring(index, index + maxLength);
-                printSub(type, tag, sub);
-                index += maxLength;
+        int countOfSub = msg.length();
+        if (countOfSub > maxLength) {
+            for (int i = 0; i < countOfSub; i += maxLength) {
+                if (i + maxLength < countOfSub) {
+                    printSub(type, tag, msg.substring(i, i + maxLength));
+                } else {
+                    printSub(type, tag, msg.substring(i, countOfSub));
+                }
             }
-            //printSub(type, msg.substring(index, msg.length()));
         } else {
             printSub(type, tag, msg);
         }
-
+        printLine(tag, false);
     }
 
-    private static void printSub(int type, String tag, String sub) {
-        if (tag == null) {
-            tag = TAG;
-        }
-        printLine(tag, true);
+    private static void printSub(int type, String tag, String msg) {
         switch (type) {
             case VERBOSE:
-                Log.v(tag, sub);
+                Log.v(tag, msg);
                 break;
             case DEBUG:
-                Log.d(tag, sub);
+                Log.d(tag, msg);
                 break;
             case INFO:
-                Log.i(tag, sub);
+                Log.i(tag, msg);
                 break;
             case WARN:
-                Log.w(tag, sub);
+                Log.w(tag, msg);
                 break;
             case ERROR:
-                Log.e(tag, sub);
+                Log.e(tag, msg);
                 break;
             case ASSERT:
-                Log.wtf(tag, sub);
+                Log.wtf(tag, msg);
                 break;
         }
-        printLine(tag, false);
     }
 
     private static void printJson(String tag, String json, String headString) {
@@ -228,7 +222,7 @@ public class L {
         message = headString + LINE_SEPARATOR + message;
         String[] lines = message.split(LINE_SEPARATOR);
         for (String line : lines) {
-            Log.d(tag, "|" + line);
+            printSub(DEBUG, tag, "|" + line);
         }
         printLine(tag, false);
     }
@@ -258,7 +252,7 @@ public class L {
         String[] lines = xml.split(LINE_SEPARATOR);
         for (String line : lines) {
             if (!TextUtils.isEmpty(line)) {
-                Log.d(tag, "|" + line);
+                printSub(DEBUG, tag, "|" + line);
             }
         }
         printLine(tag, false);
